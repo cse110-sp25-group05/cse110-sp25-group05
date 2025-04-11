@@ -1,1 +1,3 @@
-# cse110-sp25-group05
+# CSE110, Spring 2025, Group 5
+
+(Click here to go to Team Page!)[admin/team.md]
