@@ -71,3 +71,5 @@ Hello! I'm Ruyi Wu, a Math-CS major student. I realy like to write code to solve
 [Link to GitHub](https://github.com/Jswuzh)
 
 ### Somtochukwu Ikeanyi
+
+[Link to GitHub](https://github.com/somtoik)
