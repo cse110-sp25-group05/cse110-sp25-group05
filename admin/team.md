@@ -72,4 +72,6 @@ Hello! I'm Ruyi Wu, a Math-CS major student. I realy like to write code to solve
 
 ### Somtochukwu Ikeanyi
 
+4th year Bioengineering Bioinformatics student passionate about quality control!
+
 [Link to GitHub](https://github.com/somtoik)
