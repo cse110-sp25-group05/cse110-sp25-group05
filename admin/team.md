@@ -61,6 +61,10 @@ Hey :wave:, my name is Omar Akbari. I’m a fourth year Computer Science major w
 
 ### Aman Dhillon
 
+Hi, My name is Aman Dhillon! I am a second-year Computer Science major. I am primarly interest in software development. I am familiar with Java, C, C++, python, and HTML/CSS. Outside of CS I love going to the gym and beach!
+
+[Link to GitHub](https://github.com/amankdhillon)
+
 ### Ruyi Wu
 Hello! I'm Ruyi Wu, a Math-CS major student. I realy like to write code to solve my math problems. I enjoy to play video games when I am free.
 
