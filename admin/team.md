@@ -17,7 +17,7 @@ Hello! My name is Jonathan Ty, I'm a second-year Computer Science major with a m
 
 Hi! My name is Teá Ruiz, I am a fourth-year Math-Computer Science major. My programming experience mostly lies in C++ and Java. Some of my hobbies include crocheting, reading and baking. 
 
-[Link to GitHub](https://tearuiz.github.io/Page/)
+[Link to GitHub](https://tearuiz.github.com/tearuiz)
 
 ### Ibrahim Yurdan
 
@@ -35,11 +35,15 @@ Hello! I'm Abhyuday Singh, a 2nd year Math-CS major. I'm a huge sports fan and a
 
 ### Emily Nguyen
 
-### Ruyi Wu
+“Computer science major with a minor in design. Happy to be here :D”
 
-### Somtochukwu Ikeanyi
+[Link to GitHub](https://github.com/emngi)
 
 ### Aaron Joshua Delacruz
+
+Hello! I’m Aaron Joshua Delacruz, a Computer Science major. Right now, I’m still pretty new to CS, and still exploring which field I would want to focus on. During free time, I enjoy playing games and recently, watching shows/animations.
+
+[Link to GitHub](https://github.com/ALDCLAB)
 
 ### Renee Dhanaraj
 
@@ -47,3 +51,6 @@ Hello! I'm Abhyuday Singh, a 2nd year Math-CS major. I'm a huge sports fan and a
 
 ### Aman Dhillon
 
+### Ruyi Wu
+
+### Somtochukwu Ikeanyi
