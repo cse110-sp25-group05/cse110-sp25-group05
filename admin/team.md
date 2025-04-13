@@ -54,7 +54,8 @@ Hi! I’m a computer science student passionate about building smart, efficient,
 Hey :wave:, my name is Omar Akbari. I’m a fourth year Computer Science major with an interest in software development, especially backend systems. I’m most comfortable with C-family programming languages (C, C++, Java), though I’ve dabbled in at least a dozen others. My favorite areas of study are operating systems, computer architecture, and memory management. Outside of CS, my main hobby and passion is gaming. I’ve been playing games for as long as I can remember, and video games are actually what got me into software development in the first place. My favorite series is Metal Gear Solid.
 
 “A strong man doesn’t need to read the future. He makes his own.” – Solid Snake
-(from Metal Gear Solid 1)
+(from Metal Gear Solid)
+
 [Link to GitHub](https://github.com/GurigaBarafta)
 
 
