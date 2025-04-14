@@ -2,8 +2,10 @@
 
 <div align="center">
 
+### Our Team Logo
 <img src="../admin/branding/logo.png" alt="logo" width="300px"/>
 
+### Our Team Mascot
 <img src="../admin/branding/mascot.png" alt="mascot" width="300px"/>
 
 </div>
