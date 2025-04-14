@@ -2,9 +2,9 @@
 
 <div align="center">
 
-![logo](branding/logo.png)
+![logo](./branding/logo.png)
 
-![mascot](branding/mascot.png)
+![mascot](./branding/mascot.png)
 
 </div>
 
