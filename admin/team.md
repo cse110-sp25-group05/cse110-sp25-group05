@@ -57,7 +57,7 @@ Hello! I'm Aaron Joshua Delacruz, a Computer Science major. Right now, I'm still
 [![GitHub](https://img.shields.io/badge/GitHub-ALDCLAB-blue?style=flat-square&logo=github)](https://github.com/ALDCLAB)
 
 ## Renee Dhanaraj
-<img src="../admin/team_members/moment.jpg" width="100px;" alt="Renee Dhanaraj" align="right"/>
+<img src="/cse110-sp25-group05/admin/team_members/moment.jpg" width="100px;" alt="Renee Dhanaraj" align="right"/>
 
 Hi! I'm a computer science student passionate about building smart, efficient, and user-friendly tech. I have a strong interest in cloud computing and engineering, and I enjoy working on projects that blend creativity with problem-solving. Outside of tech, I love playing the piano, hitting the tennis courts, and keeping up with Formula 1. I'm always eager to learn something new and expand my skills.
 
