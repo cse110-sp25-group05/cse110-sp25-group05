@@ -2,13 +2,17 @@
 
 <div align="center">
 
-### Our Team Logo
+<div style="display: inline-block; text-align: center;">
 <img src="../admin/branding/logo.png" alt="logo" width="300px"/>
-
-### Our Team Mascot
+<br>LOGO
+</div>
+<div style="display: inline-block; text-align: center;">
 <img src="../admin/branding/mascot.png" alt="mascot" width="300px"/>
+<br>MASCOT
+</div>
 
 </div>
+
 
 ---
 
