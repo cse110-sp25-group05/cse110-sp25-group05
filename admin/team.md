@@ -2,9 +2,9 @@
 
 <div align="center">
 
-![logo](../admin/branding/logo.png)
+![logo](/cse110-sp25-group05/admin/branding/logo.png)
 
-![mascot](../admin/branding/mascot.png)
+![mascot](/cse110-sp25-group05/admin/branding/mascot.png)
 
 </div>
 
