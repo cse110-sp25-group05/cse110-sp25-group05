@@ -46,10 +46,7 @@ Hello! I'm Abhyuday Singh, a 2nd year Math-CS major. I'm a huge sports fan and a
 [![GitHub](https://img.shields.io/badge/GitHub-Abhyuday180-blue?style=flat-square&logo=github)](https://github.com/Abhyuday180)
 
 ## Emily Nguyen
-<img src="../admin/team_members/emily.jpg"
-     width="100px"
-     style="height: auto; max-height: 100px; border-radius: 8px; object-fit: contain;"
-     alt="Emily Nguyen" align="right"/>
+<img src="../admin/team_members/emily.jpg" width="100px" alt="Emily Nguyen" align="right"/>
 
 Computer science major with a minor in design. Happy to be here :D
 <br><br><br>
