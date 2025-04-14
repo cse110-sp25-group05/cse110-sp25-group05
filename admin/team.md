@@ -2,17 +2,16 @@
 
 <div align="center">
 
-<div style="display: inline-block; text-align: center;">
+<div style="display: inline-block; text-align: center; width: 45%;">
 <img src="../admin/branding/logo.png" alt="logo" width="300px"/>
 <br>LOGO
 </div>
-<div style="display: inline-block; text-align: center;">
+<div style="display: inline-block; text-align: center; width: 45%;">
 <img src="../admin/branding/mascot.png" alt="mascot" width="300px"/>
 <br>MASCOT
 </div>
 
 </div>
-
 
 ---
 
