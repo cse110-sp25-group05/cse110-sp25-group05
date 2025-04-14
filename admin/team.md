@@ -22,7 +22,7 @@ Hello! My name is Jonathan Ty, I'm a second-year Computer Science major with a m
 ## Teá Ruiz
 <img src="https://github.com/tearuiz.png" width="100px;" alt="Teá Ruiz" align="right"/>
 
-Hi! My name is Teá Ruiz, I am a fourth-year Math-Computer Science major. My programming experience mostly lies in C++ and Java. Some of my hobbies include crocheting, reading and baking. 
+Hi! My name is Teá Ruiz, I am a fourth-year Math-Computer Science major. My programming experience mostly lies in C++ and Java. Some of my hobbies include crocheting, reading and baking.
 
 [![GitHub](https://img.shields.io/badge/GitHub-tearuiz-blue?style=flat-square&logo=github)](https://tearuiz.github.com/tearuiz)
 
