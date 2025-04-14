@@ -1,10 +1,10 @@
-# Group 5: Code-Blooded 🩸
+# Group 5: Code-Blooded
 
 <div align="center">
 
-![logo](./branding/logo.png)
+![logo](../admin/branding/logo.png)
 
-![mascot](./branding/mascot.png)
+![mascot](../admin/branding/mascot.png)
 
 </div>
 
@@ -57,7 +57,7 @@ Hello! I'm Aaron Joshua Delacruz, a Computer Science major. Right now, I'm still
 [![GitHub](https://img.shields.io/badge/GitHub-ALDCLAB-blue?style=flat-square&logo=github)](https://github.com/ALDCLAB)
 
 ## Renee Dhanaraj
-<img src="branding/moment.jpg" width="100px;" alt="Renee Dhanaraj" align="right"/>
+<img src="../admin/team_members/moment.jpg" width="100px;" alt="Renee Dhanaraj" align="right"/>
 
 Hi! I'm a computer science student passionate about building smart, efficient, and user-friendly tech. I have a strong interest in cloud computing and engineering, and I enjoy working on projects that blend creativity with problem-solving. Outside of tech, I love playing the piano, hitting the tennis courts, and keeping up with Formula 1. I'm always eager to learn something new and expand my skills.
 
@@ -66,7 +66,7 @@ Hi! I'm a computer science student passionate about building smart, efficient, a
 ## Omar Akbari
 <img src="https://github.com/GurigaBarafta.png" width="100px;" alt="Omar Akbari" align="right"/>
 
-Hey :wave:, my name is Omar Akbari. I'm a fourth year Computer Science major with an interest in software development, especially backend systems. I'm most comfortable with C-family programming languages (C, C++, Java), though I've dabbled in at least a dozen others. My favorite areas of study are operating systems, computer architecture, and memory management. Outside of CS, my main hobby and passion is gaming. I've been playing games for as long as I can remember, and video games are actually what got me into software development in the first place. My favorite series is Metal Gear Solid.
+Hey, my name is Omar Akbari. I'm a fourth year Computer Science major with an interest in software development, especially backend systems. I'm most comfortable with C-family programming languages (C, C++, Java), though I've dabbled in at least a dozen others. My favorite areas of study are operating systems, computer architecture, and memory management. Outside of CS, my main hobby and passion is gaming. I've been playing games for as long as I can remember, and video games are actually what got me into software development in the first place. My favorite series is Metal Gear Solid.
 
 > "A strong man doesn't need to read the future. He makes his own." – Solid Snake
 > (from Metal Gear Solid)
