@@ -50,7 +50,7 @@ Our team aims to foster a safe space to allow each other to gain and practice sk
 | Deliverable / Area | R                  | A             | C | I | Backup      |
 |--------------------|--------------------|---------------|---|---|-------------|
 | CI/CD Pipeline     | Abhyuday Singh, Ibrahim, Aaron |               |   |   |             |
-| MD Team Contract   | Somto              | Renee         |   |   |             |
+| MD Team Contract   | Somto, Renee           |          |   |   |             |
 | ADR                | Emily, Tea         |               |   |   |             |
 
 > (R = Responsible, A = Accountable, C = Consulted, I = Informed)
