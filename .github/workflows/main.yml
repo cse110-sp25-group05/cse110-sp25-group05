@@ -1,4 +1,4 @@
-            - name: Proof HTML
+name: Proof HTML
   # You may pin to the exact commit or the version.
   # uses: anishathalye/proof-html@7b6ef60f83a30f2b7ed9b8b537804cee327ca2d5
   uses: anishathalye/proof-html@v2.2.0
