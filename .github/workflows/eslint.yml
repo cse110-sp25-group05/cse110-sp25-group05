@@ -5,7 +5,7 @@
 # ESLint is a tool for identifying and reporting on patterns
 # found in ECMAScript/JavaScript code.
 # More details at https://github.com/eslint/eslint
-# and https://eslint.org
+# and https://eslint.org 
 
 name: ESLint
 
