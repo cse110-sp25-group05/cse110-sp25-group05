@@ -91,7 +91,7 @@ After following and meeting all these guidelines and requirements, your code is 
 
 ## Continuous Updates and Future Implementations 
 We may plan on adding on additional systems or expanding our current systems if needed. Some additions/improvements may be:
-- More Unit Tests (This one will have to be continuous.)
+- More Unit Tests (These will have to be continuous.)
 - Automated Documentation Generation
 - Automated Code Style Enforcement
 - Code Coverage Reports
@@ -106,8 +106,6 @@ We may plan on adding on additional systems or expanding our current systems if 
 
 ## Pipeline Diagram
 Here is a diagram showcasing the steps needed to make a change on the master branch!  
-
-diagram placeholder here 
-
+![Diagram](phase1.drawio.png)
 
 
