@@ -2,9 +2,9 @@ name: ESLint Basic Check
 
 on:
   push:
-    branches: [ "main", "pipelinetesting", "eslint" ]
+    branches: [ "main", "eslint-test", "eslint" ]
   pull_request:
-    branches: [ "main", "pipelinetesting", "eslint" ]
+    branches: [ "main", "eslint-test", "eslint" ]
 
 jobs:
   lint:
