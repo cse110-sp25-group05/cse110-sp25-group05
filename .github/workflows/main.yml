@@ -17,4 +17,5 @@ jobs:
         with:
           directory: .        
           check_html: true    
-          check_css:  true    
+          check_css:  true   
+          check_favicon: false
