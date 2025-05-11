@@ -1,0 +1,4 @@
+/* Hex value is an illegal length */
+.value-fail {
+  color: #12;          /* ← invalid hex — should be 3, 4, 6 or 8 digits */
+}
