@@ -1,8 +1,9 @@
 name: Proof HTML
 on:
-  push:                
+  push:
     branches: [ pipelinetesting ]
-  pull_request:         
+  pull_request:
+    branches: [ pipelinetesting ]    
 
 jobs:
   proof-html:           
