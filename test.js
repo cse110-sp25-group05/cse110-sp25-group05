@@ -1,2 +1,2 @@
 const x = "hello";
-export default x;
+console.log(x);
