@@ -54,7 +54,7 @@ function timer()
 
 ## Step 3 - Done Writing Code? Merging Conflicts...  
 
-Since we are a 11 person team, **we are bound to work on the same project together and eventually have some merging conflicts.**
+Since we are a 11 person team, **we are bound to work on the same project together at the same time and eventually face merging conflicts.**
 
 ### Please follow these steps when you are done writing your own code and ***before*** making a pull request!
 
@@ -89,8 +89,9 @@ We plan on implementing unit tests, HTML validator, and a CSS validator to autom
 ## Step 5 - Code Implemented
 After following and meeting all these guidelines and requirements, your code is then finally in the master branch! Well done! 
 
-## Future Implementations 
+## Continuous Updates and Future Implementations 
 We may plan on adding on additional systems or expanding our current systems if needed. Some additions/improvements may be:
+- More Unit Tests (This one will have to be continuous.)
 - Automated Documentation Generation
 - Automated Code Style Enforcement
 - Code Coverage Reports
