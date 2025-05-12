@@ -1,5 +1,0 @@
-/* Missing colon after font-size — a classic syntax error */
-body {
-  font-size 16px;      /* ← deliberate mistake            */
-  color: #222;
-}

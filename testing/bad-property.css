@@ -1,4 +1,0 @@
-/* Uses a property name that doesn’t exist */
-.example {
-  foo-bar-baz: 42px;   /* ← “Property doesn’t exist” error */
-}
