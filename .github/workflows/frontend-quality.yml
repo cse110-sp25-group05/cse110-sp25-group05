@@ -3,65 +3,69 @@ name: Front-end Quality Checks
 
 on:
   push:
-    branches: [ "main" ]            
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]            
-  schedule:                         
-    - cron: '22 21 * * 3'           
+    branches: [ "main" ]
+  schedule:
+    - cron: '22 21 * * 3'
 
 jobs:
-  proof-html:                      
+  proof-html:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Run proof-html
-        uses: anishathalye/proof-html@v2.2.0
+      - uses: actions/checkout@v4
+      - uses: anishathalye/proof-html@v2.2.0
         with:
-          directory: .             
+          directory: .
           check_html: true
           check_css:  true
-          check_favicon: false      
+          check_favicon: false
 
-  eslint:                           
-    name: Run ESLint scan and upload SARIF
+  eslint:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      security-events: write       
+      security-events: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install dependencies
+   
+      - name: Install project dependencies (if any)
+        id: install-deps
         run: |
-          npm ci
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            echo "Using npm ci"
+            npm ci
+          elif [ -f package.json ]; then
+            echo "Using npm install"
+            npm install
+          else
+            echo "No package.json – skipping"
+          fi
 
-      - name: Install ESLint and SARIF formatter (project-local)
+    
+      - name: Install ESLint + SARIF formatter
         run: |
-          npm install --save-dev eslint@8.10.0 \
+          npm install --no-save eslint@8.10.0 \
             @microsoft/eslint-formatter-sarif@3.1.0
 
-      - name: Run ESLint and generate SARIF output
-        env:
-          SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
+    
+      - name: Run ESLint and create SARIF
         run: |
           npx eslint . \
-            --config .eslintrc.json \
             --ext .js \
+            --config .eslintrc.json \
             --format @microsoft/eslint-formatter-sarif \
-            --output-file eslint-results.sarif
-        continue-on-error: true     
+            --output-file eslint-results.sarif \
+          || true                          
 
-      - name: Upload SARIF results to GitHub Security tab
-        if: always()                
+     
+      - name: Upload SARIF to Security tab
+        if: hashFiles('eslint-results.sarif') != ''
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: eslint-results.sarif
