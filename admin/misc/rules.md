@@ -42,6 +42,8 @@ Our team aims to foster a safe space to allow each other to gain and practice sk
 | Aaron Joshua Delacruz | Transparency      | Time Management        |                              |
 | Omar Akbari           | Flexibility       | Time Management        | N/A                          |
 | Teá Ruiz              | Time Management, Collaboration | JS, better at testing | |
+| Aman Dhillon          | Communication     | Time Management        | I want to get better at CSS/new things |
+| Abhyuday Singh        | Leadership        | Planning               |                              |
 
 ---
 
