@@ -1,0 +1,68 @@
+# .github/workflows/frontend-quality.yml
+name: Front-end Quality Checks
+
+on:
+  push:
+    branches: [ "main" ]            
+  pull_request:
+    branches: [ "main" ]            
+  schedule:                         
+    - cron: '22 21 * * 3'           
+
+jobs:
+  proof-html:                      
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run proof-html
+        uses: anishathalye/proof-html@v2.2.0
+        with:
+          directory: .             
+          check_html: true
+          check_css:  true
+          check_favicon: false      
+
+  eslint:                           
+    name: Run ESLint scan and upload SARIF
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write       
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Install ESLint and SARIF formatter (project-local)
+        run: |
+          npm install --save-dev eslint@8.10.0 \
+            @microsoft/eslint-formatter-sarif@3.1.0
+
+      - name: Run ESLint and generate SARIF output
+        env:
+          SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
+        run: |
+          npx eslint . \
+            --config .eslintrc.json \
+            --ext .js \
+            --format @microsoft/eslint-formatter-sarif \
+            --output-file eslint-results.sarif
+        continue-on-error: true     
+
+      - name: Upload SARIF results to GitHub Security tab
+        if: always()                
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: eslint-results.sarif
+          wait-for-processing: true
