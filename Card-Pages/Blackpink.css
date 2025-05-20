@@ -1,0 +1,89 @@
+/* Blackpink.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: calc((220px * 5) + (20px * 4));
+  margin: 0 auto;
+}
+
+.card {
+  flex: 1 1 calc(20% - 20px);
+  max-width: 220px;
+  height: 320px;
+  perspective: 1000px;
+  margin: 1rem 0;
+}
+
+.card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card:hover .card__inner {
+  transform: rotateY(180deg);
+}
+
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card__face--front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__face--back {
+  background: white;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  font-family: system-ui, sans-serif;
+}
+
+.card__face--back p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.rarity--common    { background: #E0E0E0; }
+.rarity--rare      { background: #add8e6; }
+.rarity--ultra     { background: #f9e79f; }
+.rarity--legendary { background: #f5b7b1; }
+
+.rarity {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  align-self: center;
+  margin-top: 1rem;
+}
