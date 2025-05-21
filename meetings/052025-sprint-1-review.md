@@ -1,4 +1,4 @@
-# Stand Up 5/20
+# Sprint Review 5/20
 
 May 20th, 8:15pm
 
@@ -56,10 +56,7 @@ Somto:
 2. will work on issue #23
 3. N/A
 
----
+Current demo:
+[https://ibrahimyurdan.github.io/kpopgacha/](https://ibrahimyurdan.github.io/kpopgacha/)
 
-- Working on setting up small groups and new repo with issues to be organized
-- Will be building more slowly but efficiently
-- More meetings every other day at 8 pm
-- Assign people to tasks
-- Connect more issues tgt, make them more like subtasks so people don't have to wait for code to be completed
+---

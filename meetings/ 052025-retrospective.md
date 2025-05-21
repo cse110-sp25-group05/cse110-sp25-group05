@@ -1,0 +1,15 @@
+# Sprint Retro 5/20
+
+May 20th, 8:30pm
+
+Attendees: Emily, Somto, Renee, Ruyi, Aaron, Ibrahim, Aman, Omar
+
+---
+
+- Working on setting up small groups and new repo with issues to be organized
+- Will be building more slowly but efficiently
+- More meetings every other day at 8 pm
+- Assign people to tasks
+- Connect more issues tgt, make them more like subtasks so people don't have to wait for code to be completed
+- Autonomy and impact was very high but clarity wasn’t
+- Hard for inexperienced people to do a lot of work
