@@ -16,7 +16,7 @@ Attendees: Aaron, Ibrahim, Omar, Jonathan, Tea
 
 **New design mockup:**  
 [https://www.figma.com/design/yIahLzVgf9APQi3oqnmmjO/CSE-110?node-id=0-1\&t=ueGsiCWYiXcnAR7R-1](https://www.figma.com/design/yIahLzVgf9APQi3oqnmmjO/CSE-110?node-id=0-1&t=ueGsiCWYiXcnAR7R-1)  
-![](images\jonathan_mockup1_5-25.png)
-![](images\jonathan_mockup2_5-25.png)
+![](images/jonathan_mockup1_5-25.png)
+![](images/jonathan_mockup2_5-25.png)
 
 **Current Demo:** [https://cse110-sp25-group05.github.io/cse110-sp25-group05/source/kpopdemo/](https://cse110-sp25-group05.github.io/cse110-sp25-group05/source/kpopdemo/)
