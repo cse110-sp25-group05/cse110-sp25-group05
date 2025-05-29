@@ -228,6 +228,51 @@ const CardData = (() => {
             image: getCardImage('skz-felix', 'Felix', 'STRAY KIDS')
         },
         {
+            id: 'skz-han',
+            name: 'Han',
+            group: 'STRAY KIDS',
+            role: 'Rapper, Vocalist',
+            birthday: 'September 14th, 2000',
+            bio: 'Han Jisung is a South Korean member of Stray Kids, known for his songwriting and rap skills.', 
+            image: getCardImage('skz-han', 'Han', 'STRAY KIDS')
+        },
+        {
+            id: 'skz-changbin',
+            name: 'Changbin',
+            group: 'STRAY KIDS', 
+            role: 'Rapper, Producer',
+            birthday: 'August 11th, 1999',
+            bio: 'Seo Chang-bin, known as Changbin in the group STRAY KIDS, is known for his producing and rapping.', 
+            image: getCardImage('skz-changbin','Changbin','STRAY KIDS')
+        },
+        {
+            id: 'skz-hyunjin',
+            name: 'Hyunjin',
+            group: 'STRAY KIDS',
+            role: 'Rapper, Dancer',
+            birthday: 'March 20th, 2000',
+            bio: 'South Korean STRAY KIDS member Hyunjin is known for his impressive rap and dancing skills',
+            image: getCardImage('skz-hyunjin','Hyunjin','STRAY KIDS')
+        },
+        {
+            id: 'skz-in',
+            name: 'I.N',
+            group: 'STRAY KIDS',
+            role: 'Vocalist',
+            birthday: 'February 8th, 2001',
+            bio: 'Yang Jeong-in, known as I.N, is a vocalist member of STRAY KIDS is known for his range.',
+            image: getCardImage('skz-in', 'I.N', 'STRAY KIDS')
+        },
+        {
+            id: 'skz-seungmin',
+            name: 'Seungmin',
+            group: 'STRAY KIDS',
+            role: 'Main Vocalist',
+            birthday: 'September 22nd, 2000',
+            bio: 'Seungmin is a member of STRAY KIDS known for taking on some of the most challenging parts of their songs.', 
+            image: getCardImage('skz-seungmin','Seungmin', 'STRAY KIDS')
+        },
+        {
             id: 'itzy-yeji',
             name: 'Yeji',
             group: 'ITZY',
