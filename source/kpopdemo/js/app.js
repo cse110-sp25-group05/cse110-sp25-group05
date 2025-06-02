@@ -1,21 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => 
+{
     initApp();
 });
 
-function initApp() {
+function initApp()
+{
     setupEventListeners();
     loadCollection();
-    document.querySelectorAll('.pack').forEach((pack, index) => {
+    document.querySelectorAll('.pack').forEach((pack, index) => 
+    {
         setTimeout(() => {
             pack.classList.add('pack-opening-animation');
         }, 100 * index);
     });
 }
 
-function setupEventListeners() {
+function setupEventListeners() 
+{
     const openPackBtns = document.querySelectorAll('.open-pack-btn');
-    openPackBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+    openPackBtns.forEach(btn => 
+    {
+        btn.addEventListener('click', function() 
+        {
             const packType = this.getAttribute('data-type');
             const groupFilter = this.getAttribute('data-group');
             handlePackOpening(packType, groupFilter);
@@ -23,16 +29,20 @@ function setupEventListeners() {
     });
     
     const backToPacksBtn = document.getElementById('back-to-packs');
-    if (backToPacksBtn) {
-        backToPacksBtn.addEventListener('click', () => {
+    if (backToPacksBtn) 
+    {
+        backToPacksBtn.addEventListener('click', () => 
+        {
             const packOpeningSection = document.getElementById('pack-opening');
             packOpeningSection.classList.add('hidden');
         });
     }
     
     const addToCollectionBtn = document.getElementById('add-to-collection');
-    if (addToCollectionBtn) {
-        addToCollectionBtn.addEventListener('click', () => {
+    if (addToCollectionBtn) 
+    {
+        addToCollectionBtn.addEventListener('click', () => 
+        {
             const cards = getCurrentlyOpenedCards();
             CardManager.addCardsToCollection(cards);
             updateCollectionDisplay();
@@ -41,35 +51,44 @@ function setupEventListeners() {
     }
     
     const groupFilter = document.getElementById('group-filter');
-    if (groupFilter) {
-        groupFilter.addEventListener('change', () => {
+    if (groupFilter) 
+    {
+        groupFilter.addEventListener('change', () => 
+        {
             updateCollectionDisplay();
         });
     }
     
-    document.addEventListener('click', event => {
+    document.addEventListener('click', event => 
+    {
         const card = event.target.closest('.card');
-        if (card && !card.classList.contains('new-card-animation') && !card.classList.contains('card-reveal')) {
+        if (card && !card.classList.contains('new-card-animation') && !card.classList.contains('card-reveal')) 
+        {
             card.classList.toggle('flipped');
-            if (card.classList.contains('flipped')) {
+            if (card.classList.contains('flipped')) 
+            {
                 playSound('flip');
             }
         }
     });
 }
 
-function playSound(type) {
+function playSound(type) 
+{
     console.log(`Playing ${type} sound`);
 }
 
-function showNotification(message, type = 'info') {
+function showNotification(message, type = 'info') 
+{
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.textContent = message;
     document.body.appendChild(notification);
-    setTimeout(() => {
+    setTimeout(() => 
+    {
         notification.classList.add('notification-hide');
-        setTimeout(() => {
+        setTimeout(() => 
+        {
             notification.remove();
         }, 500);
     }, 3000);
@@ -77,18 +96,21 @@ function showNotification(message, type = 'info') {
 
 let currentlyOpenedCards = [];
 
-function getCurrentlyOpenedCards() {
+function getCurrentlyOpenedCards() 
+{
     return [...currentlyOpenedCards];
 }
 
-function handlePackOpening(packType = 'basic', groupFilter = 'random') {
+function handlePackOpening(packType = 'basic', groupFilter = 'random') 
+{
     const packOpeningSection = document.getElementById('pack-opening');
     packOpeningSection.classList.remove('hidden');
     const cardCount = packType === 'premium' ? 7 : (packType === 'ultimate' ? 10 : 5);
     showLoadingCards(cardCount);
     playSound('summon');
     packOpeningSection.classList.add('pack-opening');
-    setTimeout(() => {
+    setTimeout(() => 
+    {
         const cards = PackManager.openPack(packType, groupFilter);
         currentlyOpenedCards = cards;
         packOpeningSection.classList.remove('pack-opening');
@@ -96,10 +118,12 @@ function handlePackOpening(packType = 'basic', groupFilter = 'random') {
     }, 800);
 }
 
-function showLoadingCards(count) {
+function showLoadingCards(count) 
+{
     const cardsContainer = document.querySelector('#pack-opening .cards-container');
     cardsContainer.innerHTML = '';
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) 
+    {
         const loadingCard = document.createElement('div');
         loadingCard.className = 'card loading-card';
         loadingCard.style.width = '180px';
@@ -108,11 +132,13 @@ function showLoadingCards(count) {
     }
 }
 
-function displayGachaCards(cards) {
+function displayGachaCards(cards) 
+{
     const cardsContainer = document.querySelector('#pack-opening .cards-container');
     cardsContainer.innerHTML = '';
     const hasLegendary = cards.some(card => card.rarity === 'legendary');
-    if (hasLegendary) {
+    if (hasLegendary) 
+    {
         playSound('legendary');
         document.body.classList.add('legendary-pull');
         setTimeout(() => {
@@ -120,10 +146,12 @@ function displayGachaCards(cards) {
         }, 3000);
     }
     const rarityOrder = { common: 0, rare: 1, epic: 2, legendary: 3 };
-    cards.sort((a, b) => {
+    cards.sort((a, b) => 
+    {
         return (rarityOrder[a.rarity] || 0) - (rarityOrder[b.rarity] || 0);
     });
-    cards.forEach((card, index) => {
+    cards.forEach((card, index) => 
+    {
         const placeholderId = `placeholder-${index}-${Date.now()}`;
         const cardElement = document.createElement('div');
         cardElement.className = 'card card-placeholder';
@@ -140,7 +168,8 @@ function displayGachaCards(cards) {
             </div>
         `;
         cardsContainer.appendChild(cardElement);
-        setTimeout(() => {
+        setTimeout(() => 
+        {
             const actualCard = createCardElement(card);
             actualCard.classList.add('card-reveal');
             actualCard.addEventListener('animationend', function() {
@@ -158,14 +187,16 @@ function displayGachaCards(cards) {
     });
 }
 
-function createCardElement(card) {
+function createCardElement(card) 
+{
     const cardDiv = document.createElement('div');
     cardDiv.className = 'card';
     cardDiv.dataset.id = card.id;
     cardDiv.dataset.group = card.group;
     cardDiv.dataset.rarity = card.rarity || 'common';
     let countBadge = '';
-    if (card.count && card.count > 1) {
+    if (card.count && card.count > 1) 
+    {
         countBadge = `<div class="card-count">${card.count}</div>`;
     }
     let rarityClass = '';
@@ -197,7 +228,8 @@ function createCardElement(card) {
     return cardDiv;
 }
 
-function updateCollectionDisplay() {
+function updateCollectionDisplay() 
+{
     const collectionContainer = document.querySelector('.collection-container');
     collectionContainer.innerHTML = '';
     const collection = CardManager.getCollection();
@@ -206,13 +238,16 @@ function updateCollectionDisplay() {
     const filteredCollection = selectedGroup === 'all' 
         ? collection 
         : collection.filter(card => card.group === selectedGroup);
-    if (filteredCollection.length === 0) {
+    if (filteredCollection.length === 0) 
+    {
         collectionContainer.innerHTML = '<p class="empty-collection">No cards in this category yet. Summon some cards to build your collection!</p>';
         return;
     }
     const groupedCards = {};
-    filteredCollection.forEach(card => {
-        if (!groupedCards[card.group]) {
+    filteredCollection.forEach(card => 
+    {
+        if (!groupedCards[card.group]) 
+        {
             groupedCards[card.group] = [];
         }
         groupedCards[card.group].push(card);
@@ -220,47 +255,56 @@ function updateCollectionDisplay() {
     const collectionGrid = document.createElement('div');
     collectionGrid.className = 'collection-grid';
     const sortedGroups = Object.keys(groupedCards).sort();
-    sortedGroups.forEach(group => {
+    sortedGroups.forEach(group => 
+    {
         const groupTile = createGroupTile(group, groupedCards[group]);
         collectionGrid.appendChild(groupTile);
     });
     collectionContainer.appendChild(collectionGrid);
-    document.querySelectorAll('.group-tile').forEach(tile => {
-        tile.addEventListener('click', function() {
+    document.querySelectorAll('.group-tile').forEach(tile => 
+    {
+        tile.addEventListener('click', function() 
+        {
             const group = this.getAttribute('data-group');
             showGroupDetail(group, groupedCards[group]);
         });
     });
 }
 
-function createGroupTile(groupName, cards) {
+function createGroupTile(groupName, cards) 
+{
     const tile = document.createElement('div');
     tile.className = 'group-tile';
     tile.dataset.group = groupName;
     let coverImageUrl = `https://via.placeholder.com/400x300/${getGroupColor(groupName)}/ffffff?text=${encodeURIComponent(groupName)}`;
     let highestRarityCard = cards[0];
     const rarityValues = { legendary: 4, epic: 3, rare: 2, common: 1 };
-    cards.forEach(card => {
+    cards.forEach(card => 
+    {
         const cardRarityValue = rarityValues[card.rarity] || 1;
         const highestRarityValue = rarityValues[highestRarityCard.rarity] || 1;
-        if (cardRarityValue > highestRarityValue) {
+        if (cardRarityValue > highestRarityValue) 
+        {
             highestRarityCard = card;
         }
     });
-    if (highestRarityCard && highestRarityCard.image) {
+    if (highestRarityCard && highestRarityCard.image) 
+    {
         coverImageUrl = highestRarityCard.image;
     }
     const uniqueCardIds = new Set(cards.map(card => card.id));
     const uniqueCardCount = uniqueCardIds.size;
     const totalCardCount = cards.length;
-    const rarityCount = {
+    const rarityCount = 
+    {
         common: cards.filter(card => !card.rarity || card.rarity === 'common').length,
         rare: cards.filter(card => card.rarity === 'rare').length,
         epic: cards.filter(card => card.rarity === 'epic').length,
         legendary: cards.filter(card => card.rarity === 'legendary').length
     };
     let rarityInfo = '';
-    if (rarityCount.rare > 0 || rarityCount.epic > 0 || rarityCount.legendary > 0) {
+    if (rarityCount.rare > 0 || rarityCount.epic > 0 || rarityCount.legendary > 0) 
+    {
         rarityInfo = `
             <div class="rarity-info">
                 ${rarityCount.legendary > 0 ? `<span class="rarity-legendary">⭐ ${rarityCount.legendary}</span>` : ''}
@@ -285,9 +329,11 @@ function createGroupTile(groupName, cards) {
     return tile;
 }
 
-function showGroupDetail(groupName, cards) {
+function showGroupDetail(groupName, cards) 
+{
     const existingDetail = document.querySelector('.group-detail');
-    if (existingDetail) {
+    if (existingDetail) 
+    {
         existingDetail.remove();
     }
     const groupDetail = document.createElement('div');
@@ -301,7 +347,8 @@ function showGroupDetail(groupName, cards) {
     const closeButton = document.createElement('button');
     closeButton.className = 'close-detail';
     closeButton.innerHTML = '<i class="fas fa-times"></i>';
-    closeButton.addEventListener('click', () => {
+    closeButton.addEventListener('click', () => 
+    {
         groupDetail.remove();
     });
     detailHeader.appendChild(detailTitle);
@@ -310,7 +357,8 @@ function showGroupDetail(groupName, cards) {
     const groupCards = document.createElement('div');
     groupCards.className = 'group-cards';
     const sortedCards = cards.sort((a, b) => a.name.localeCompare(b.name));
-    sortedCards.forEach(card => {
+    sortedCards.forEach(card => 
+    {
         const cardElement = createCardElement(card);
         groupCards.appendChild(cardElement);
     });
@@ -319,7 +367,8 @@ function showGroupDetail(groupName, cards) {
     groupDetail.scrollIntoView({ behavior: 'smooth' });
 }
 
-function getGroupColor(groupName) {
+function getGroupColor(groupName) 
+{
     const colors = {
         'BTS': '7a3fb0',
         'BLACKPINK': 'ff007f',
@@ -331,7 +380,8 @@ function getGroupColor(groupName) {
     return colors[groupName] || 'f8a5c2';
 }
 
-function loadCollection() {
+function loadCollection() 
+{
     CardManager.loadCollection();
     updateCollectionDisplay();
 }

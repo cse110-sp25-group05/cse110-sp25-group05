@@ -1,23 +1,31 @@
-const CardManager = (() => {
+const CardManager = (() => 
+{
     let collection = [];
 
-    function loadCollection() {
+    function loadCollection() 
+    {
         const savedCollection = localStorage.getItem('kpopCardCollection');
-        if (savedCollection) {
+        if (savedCollection) 
+        {
             collection = JSON.parse(savedCollection);
         }
     }
 
-    function saveCollection() {
+    function saveCollection() 
+    {
         localStorage.setItem('kpopCardCollection', JSON.stringify(collection));
     }
 
-    function addCardsToCollection(cards) {
-        cards.forEach(card => {
+    function addCardsToCollection(cards) 
+    {
+        cards.forEach(card => 
+        {
             const existingIndex = collection.findIndex(c => c.id === card.id);
-            if (existingIndex === -1) {
+            if (existingIndex === -1) 
+            {
                 collection.push(card);
-            } else {
+            } else 
+            {
                 if (!collection[existingIndex].count) {
                     collection[existingIndex].count = 1;
                 }
@@ -27,11 +35,13 @@ const CardManager = (() => {
         saveCollection();
     }
 
-    function getCollection() {
+    function getCollection() 
+    {
         return [...collection];
     }
 
-    function getCardById(id) {
+    function getCardById(id) 
+    {
         return collection.find(card => card.id === id) || null;
     }
 
@@ -44,10 +54,13 @@ const CardManager = (() => {
     };
 })();
 
-const CardData = (() => {
-    function getPlaceholderUrl(name, group) {
+const CardData = (() => 
+{
+    function getPlaceholderUrl(name, group) 
+    {
         const initials = name.split(' ').map(n => n[0]).join('');
-        const colorMap = {
+        const colorMap = 
+        {
             'BTS': '7a3fb0',
             'BLACKPINK': 'ff007f',
             'TWICE': 'ff8b3e',
@@ -59,7 +72,8 @@ const CardData = (() => {
         return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${bgColor}&color=fff&size=300&bold=true&font-size=0.33&length=2`;
     }
 
-    function getCardImage(id, name, group) {
+    function getCardImage(id, name, group) 
+    {
         const realImagePath = `src/assets/cards/${group.toLowerCase()}/${id}.jpg`;
         return getPlaceholderUrl(name, group);
     }
@@ -283,15 +297,18 @@ const CardData = (() => {
         }
     ];
 
-    function getAllCards() {
+    function getAllCards() 
+    {
         return [...cards];
     }
 
-    function getCardsByGroup(groupName) {
+    function getCardsByGroup(groupName) 
+    {
         return cards.filter(card => card.group === groupName);
     }
 
-    function getCardById(id) {
+    function getCardById(id) 
+    {
         return cards.find(card => card.id === id) || null;
     }
 
