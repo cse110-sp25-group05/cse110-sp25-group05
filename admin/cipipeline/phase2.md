@@ -1,13 +1,21 @@
 
 # Continuous Integration and Deployment Guide
 
-Last Updated: 25 May 2025  
+## Pipeline Goals  
+The goal of the pipeline is to filter code not up to par to quality but to also make sure that it is not very difficult to make a change to the master branch.
+
+### Updates
+
+Last Updated: 2 June 2025  
 
 **CHANGES TO OUR PIPELINE SINCE PHASE 1:**
-We have developed some unit tests since phase 1 to test some functions of the current demo. However, in our meetings, we decided to hold off adding the unit tests into the automatic actions and current pipeline as we have not decided any major specifics on the app just yet. Other than that, there has been no changes to our pipeline as of May 25.
+We have developed some unit tests since phase 1 to test some functions of the current demo. However, in our meetings, we decided to hold off adding the unit tests into the automatic actions and current pipeline as we have not decided any major specifics on the app just yet. 
+
+**Changelog:**
+
+**2 June 2025** - A styling change specifically to one of our rules regarding functions and curly brackets. We changed it so that brackets stay within the same line as the function's name/call instead of being on a newline.
 
 
-The goal of the pipeline is to filter code not up to par to quality but to also make sure that it is not very difficult to make a change to the master branch.
 
 ## Step 1 - Communication on Slack
 - **Announce Work in Slack**  
@@ -27,7 +35,7 @@ The purpose of this step is to keep the team informed and avoid any unnecessary 
     - Consistent name conventions.
     - Clear naming variables and functions.
     - Extra comments on any complex lines of code to help others understand.
-    - Brackets should have their own line for easier reading.
+    - Brackets should be in the same line for easier reading.
 
 For now, we want to keep it simple, but later on we may more strict coding guidelines and have programs or pipeline tests to check if needed. **We will depend on pull request reviewers currently** to check if the code writing is readable and easy to understand.
 
@@ -36,8 +44,7 @@ Since good indentation and formatting is difficult to describe, here is some exa
 
 ``` JavaScript
 // this function constant, add, provides a sum out of two numbers
-const add = (number1, number2) => 
-{
+const add = (number1, number2) => {
     const result = number1 + number2  // this line adds number1 and number2 to make the sum
     return result
 }
@@ -48,12 +55,11 @@ Here is another example:
 setInterval(timer, 1000); // runs the timer function every 1000ms. (1 second)
 
 // this function, timer,  provides the current time every second.
-function timer() 
-{
+function timer() {
     let dates = new Date();
     let time = dates.toLocaleTimeString(); 
     console.log(time);
-} // Please note the brackets!  
+} 
 ```
 
 ## Step 3 - Done Writing Code? Merging Conflicts...  
