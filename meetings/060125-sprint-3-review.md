@@ -9,9 +9,9 @@ Omar & Aaron:
 
 - Worked on issue 37, has an outline for the page and now has to implement the core functionality. Wondering how they should style this new page.
 
-![Decoration Card Button](images/decocardbutton.png.png)
+![Decoration Card Button](images/decocardbutton.png)
 
-![Deco Tab](images/decocardtab.png.png)
+![Deco Tab](images/decocardtab.png)
 
 Emily, Renee, Jonathan, Aman:
 
