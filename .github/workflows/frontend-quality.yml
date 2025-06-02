@@ -1,11 +1,11 @@
-# .github/workflows/frontend-quality.yml
-name: Front-end Quality Checks
+name: Front-end CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
+  workflow_dispatch:
   schedule:
     - cron: '22 21 * * 3'
 
@@ -18,55 +18,93 @@ jobs:
         with:
           directory: .
           check_html: true
-          check_css:  true
+          check_css: true
           check_favicon: false
+
+  validate-html-w3c:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate HTML files with W3C API
+        run: |
+          find source -name "*.html" | while read file; do
+            echo "Validating $file"
+            curl --silent \
+              -H "Content-Type: text/html; charset=utf-8" \
+              -H "Accept: application/json" \
+              --data-binary "@$file" \
+              https://validator.w3.org/nu/?out=json \
+              > validator-result.json
+            if grep -q '"type":"error"' validator-result.json; then
+              echo "Validation failed for $file"
+              cat validator-result.json
+              exit 1
+            else
+              echo "Validation passed for $file"
+            fi
+          done
 
   eslint:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       security-events: write
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-
-   
       - name: Install project dependencies (if any)
-        id: install-deps
         run: |
           if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
-            echo "Using npm ci"
             npm ci
           elif [ -f package.json ]; then
-            echo "Using npm install"
             npm install
-          else
-            echo "No package.json – skipping"
           fi
-
-    
       - name: Install ESLint + SARIF formatter
         run: |
-          npm install --no-save eslint@8.10.0 \
-            @microsoft/eslint-formatter-sarif@3.1.0
-
-    
-      - name: Run ESLint and create SARIF
+          npm install --no-save eslint@8.10.0 @microsoft/eslint-formatter-sarif@3.1.0
+      - name: Run ESLint (repo script) and create SARIF
         run: |
+          npm run lint --if-present || true
           npx eslint . \
             --ext .js \
-            --config .eslintrc.json \
             --format @microsoft/eslint-formatter-sarif \
-            --output-file eslint-results.sarif \
-          || true                          
-
-     
+            --output-file eslint-results.sarif || true
       - name: Upload SARIF to Security tab
         if: hashFiles('eslint-results.sarif') != ''
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npm test
+
+  build-and-deploy-docs:
+    needs: [proof-html, validate-html-w3c, eslint, unit-tests]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npm run docs
+      - name: Deploy to docs branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: ${{ github.ref == 'refs/heads/main' && 'docs' || 'docs-cicd' }}
+          force_orphan: true
