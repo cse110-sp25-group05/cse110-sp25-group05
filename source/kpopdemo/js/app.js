@@ -9,7 +9,8 @@ function initApp()
     loadCollection();
     document.querySelectorAll('.pack').forEach((pack, index) => 
     {
-        setTimeout(() => {
+        setTimeout(() => 
+        {
             pack.classList.add('pack-opening-animation');
         }, 100 * index);
     });
