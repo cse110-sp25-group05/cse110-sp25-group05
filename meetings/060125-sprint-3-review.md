@@ -9,16 +9,16 @@ Omar & Aaron:
 
 - Worked on issue 37, has an outline for the page and now has to implement the core functionality. Wondering how they should style this new page.
 
-![Decoration Card Button](/images/decocardbutton.png.png)
+![Decoration Card Button](images/decocardbutton.png.png)
 
-![Deco Tab](/images/decocardtab.png.png)
+![Deco Tab](images/decocardtab.png.png)
 
 Emily, Renee, Jonathan, Aman:
 
 - Finished getting photos for all the groups
 - Jonathan made a webcraper!
     
-    ![Screenshot 2025-06-01 at 9.38.02 PM.png](/images/webscraper.png)
+    ![Screenshot 2025-06-01 at 9.38.02 PM.png](images/webscraper.png)
     
 - We have to follow good style guidelines!! Very good point
 - ADR for credit system
@@ -27,7 +27,7 @@ Abhyuday:
 
 - Worked on Decoration homepage.
 
-![deco page](/images/decocardpage.png)
+![deco page](images/decocardpage.png)
 
 Ibrahim: 
 
@@ -35,4 +35,4 @@ Ibrahim:
 - Thinking about pack mechanics → less cards pulled
 - Change drop rates
     
-![Tic tac toe](/images/tictactoe.png)
+![Tic tac toe](images/tictactoe.png)
