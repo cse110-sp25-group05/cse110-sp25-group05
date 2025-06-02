@@ -45,24 +45,23 @@ const CardManager = (() => {
 })();
 
 const CardData = (() => {
-  // function getPlaceholderUrl(name, group) {
-  //     const initials = name.split(' ').map(n => n[0]).join('');
-  //     const colorMap = {
-  //         'BTS': '7a3fb0',
-  //         'BLACKPINK': 'ff007f',
-  //         'TWICE': 'ff8b3e',
-  //         'STRAY KIDS': '384cff',
-  //         'ITZY': 'ff363c',
-  //         'AESPA': '00a77d'
-  //     };
-  //     const bgColor = colorMap[group] || 'f8a5c2';
-  //     return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${bgColor}&color=fff&size=300&bold=true&font-size=0.33&length=2`;
-  // }
+  function getPlaceholderUrl(name, group) {
+      const initials = name.split(' ').map(n => n[0]).join('');
+      const colorMap = {
+          'BTS': '7a3fb0',
+          'BLACKPINK': 'ff007f',
+          'TWICE': 'ff8b3e',
+          'STRAY KIDS': '384cff',
+          'ITZY': 'ff363c',
+          'AESPA': '00a77d'
+      };
+      const bgColor = colorMap[group] || 'f8a5c2';
+      return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${bgColor}&color=fff&size=300&bold=true&font-size=0.33&length=2`;
+  }
 
   function getCardImage(id, name, group) {
     const realImagePath = `assets/cards/${group.toLowerCase()}/${name}/${id}.png`;
     return realImagePath;
-    // return getPlaceholderUrl(name, group);
   }
 
   const cards = [
@@ -166,6 +165,15 @@ const CardData = (() => {
       image: getCardImage("bp-lisa", "Lisa", "BLACKPINK"),
     },
     {
+      id: "twice-chaeyoung",
+      name: "Chaeyoung",
+      group: "TWICE",
+      role: "Main Rapper, Sub Vocalist",
+      birthday: "April 23, 1999",
+      bio: "Son Chae-young is the main rapper and sub vocalist of TWICE, known for her creativity and charisma.",
+      image: getCardImage("twice-chaeyoung", "Chaeyoung", "TWICE"),
+    },
+    {
       id: "twice-nayeon",
       name: "Nayeon",
       group: "TWICE",
@@ -184,6 +192,15 @@ const CardData = (() => {
       image: getCardImage("twice-jeongyeon", "Jeongyeon", "TWICE"),
     },
     {
+      id: "twice-jihyo",
+      name: "Jihyo",
+      group: "TWICE",
+      role: "Leader, Main Vocalist",
+      birthday: "February 1, 1997",
+      bio: "Park Ji-hyo is the leader and main vocalist of TWICE, known for her powerful voice and leadership.",
+      image: getCardImage("twice-jihyo", "Jihyo", "TWICE"),
+    },
+    {
       id: "twice-momo",
       name: "Momo",
       group: "TWICE",
@@ -191,6 +208,33 @@ const CardData = (() => {
       birthday: "November 9, 1996",
       bio: "Hirai Momo is a Japanese dancer and vocalist in TWICE with powerful dance skills.",
       image: getCardImage("twice-momo", "Momo", "TWICE"),
+    },
+    {
+      id: "twice-mina",
+      name: "Mina",
+      group: "TWICE",
+      role: "Main Dancer, Sub Vocalist",
+      birthday: "March 24, 1997",
+      bio: "Myoui Mina is a Japanese-American member of TWICE, known for her elegance and ballet background.",
+      image: getCardImage("twice-mina", "Mina", "TWICE"),
+    },
+    {
+      id: "twice-dahyun",
+      name: "Dahyun",
+      group: "TWICE",
+      role: "Lead Rapper, Sub Vocalist",
+      birthday: "May 28, 1998",
+      bio: "Kim Da-hyun is known for her bright personality and is the lead rapper and sub vocalist of TWICE.",
+      image: getCardImage("twice-dahyun", "Dahyun", "TWICE"),
+    },
+    {
+      id: "twice-tzuyu",
+      name: "Tzuyu",
+      group: "TWICE",
+      role: "Lead Dancer, Sub Vocalist, Visual, Maknae",
+      birthday: "June 14, 1999",
+      bio: "Chou Tzuyu is the youngest member (maknae) of TWICE, known for her visuals and graceful dancing.",
+      image: getCardImage("twice-tzuyu", "Tzuyu", "TWICE"),
     },
     {
       id: "twice-sana",
