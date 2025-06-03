@@ -875,27 +875,27 @@ footer {
     header h1 {
         font-size: 2rem;
     }
-    
+
     .pack-container {
         gap: 1.5rem;
     }
-    
+
     .pack {
         width: 160px;
     }
-    
+
     .pack-image {
         height: 200px;
     }
-    
+
     .group-section {
         padding: 1.5rem;
     }
-    
+
     .group-cards {
         gap: 1.2rem;
     }
-    
+
     .group-cards .card {
         flex: 0 0 150px;
     }
@@ -905,45 +905,45 @@ footer {
     header h1 {
         font-size: 1.8rem;
     }
-    
+
     main {
         padding: 0 1rem;
     }
-    
+
     .pack-container {
         gap: 1rem;
     }
-    
+
     .pack {
         width: 140px;
     }
-    
+
     .pack-image {
         height: 180px;
     }
-    
+
     .open-pack-btn {
         padding: 0.8rem;
         font-size: 0.9rem;
     }
-    
+
     .group-section {
         padding: 1rem;
     }
-    
+
     .group-cards {
         gap: 1rem;
         justify-content: center;
     }
-    
+
     .group-cards .card {
         flex: 0 0 140px;
     }
-    
+
     .card-back h3 {
         font-size: 1rem;
     }
-    
+
     .card-back p {
         font-size: 0.8rem;
     }
@@ -1189,7 +1189,7 @@ footer {
     .group-cards {
         gap: 15px;
     }
-    
+
     .group-cards .card {
         flex: 0 0 150px;
         height: 235px;
@@ -1201,12 +1201,12 @@ footer {
         gap: 10px;
         justify-content: center;
     }
-    
+
     .group-cards .card {
         flex: 0 0 140px;
         height: 220px;
     }
-    
+
     .group-detail {
         padding: 1.5rem 1rem;
     }
@@ -1251,21 +1251,21 @@ footer {
         gap: 1.5rem;
         justify-content: center;
     }
-    
+
     .group-tile {
         flex: 0 0 calc(50% - 1.5rem);
         height: 300px;
         margin: 0 0.75rem 1.5rem 0.75rem;
     }
-    
+
     .group-cover {
         height: 160px;
     }
-    
+
     .group-cards {
         gap: 15px;
     }
-    
+
     .group-cards .card {
         flex: 0 0 150px;
         height: 235px;
@@ -1276,36 +1276,36 @@ footer {
     .collection-grid {
         gap: 1rem;
     }
-    
+
     .group-tile {
         flex: 0 0 calc(100% - 1rem);
         max-width: 280px;
         height: 300px;
         margin: 0 0.5rem 1.5rem 0.5rem;
     }
-    
+
     .group-cover {
         height: 140px;
     }
-    
+
     .group-info {
         padding: 1rem;
     }
-    
+
     .group-name {
         font-size: 1.2rem;
     }
-    
+
     .group-cards {
         gap: 10px;
         justify-content: center;
     }
-    
+
     .group-cards .card {
         flex: 0 0 140px;
         height: 220px;
     }
-    
+
     .group-detail {
         padding: 1.5rem 1rem;
     }
@@ -1560,7 +1560,7 @@ body.legendary-pull #pack-opening {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     padding: 12px 20px;
     border-radius: 50px;
-    box-shadow: 
+    box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         0 0 0 1px rgba(255, 255, 255, 0.05);
@@ -1594,7 +1594,7 @@ body.legendary-pull #pack-opening {
 
 .credit-display-wrapper:hover {
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
         0 12px 40px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.2),
         0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -1639,7 +1639,7 @@ body.legendary-pull #pack-opening {
     min-width: 80px;
     text-align: right;
     font-family: 'Montserrat', sans-serif;
-    text-shadow: 
+    text-shadow:
         0 1px 2px rgba(0, 0, 0, 0.3),
         0 0 10px rgba(241, 196, 15, 0.3);
     position: relative;
@@ -1659,7 +1659,7 @@ body.legendary-pull #pack-opening {
     color: white;
     font-size: 18px;
     cursor: pointer;
-    box-shadow: 
+    box-shadow:
         0 6px 20px rgba(39, 174, 96, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1690,7 +1690,7 @@ body.legendary-pull #pack-opening {
 
 .add-credits-btn:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 
+    box-shadow:
         0 10px 30px rgba(39, 174, 96, 0.6),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
     background: linear-gradient(135deg, #229954 0%, #27ae60 50%, #2ecc71 100%);
@@ -1734,7 +1734,7 @@ body.legendary-pull #pack-opening {
     background: white;
     padding: 18px 24px;
     border-radius: 16px;
-    box-shadow: 
+    box-shadow:
         0 10px 40px rgba(0, 0, 0, 0.15),
         0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 10000;
@@ -1850,7 +1850,7 @@ body.legendary-pull #pack-opening {
     width: 90%;
     max-height: 85vh;
     overflow-y: auto;
-    box-shadow: 
+    box-shadow:
         0 25px 60px rgba(0, 0, 0, 0.3),
         0 8px 20px rgba(0, 0, 0, 0.2);
     transform: scale(0.7) translateY(50px);
@@ -1964,7 +1964,7 @@ body.legendary-pull #pack-opening {
 
 .earn-option:hover {
     border-color: #667eea;
-    box-shadow: 
+    box-shadow:
         0 12px 40px rgba(102, 126, 234, 0.15),
         0 4px 12px rgba(102, 126, 234, 0.1);
     transform: translateY(-6px);
@@ -2055,13 +2055,13 @@ body.legendary-pull #pack-opening {
 }
 
 @keyframes bonus-sparkle {
-    0%, 100% { 
-        box-shadow: 
+    0%, 100% {
+        box-shadow:
             0 10px 40px rgba(0, 0, 0, 0.15),
             0 4px 12px rgba(0, 0, 0, 0.1);
     }
-    50% { 
-        box-shadow: 
+    50% {
+        box-shadow:
             0 15px 50px rgba(241, 196, 15, 0.3),
             0 8px 20px rgba(241, 196, 15, 0.2);
     }
@@ -2231,44 +2231,44 @@ body.legendary-pull #pack-opening {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .credit-container {
         order: -1;
     }
-    
+
     .credit-display-wrapper {
         padding: 6px 12px;
     }
-    
+
     .credit-amount {
         font-size: 16px;
     }
-    
+
     .credit-notification {
         right: 10px;
         left: 10px;
         max-width: none;
     }
-    
+
     .earn-options {
         grid-template-columns: 1fr;
     }
-    
+
     .minigames-container {
         grid-template-columns: 1fr;
         padding: 0 15px;
     }
-    
+
     .minigame-card {
         padding: 20px;
     }
-    
+
     .minigame-icon {
         width: 60px;
         height: 60px;
     }
-    
+
     .minigame-icon i {
         font-size: 24px;
     }
-} 
+}
