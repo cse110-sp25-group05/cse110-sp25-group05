@@ -60,7 +60,7 @@ const CardData = (() => {
     }
 
     function getCardImage(id, name, group) {
-        const realImagePath = `assets/cards/${group.toLowerCase()}/${id}.jpg`;
+        const realImagePath = `assets/cards/${group.toLowerCase()}/${id}.png`;
         return realImagePath;
     }
 
