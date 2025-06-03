@@ -15,9 +15,20 @@ function initApp() {
 function setupEventListeners() {
     const openPackBtns = document.querySelectorAll('.open-pack-btn');
     openPackBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(event) {
             const packType = this.getAttribute('data-type');
             const groupFilter = this.getAttribute('data-group');
+            
+            // Check if credit system is enabled and if user can afford the pack
+            if (window.CreditSystem) {
+                const canAfford = CreditSystem.canAffordPack(packType);
+                if (!canAfford) {
+                    // Credit system will handle showing error and modal
+                    return;
+                }
+                // Credit system will handle deducting credits
+            }
+            
             handlePackOpening(packType, groupFilter);
         });
     });
@@ -46,6 +57,27 @@ function setupEventListeners() {
             updateCollectionDisplay();
         });
     }
+    
+    // Add credits button event listener
+    const addCreditsBtn = document.getElementById('add-credits-btn');
+    if (addCreditsBtn) {
+        addCreditsBtn.addEventListener('click', () => {
+            if (window.CreditSystem) {
+                CreditSystem.showEarnCreditsModal();
+            }
+        });
+    }
+    
+    // Mini-game button event listeners
+    const minigameButtons = document.querySelectorAll('.minigame-play-btn');
+    minigameButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const gameType = this.getAttribute('data-game');
+            if (gameType && !this.disabled) {
+                playMiniGameDemo(gameType);
+            }
+        });
+    });
     
     document.addEventListener('click', event => {
         const card = event.target.closest('.card');
@@ -334,4 +366,121 @@ function getGroupColor(groupName) {
 function loadCollection() {
     CardManager.loadCollection();
     updateCollectionDisplay();
+}
+
+/**
+ * Demo mini-game functionality for testing
+ * This will be replaced with actual mini-games from other branches
+ */
+function playMiniGameDemo(gameType) {
+    const gameNames = {
+        rockPaperScissors: 'Rock Paper Scissors',
+        ticTacToe: 'Tic Tac Toe'
+    };
+    
+    const results = ['win', 'draw', 'lose'];
+    const randomResult = results[Math.floor(Math.random() * results.length)];
+    
+    // Simulate game play with a modal
+    const modal = document.createElement('div');
+    modal.className = 'minigame-demo-modal';
+    modal.innerHTML = `
+        <div class="minigame-demo-content">
+            <h3>🎮 ${gameNames[gameType]} Demo</h3>
+            <p>This is a demonstration of the credit system!</p>
+            <p>In the actual game from your other branch, this would be the real ${gameNames[gameType]} game.</p>
+            <div class="demo-result">
+                <p><strong>Random Result: ${randomResult.toUpperCase()}</strong></p>
+                <p>Credits earned will be automatically added to your balance.</p>
+            </div>
+            <div class="demo-buttons">
+                <button class="demo-btn demo-close">Close</button>
+                <button class="demo-btn demo-play">Simulate Result</button>
+            </div>
+        </div>
+    `;
+    
+    // Add modal styles
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 20000;
+    `;
+    
+    const content = modal.querySelector('.minigame-demo-content');
+    content.style.cssText = `
+        background: white;
+        padding: 40px 30px;
+        border-radius: 20px;
+        text-align: center;
+        max-width: 500px;
+        margin: 20px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    `;
+    
+    // Style the demo buttons
+    const demoButtons = modal.querySelectorAll('.demo-btn');
+    demoButtons.forEach(btn => {
+        if (btn.classList.contains('demo-play')) {
+            btn.style.cssText = `
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                border: none;
+                border-radius: 25px;
+                padding: 12px 24px;
+                margin: 0 8px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-size: 13px;
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            `;
+        } else {
+            btn.style.cssText = `
+                background: linear-gradient(135deg, #95a5a6, #bdc3c7);
+                color: white;
+                border: none;
+                border-radius: 25px;
+                padding: 12px 24px;
+                margin: 0 8px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-size: 13px;
+                box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+            `;
+        }
+    });
+    
+    document.body.appendChild(modal);
+    
+    // Event listeners
+    modal.querySelector('.demo-close').addEventListener('click', () => {
+        modal.remove();
+    });
+    
+    modal.querySelector('.demo-play').addEventListener('click', () => {
+        if (window.CreditSystem) {
+            CreditSystem.rewardMiniGame(gameType, randomResult);
+        }
+        modal.remove();
+    });
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
 }

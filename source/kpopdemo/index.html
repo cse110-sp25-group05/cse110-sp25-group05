@@ -10,12 +10,25 @@
 <body>
     <header>
         <h1><i class="fas fa-gem"></i> K-pop Card Gacha</h1>
-        <nav>
-            <ul>
-                <li><a href="#collection"><i class="fas fa-layer-group"></i> My Collection</a></li>
-                <li><a href="#packs"><i class="fas fa-gift"></i> Summon Cards</a></li>
-            </ul>
-        </nav>
+        <div class="header-content">
+            <nav>
+                <ul>
+                    <li><a href="#collection"><i class="fas fa-layer-group"></i> My Collection</a></li>
+                    <li><a href="#packs"><i class="fas fa-gift"></i> Summon Cards</a></li>
+                    <li><a href="#minigames"><i class="fas fa-gamepad"></i> Mini Games</a></li>
+                </ul>
+            </nav>
+            <div class="credit-container">
+                <div class="credit-display-wrapper">
+                    <i class="fas fa-coins credit-icon"></i>
+                    <span class="credit-label">Credits:</span>
+                    <span id="credit-display" class="credit-amount">0</span>
+                </div>
+                <button id="add-credits-btn" class="add-credits-btn" title="Play mini-games to earn credits!">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -144,12 +157,71 @@
                 <!-- Collection cards will be displayed here -->
             </div>
         </section>
+
+        <section id="minigames">
+            <h2>Mini Games <i class="fas fa-gamepad"></i></h2>
+            <p class="minigames-description">Play mini-games to earn credits and unlock more card packs!</p>
+            <div class="minigames-container">
+                <div class="minigame-card">
+                    <div class="minigame-icon">
+                        <i class="fas fa-hand-rock"></i>
+                    </div>
+                    <div class="minigame-info">
+                        <h3>Rock Paper Scissors</h3>
+                        <p>Classic game against the computer</p>
+                        <div class="rewards">
+                            <span class="reward win">Win: 50 credits</span>
+                            <span class="reward draw">Draw: 10 credits</span>
+                            <span class="reward lose">Lose: 5 credits</span>
+                        </div>
+                    </div>
+                    <button class="minigame-play-btn" data-game="rockPaperScissors">
+                        <i class="fas fa-play"></i> Play Now
+                    </button>
+                </div>
+
+                <div class="minigame-card">
+                    <div class="minigame-icon">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <div class="minigame-info">
+                        <h3>Tic Tac Toe</h3>
+                        <p>Strategic game against AI opponent</p>
+                        <div class="rewards">
+                            <span class="reward win">Win: 75 credits</span>
+                            <span class="reward draw">Draw: 15 credits</span>
+                            <span class="reward lose">Lose: 10 credits</span>
+                        </div>
+                    </div>
+                    <button class="minigame-play-btn" data-game="ticTacToe">
+                        <i class="fas fa-play"></i> Play Now
+                    </button>
+                </div>
+
+                <div class="minigame-card coming-soon">
+                    <div class="minigame-icon">
+                        <i class="fas fa-dice"></i>
+                    </div>
+                    <div class="minigame-info">
+                        <h3>Lucky Dice</h3>
+                        <p>Roll the dice for random rewards</p>
+                        <div class="rewards">
+                            <span class="reward">Coming Soon!</span>
+                        </div>
+                    </div>
+                    <button class="minigame-play-btn" disabled>
+                        <i class="fas fa-clock"></i> Coming Soon
+                    </button>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
         <p>CSE 110 Project - K-pop Card Gacha</p>
     </footer>
 
+    <script src="js/creditSystem.js"></script>
     <script src="js/app.js"></script>
     <script src="js/card.js"></script>
     <script src="js/pack.js"></script>
