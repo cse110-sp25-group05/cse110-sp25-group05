@@ -875,27 +875,27 @@ footer {
     header h1 {
         font-size: 2rem;
     }
-
+    
     .pack-container {
         gap: 1.5rem;
     }
-
+    
     .pack {
         width: 160px;
     }
-
+    
     .pack-image {
         height: 200px;
     }
-
+    
     .group-section {
         padding: 1.5rem;
     }
-
+    
     .group-cards {
         gap: 1.2rem;
     }
-
+    
     .group-cards .card {
         flex: 0 0 150px;
     }
@@ -905,45 +905,45 @@ footer {
     header h1 {
         font-size: 1.8rem;
     }
-
+    
     main {
         padding: 0 1rem;
     }
-
+    
     .pack-container {
         gap: 1rem;
     }
-
+    
     .pack {
         width: 140px;
     }
-
+    
     .pack-image {
         height: 180px;
     }
-
+    
     .open-pack-btn {
         padding: 0.8rem;
         font-size: 0.9rem;
     }
-
+    
     .group-section {
         padding: 1rem;
     }
-
+    
     .group-cards {
         gap: 1rem;
         justify-content: center;
     }
-
+    
     .group-cards .card {
         flex: 0 0 140px;
     }
-
+    
     .card-back h3 {
         font-size: 1rem;
     }
-
+    
     .card-back p {
         font-size: 0.8rem;
     }
@@ -1189,7 +1189,7 @@ footer {
     .group-cards {
         gap: 15px;
     }
-
+    
     .group-cards .card {
         flex: 0 0 150px;
         height: 235px;
@@ -1201,12 +1201,12 @@ footer {
         gap: 10px;
         justify-content: center;
     }
-
+    
     .group-cards .card {
         flex: 0 0 140px;
         height: 220px;
     }
-
+    
     .group-detail {
         padding: 1.5rem 1rem;
     }
@@ -1251,21 +1251,21 @@ footer {
         gap: 1.5rem;
         justify-content: center;
     }
-
+    
     .group-tile {
         flex: 0 0 calc(50% - 1.5rem);
         height: 300px;
         margin: 0 0.75rem 1.5rem 0.75rem;
     }
-
+    
     .group-cover {
         height: 160px;
     }
-
+    
     .group-cards {
         gap: 15px;
     }
-
+    
     .group-cards .card {
         flex: 0 0 150px;
         height: 235px;
@@ -1276,36 +1276,36 @@ footer {
     .collection-grid {
         gap: 1rem;
     }
-
+    
     .group-tile {
         flex: 0 0 calc(100% - 1rem);
         max-width: 280px;
         height: 300px;
         margin: 0 0.5rem 1.5rem 0.5rem;
     }
-
+    
     .group-cover {
         height: 140px;
     }
-
+    
     .group-info {
         padding: 1rem;
     }
-
+    
     .group-name {
         font-size: 1.2rem;
     }
-
+    
     .group-cards {
         gap: 10px;
         justify-content: center;
     }
-
+    
     .group-cards .card {
         flex: 0 0 140px;
         height: 220px;
     }
-
+    
     .group-detail {
         padding: 1.5rem 1rem;
     }
@@ -1531,4 +1531,4 @@ body.legendary-pull #pack-opening {
     0% { transform: scale(1); }
     50% { transform: scale(1.03); }
     100% { transform: scale(1); }
-}
+} 
