@@ -436,9 +436,7 @@ footer {
 
 .card[data-rarity="legendary"] .card-name {
     background: linear-gradient(to right, #ff6f00, #ffeb3b);
-    background-clip: text;
     -webkit-background-clip: text;
-    color: transparent;
     -webkit-text-fill-color: transparent;
 }
 
