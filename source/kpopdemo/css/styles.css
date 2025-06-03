@@ -435,11 +435,11 @@ footer {
 }
 
 .card[data-rarity="legendary"] .card-name {
+    color: #ff6f00;
     background: linear-gradient(to right, #ff6f00, #ffeb3b);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    animation: textShimmer 2s ease-in-out infinite alternate;
+    font-weight: 700;
 }
 
 .card[data-rarity="legendary"]::before {
@@ -457,6 +457,17 @@ footer {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+@keyframes textShimmer {
+    0% { 
+        color: #ff6f00;
+        text-shadow: 0 0 5px rgba(255, 111, 0, 0.3);
+    }
+    100% { 
+        color: #ffeb3b;
+        text-shadow: 0 0 8px rgba(255, 235, 59, 0.4);
+    }
 }
 
 /* Card Back Design */
