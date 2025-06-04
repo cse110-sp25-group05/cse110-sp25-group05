@@ -153,7 +153,7 @@ const CardData = (() => {
       role: "Main Vocalist, Lead Dancer",
       birthday: "February 11, 1997",
       bio: "Roseanne Park, known as Rosé, is the main vocalist of BLACKPINK with a unique vocal tone.",
-      image: getCardImage("bp-rose", "Rosé", "BLACKPINK"),
+      image: getCardImage("bp-rose", "Rose", "BLACKPINK"),
     },
     {
       id: "bp-lisa",
