@@ -138,6 +138,15 @@ const CardData = (() => {
       image: getCardImage("bp-jisoo", "Jisoo", "BLACKPINK"),
     },
     {
+      id: "bp-jisoo2",
+      name: "Jisoo",
+      group: "BLACKPINK",
+      role: "Lead Vocalist, Visual",
+      birthday: "January 3, 1995",
+      bio: "Kim Ji-soo is the oldest member of BLACKPINK and serves as a vocalist and visual.",
+      image: getCardImage("bp-jisoo2", "Jisoo", "BLACKPINK"),
+    },
+    {
       id: "bp-jennie",
       name: "Jennie",
       group: "BLACKPINK",
@@ -145,6 +154,15 @@ const CardData = (() => {
       birthday: "January 16, 1996",
       bio: "Jennie Kim is a rapper and vocalist in BLACKPINK, known for her versatility.",
       image: getCardImage("bp-jennie", "Jennie", "BLACKPINK"),
+    },
+    {
+      id: "bp-jennie2",
+      name: "Jennie",
+      group: "BLACKPINK",
+      role: "Main Rapper, Lead Vocalist",
+      birthday: "January 16, 1996",
+      bio: "Jennie Kim is a rapper and vocalist in BLACKPINK, known for her versatility.",
+      image: getCardImage("bp-jennie2", "Jennie", "BLACKPINK"),
     },
     {
       id: "bp-rose",
@@ -156,6 +174,15 @@ const CardData = (() => {
       image: getCardImage("bp-rose", "Rose", "BLACKPINK"),
     },
     {
+      id: "bp-rose2",
+      name: "Rosé",
+      group: "BLACKPINK",
+      role: "Main Vocalist, Lead Dancer",
+      birthday: "February 11, 1997",
+      bio: "Roseanne Park, known as Rosé, is the main vocalist of BLACKPINK with a unique vocal tone.",
+      image: getCardImage("bp-rose2", "Rose", "BLACKPINK"),
+    },
+    {
       id: "bp-lisa",
       name: "Lisa",
       group: "BLACKPINK",
@@ -163,6 +190,15 @@ const CardData = (() => {
       birthday: "March 27, 1997",
       bio: "Lalisa Manoban, known as Lisa, is a Thai rapper and dancer in BLACKPINK.",
       image: getCardImage("bp-lisa", "Lisa", "BLACKPINK"),
+    },
+    {
+      id: "bp-lisa2",
+      name: "Lisa",
+      group: "BLACKPINK",
+      role: "Main Dancer, Lead Rapper, Maknae",
+      birthday: "March 27, 1997",
+      bio: "Lalisa Manoban, known as Lisa, is a Thai rapper and dancer in BLACKPINK.",
+      image: getCardImage("bp-lisa2", "Lisa", "BLACKPINK"),
     },
     {
       id: "twice-chaeyoung",
