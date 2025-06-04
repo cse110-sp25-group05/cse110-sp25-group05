@@ -21,27 +21,32 @@ function writeDecorMap(map) {
 
 /* ─────────────── build the <select> ───────────── */
 function populateSelect(cards) {
-  const sel = document.getElementById('card-select');
-  if (!sel) return;
+  const selectedCard = document.getElementById('card-select');
+  if (!selectedCard) {
+    return;
+  }
   
-  sel.innerHTML = '';                                        // clear
+  selectedCard.innerHTML = '';                                        // clear
 
   // Add default option
   const defaultOpt = document.createElement('option');
   defaultOpt.value = '';
   defaultOpt.textContent = 'Select a card to decorate...';
-  sel.appendChild(defaultOpt);
+  selectedCard.appendChild(defaultOpt);
 
   cards.forEach(c => {
     const opt = document.createElement('option');
     opt.value = c.id;
     opt.textContent = `${c.name} (${c.group})`;
-    sel.appendChild(opt);
+    selectedCard.appendChild(opt);
   });
 
-  sel.onchange = () => {
-    if (!sel.value) return;
-    const card = cards.find(c => c.id === sel.value);
+  selectedCard.onchange = () => {
+    if (!selectedCard.value) {
+      resetPreview();
+      return;
+    }
+    const card = cards.find(c => c.id === selectedCard.value);
     if (card) {
       const map = readDecorMap();
       showInPreview(card, map[card.id] || {});
@@ -59,7 +64,9 @@ function showInPreview(card, decor) {
   const inner = shell.querySelector('.card-inner');
   const cardImage = shell.querySelector('.card-image img');
   
-  if (!shell || !inner || !cardImage) return;
+  if (!shell || !inner || !cardImage) {
+    return;
+  }
 
   // Clear existing frame classes
   inner.classList.remove('rare-card', 'epic-card', 'legendary-card');
@@ -80,7 +87,7 @@ function showInPreview(card, decor) {
 
   // Sync controls with current decoration
   document.querySelectorAll('input[name="frame"]')
-          .forEach(r => (r.checked = r.value === (decor.frame || '')));
+    .forEach(r => (r.checked = r.value === (decor.frame || '')));
 
   const badge = document.getElementById('toggle-badge');
   if (badge) {
@@ -89,36 +96,41 @@ function showInPreview(card, decor) {
     // Apply badge visibility
     if (badge.checked) {
       shell.setAttribute('data-show-badge', 'true');
-    } else {
+    } 
+    else {
       shell.removeAttribute('data-show-badge');
     }
   }
 }
 
 function resetPreview() {
-  const shell = document.getElementById('decoration-preview-card');
-  const inner = shell.querySelector('.card-inner');
-  const cardImage = shell.querySelector('.card-image img');
-  
-  if (!shell || !inner || !cardImage) return;
+    const shell = document.getElementById('decoration-preview-card');
+    const inner = shell.querySelector('.card-inner');
+    const cardImage = shell.querySelector('.card-image img');
+    
+    if (!shell || !inner || !cardImage) {
+      return;
+    }
 
-  // Reset to default state
-  inner.classList.remove('rare-card', 'epic-card', 'legendary-card');
-  shell.dataset.rarity = 'common';
-  shell.querySelector('.card-name').textContent = '';
-  shell.querySelector('.card-group').textContent = '';
-  cardImage.src = 'https://via.placeholder.com/300x420?text=Select+Card';
-  cardImage.alt = 'Preview';
-  shell.removeAttribute('data-show-badge');
-  
-  // Reset controls
-  document.querySelectorAll('input[name="frame"]')
-          .forEach(r => (r.checked = r.value === ''));
-  
-  const badge = document.getElementById('toggle-badge');
-  if (badge) badge.checked = true;
-  
-  currentCard = null;
+    // Reset to default state
+    inner.classList.remove('rare-card', 'epic-card', 'legendary-card');
+    shell.dataset.rarity = 'common';
+    shell.querySelector('.card-name').textContent = '';
+    shell.querySelector('.card-group').textContent = '';
+    cardImage.src = 'https://via.placeholder.com/300x420?text=Select+Card';
+    cardImage.alt = 'Preview';
+    shell.removeAttribute('data-show-badge');
+    
+    // Reset controls
+    document.querySelectorAll('input[name="frame"]')
+      .forEach(r => (r.checked = r.value === ''));
+    
+    const badge = document.getElementById('toggle-badge');
+    if (badge) {
+      badge.checked = true;
+    }
+    
+    currentCard = null;
 }
 
 /* ───────────────── init ───────────────── */
@@ -140,10 +152,14 @@ function initDecorationStudio() {
   // Frame radio buttons
   document.querySelectorAll('input[name="frame"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
-      if (!currentCard) return;
+      if (!currentCard) {
+        return;
+      }
       
       const inner = document.querySelector('#decoration-preview-card .card-inner');
-      if (!inner) return;
+      if (!inner) {
+        return;
+      }
       
       // Remove all frame classes
       inner.classList.remove('rare-card', 'epic-card', 'legendary-card');
@@ -155,18 +171,42 @@ function initDecorationStudio() {
     });
   });
 
+  // For Stickers Functionality (INCOMPLETE)
+  function initStickers() {
+    const previewCard = document.getElementById('decoration-preview-card');
+    
+    document.querySelectorAll('.sticker-option').forEach(option => {
+      if (!currentCard) {
+        alert('Please select a card first!');
+        return;
+      }
+    })
+
+    const src = option.dataset.src;
+    const sticker = document.createElement('img');
+    sticker.src = src;
+    sticker.classList.add('sticker');
+    sticker.style.position = 'absolute';
+    sticker.style.width = '50px';
+    sticker.style.cursor = 'move';
+  }
   // Badge toggle
   const badgeToggle = document.getElementById('toggle-badge');
   if (badgeToggle) {
     badgeToggle.addEventListener('change', (e) => {
-      if (!currentCard) return;
+      if (!currentCard) {
+        return;
+      }
       
       const shell = document.getElementById('decoration-preview-card');
-      if (!shell) return;
+      if (!shell) {
+        return;
+      }
       
       if (e.target.checked) {
         shell.setAttribute('data-show-badge', 'true');
-      } else {
+      } 
+      else {
         shell.removeAttribute('data-show-badge');
       }
     });
@@ -182,11 +222,13 @@ function initDecorationStudio() {
       }
       
       const inner = document.querySelector('#decoration-preview-card .card-inner');
-      if (!inner) return;
+      if (!inner) {
+        return;
+      }
       
       // Determine current frame
       const frame = ['rare-card', 'epic-card', 'legendary-card']
-                      .find(c => inner.classList.contains(c)) || '';
+        .find(c => inner.classList.contains(c)) || '';
       
       // Get badge setting
       const badgeToggle = document.getElementById('toggle-badge');
@@ -225,3 +267,4 @@ function initDecorationStudio() {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', initDecorationStudio);
+

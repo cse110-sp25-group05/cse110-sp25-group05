@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Styling related to decoration button under each card in user's collection */
+
+a.deco-button {
+  display: inline-block;
+  margin: 0.5rem auto 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--secondary-color);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+/* center card */
+.card .deco-button {
+  width: calc(100%);
+}
+
+a.deco-button:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--hover-shadow);
+}
+
+a.deco-button i {
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+@media (max-width: 1200px) {
+    .collection-container .card {
+        /* remove the fixed 280px height and allow vertical stacking */
+        height: auto !important;
+
+        /* overwrites previous width to fit smaller resolutions */
+        width: 160px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .collection-container .card .card-inner {
+        width: 100%;
+        flex: 0 0 280px; 
+    }
+}
+
+/* Styling for decoration.html */
+    
+.decoration-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.decoration-preview {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.decoration-preview h3 {
+    margin-bottom: 1rem;
+    color: #000000;
+}
+
+#decoration-preview-card {
+    display: inline-block;
+    margin: 1rem;
+}
+
+.card-select-wrapper {
+    margin-bottom: 2rem;
+}
+
+.card-select {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.75rem;
+    border: 2px solid rgba(255, 255, 255, 0.938);
+    border-radius: 0.5rem;
+    background: rgb(255, 255, 255);
+    color: #000000;
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.card-select option {
+    background: #ffffff;
+    color: #000000;
+}
+
+.decoration-options {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.decoration-options legend {
+    padding: 0 1rem;
+    color: #000000;
+    font-weight: bold;
+}
+
+.decoration-options legend h3 {
+    margin: 0;
+}
+
+.decoration-options label {
+    display: block;
+    margin: 0.75rem 0;
+    color: #000000;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.decoration-options input[type="radio"],
+.decoration-options input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.2);
+}
+
+.decoration-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.decoration-actions button {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#save-decor {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: rgb(0, 0, 0);
+}
+
+#save-decor:hover {
+    background: linear-gradient(135deg, #45a049, #4CAF50);
+    transform: translateY(-2px);
+}
+
+#reset-decor {
+    background: linear-gradient(135deg, #f44336, #da190b);
+    color: rgb(0, 0, 0);
+}
+
+#reset-decor:hover {
+    background: linear-gradient(135deg, #da190b, #f44336);
+    transform: translateY(-2px);
+}
+
+/* Card rarity badge styles */
+.card[data-show-badge="true"]:before {
+    content: attr(data-rarity);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #000;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+.card[data-rarity="rare"][data-show-badge="true"]:before {
+    background: linear-gradient(45deg, #9b59b6, #8e44ad);
+    color: rgb(0, 0, 0);
+}
+
+.card[data-rarity="epic"][data-show-badge="true"]:before {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: rgb(0, 0, 0);
+}
+
+.card[data-rarity="legendary"][data-show-badge="true"]:before {
+    background: linear-gradient(45deg, #f39c12, #e67e22);
+    color: rgb(0, 0, 0);
+}
+
+.decoration-section {
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 2rem 1rem; 
+}
+.decoration-preview { 
+    text-align:center; 
+    margin-bottom:2rem; 
+}
+.card-grid { 
+    display:grid; 
+    grid-template-columns:repeat(auto-fill,minmax(90px,1fr)); 
+    gap:1rem; 
+    margin:1.5rem 0; 
+}
+
+.card-thumb { 
+    height:90px; 
+    display:flex; 
+    align-items:center; 
+    justify-content:center;
+    border-radius:12px; 
+    background:var(--card-bg,#ececec);
+    font-weight:700; 
+    font-size:1.4rem; 
+    color:#fff;
+    cursor:pointer; 
+    transition:transform .15s ease; 
+}
+.card-thumb:hover { 
+    transform:translateY(-4px); 
+}
+
+.card-thumb.rare-card { 
+    background:#5c6bc0; 
+}
+.card-thumb.epic-card { 
+    background:#7b1fa2; 
+}
+.card-thumb.legendary-card { 
+    background:linear-gradient(45deg,#ff6f00,#ffd54f); 
+}
+
+.decoration-options { 
+    margin:1.5rem auto; 
+    padding:1rem 1.5rem; 
+    max-width:320px;
+    border-radius:12px; 
+    background:#fafafa;
+    box-shadow:0 4px 10px rgba(0,0,0,.06); 
+}
+
+.decoration-options h3 { 
+    margin-bottom:.75rem; 
+    font-size:1.1rem; 
+}
+
+.decoration-options label { 
+    display:block; 
+    margin-bottom:.5rem; 
+    cursor:pointer; 
+}
+
+.decoration-actions { 
+    margin:2rem auto;
+    display:flex; 
+    justify-content:center; 
+    gap:1rem; 
+}
+
+.decoration-actions button { 
+    padding:.7rem 1.6rem; 
+    border:none; 
+    border-radius:8px;
+    font-weight:600; cursor:pointer;
+    background:var(--primary-color,#ff4081); color:#fff;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+    transition:transform .15s ease; 
+}
+
+.decoration-actions button:hover { 
+    transform:translateY(-2px); 
+}
+
+.card-select-wrapper { 
+    max-width:320px; 
+    margin:1.5rem auto; 
+}
+
+
+.card-select          { 
+    width:100%; 
+    padding:.6rem 1rem; 
+    border-radius:8px;
+    border:1px solid #ccc; 
+    font-size:1rem; 
+    cursor:pointer; 
+}
+
+.decoration-section h3,
+.decoration-options legend,
+.decoration-preview h3 {    
+    color: var(--primary-color) !important;
+}
+
+/* ─── horizontal scrollbar of sticker thumbnails ─────────────── */
+.sticker-scroll{
+    max-width: calc(72px * 3 + 0.75rem * 2);
+    margin: 0 auto;
+    display:flex;
+    gap:.75rem;
+    overflow-x:auto;
+    padding:.25rem 0;
+    scroll-snap-type:x mandatory;            /* nice snap on touchpads */
+}
+
+.sticker-scroll label{
+  flex:0 0 auto;                           /* keep each 72 × 72 box */
+  width:72px;
+  height:72px;
+  border-radius:10px;
+  overflow:hidden;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.12);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+
+.sticker-scroll input{                     /* still keyboard-accessible */
+  position:absolute;
+  opacity:0;
+}
+
+.sticker-scroll label img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+.sticker-scroll input:checked + img{
+  box-shadow:0 0 0 3px var(--primary-color,#ff4081);
+  transform:translateY(-2px);
+}
+
+/* optional nicer scrollbar (WebKit) */
+.sticker-scroll::-webkit-scrollbar{ height:8px; }
+.sticker-scroll::-webkit-scrollbar-thumb{
+  background:var(--primary-color,#ff4081);
+  border-radius:4px;
+}
+
+
+

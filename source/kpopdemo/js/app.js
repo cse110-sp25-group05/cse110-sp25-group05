@@ -193,6 +193,7 @@ function createCardElement(card) {
                 <p class="card-bio">${card.bio || 'No bio available'}</p>
             </div>
         </div>
+        <a href="decoration.html" class="deco-button"><i class="fas fa-palette"></i>Decorate</a>
     `;
     return cardDiv;
 }
