@@ -176,6 +176,16 @@ body {
   transform: translateY(-2px);
 }
 
+.dropped-sticker {
+  z-index: 20;
+  cursor: move;
+  user-select: none;
+  transition: box-shadow 0.2s;
+}
+.dropped-sticker:active {
+  box-shadow: 0 0 8px #ff4081;
+}
+
 .card[data-show-badge="true"]::before {
   content: attr(data-rarity);
   position: absolute;

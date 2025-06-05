@@ -80,6 +80,86 @@ function initDecorationStudio() {
 	}
 }
 
+
+function enableStickerDragDrop() {
+  const stickers = document.querySelectorAll('.sticker-scroll img[draggable="true"]');
+  const preview = document.getElementById('decoration-preview-card');
+
+  stickers.forEach(sticker => {
+    sticker.addEventListener('dragstart', function (e) {
+      e.dataTransfer.setData('sticker-src', this.src);
+    });
+  });
+
+  preview.addEventListener('dragover', function (e) {
+    e.preventDefault();
+  });
+
+  preview.addEventListener('drop', function (e) {
+    e.preventDefault();
+    const src = e.dataTransfer.getData('sticker-src');
+    if (src) {
+      const rect = preview.getBoundingClientRect();
+      // Calculate position relative to preview
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const stickerImg = document.createElement('img');
+      stickerImg.src = src;
+      stickerImg.className = 'dropped-sticker';
+      stickerImg.style.position = 'absolute';
+      stickerImg.style.left = `${x - 36}px`; // Center sticker (assuming 72px)
+      stickerImg.style.top = `${y - 36}px`;
+      stickerImg.style.width = '72px';
+      stickerImg.style.height = '72px';
+      stickerImg.style.pointerEvents = 'auto';
+      stickerImg.draggable = false;
+
+	  makeStickerMoveable(stickerImg, preview);
+
+      preview.appendChild(stickerImg);
+      preview.style.position = 'relative';
+    }
+  });
+}
+
+function makeStickerMoveable(sticker, container) {
+  let offsetX, offsetY, isDragging = false;
+
+  sticker.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    offsetX = e.offsetX;
+    offsetY = e.offsetY;
+    sticker.style.zIndex = 100;
+    document.body.style.userSelect = 'none';
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    const rect = container.getBoundingClientRect();
+    let x = e.clientX - rect.left - offsetX;
+    let y = e.clientY - rect.top - offsetY;
+    // Optional: constrain within container
+    x = Math.max(0, Math.min(x, container.offsetWidth - sticker.offsetWidth));
+    y = Math.max(0, Math.min(y, container.offsetHeight - sticker.offsetHeight));
+    sticker.style.left = x + 'px';
+    sticker.style.top = y + 'px';
+  });
+
+  document.addEventListener('mouseup', function() {
+    if (isDragging) {
+      isDragging = false;
+      sticker.style.zIndex = 20;
+      document.body.style.userSelect = '';
+    }
+  });
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  initDecorationStudio();
+  enableStickerDragDrop();
+});
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', initDecorationStudio);
 
