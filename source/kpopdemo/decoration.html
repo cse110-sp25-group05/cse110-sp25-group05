@@ -1,105 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Decoration Studio</title>
-
-    <!-- main theme & icon font (same link used in index.html) -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- any styling related to decoration stuff -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/deco-styles.css">
 </head>
 <body>
-
-    <!-- gradient banner reused from the main page -->
     <header class="app-header">
         <h1>Decoration Studio</h1>
         <nav class="app-nav">
             <ul>
-                <li><a href="index.html"><i class="fas fa-home"></i>  Home</a></li>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="index.html#collection"><i class="fas fa-layer-group"></i> My Collection</a></li>
                 <li><a href="index.html#packs"><i class="fas fa-gift"></i> Summon Cards</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section id="decorations" class="decoration-section">
-
-            <!-- live preview -->
-            <div class="decoration-preview" aria-live="polite">
-                <h3>Live Preview</h3>
-                <div id="decoration-preview-card"
-                     class="card"
-                     data-rarity="common"
-                     style="position: relative;">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-image">
-                                <img src= "assets/cardselect.png" width="200" height="100" alt="Select a card">
-                            </div>
-                            <div class="card-info">
-                                <div class="card-name">Select a card to decorate</div>
-                                <div class="card-group"></div>
-                            </div>
-                        </div>
-                        <div class="card-back"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- dropdown of owned cards -->
-            <h3 style=" text-align: center;">Your Cards</h3>
-            <div class="card-select-wrapper" style="text-align: center;">
+    <section class="decoration-layout">
+        <div class="panel left-panel">
+            <details open>
+                <summary><strong>Your Cards</strong></summary>
+            
                 <select id="card-select" class="card-select">
-                    <option>Loading cards...</option>
+                    <option>Select a card to decorate...</option>
                 </select>
+              
+                <fieldset class="decoration-options">
+                    <legend><h3>Show Rarity Badge</h3></legend>
+                    <label><input type="checkbox" id="toggle-badge" checked> Display rarity badge on card</label>
+                </fieldset>
+              
+                <div class="decoration-actions">
+                    <button id="save-decor"><i class="fas fa-save"></i> Save</button>
+                    <button id="reset-decor"><i class="fas fa-undo"></i> Reset</button>
+                </div>
+            </details>
+        </div>
+
+      <div class="dragbar"></div>
+
+        <div class="panel center-panel">
+            <h3>Live Preview</h3>
+            <div id="decoration-preview-card" class="card" data-rarity="common" data-show-badge="true">
+                <img src="assets/cardselect.png" alt="Preview" width="220">
             </div>
+        </div>
 
-            <!-- stickers (INCOMPLETE)-->
-            <fieldset class="decoration-options">
-              <legend><h3>Select Sticker</h3></legend>
-              <div class="sticker-scroll">
-                <label><input type="radio" name="sticker" value="sparkles"> 
-                  <img src="assets/sparkles.png" class="sticker-option" data-src="assets/sparkles.png" alt = "Sparkles" >
-                </label>
-                <label><input type="radio" name="sticker" value="gold-sparkles"> 
-                  <img src="assets/gold-sparkles.png" class="sticker-option" data-src="assets/sparkles.png" alt = "Gold Sparkles">
-                </label>
-                <label><input type="radio" name="sticker" value="heart"> 
-                  <img src="assets/heart.png" class="sticker-option" data-src="assets/sparkles.png" alt = "Heart">
-                </label>
-                <label><input type="radio" name="sticker" value="pink-hearts"> 
-                  <img src="assets/pink-hearts.png" class="sticker-option" data-src="assets/sparkles.png" alt = "Pink Hearts">
-                </label>
-                <label><input type="radio" name="sticker" value="pink-flower"> 
-                  <img src="assets/pink-flower.png" class="sticker-option" data-src="assets/sparkles.png" alt = "Pink Flower">
-                </label>  
-              </div>
-            </fieldset>
+        <div class="panel right-panel">
+            <details open>
+                <summary><strong>Select Sticker</strong></summary>
+                <fieldset class="decoration-options">
+                  <div class="sticker-scroll">
+                    <label><input type="radio" name="sticker"><img src="assets/sparkles.png" alt="Sparkles"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/gold-sparkles.png" alt="Gold Sparkles"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/heart.png" alt="Heart"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/pink-hearts.png" alt="Pink Hearts"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/pink-flower.png" alt="Pink Flower"></label>
+                  </div>
+                </fieldset>
+            </details>
+        </div>
+    </section>
 
-            <!-- Rarity Badge -->
-            <fieldset class="decoration-options">
-                <legend><h3>Show Rarity Badge</h3></legend>
-                <label><input type="checkbox" id="toggle-badge" checked> Display rarity badge on card</label>
-            </fieldset>
-
-            <div class="decoration-actions">
-                <button id="save-decor"><i class="fas fa-save"></i> Save Decoration</button>
-                <button id="reset-decor"><i class="fas fa-undo"></i> Reset to Default</button>
-            </div>
-        </section>
-    </main>
-
-    <footer><p>CSE&nbsp;110 Project – K-pop Card&nbsp;Gacha</p></footer>
-
-    <!-- Load dependencies in correct order -->
-    <script src="js/card.js"></script>
-    <script src ="js/decoration.js"></script>
-        
+  
+  
 </body>
 </html>
