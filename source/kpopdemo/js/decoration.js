@@ -120,6 +120,22 @@ function enableStickerDragDrop() {
       preview.style.position = 'relative';
     }
   });
+
+  if (trashcan) {
+    trashcan.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      trashcan.style.background = '#ffeaea';
+    });
+    trashcan.addEventListener('dragleave', function() {
+      trashcan.style.background = '';
+    });
+    trashcan.addEventListener('drop', function(e) {
+      e.preventDefault();
+      trashcan.style.background = '';
+      const dragging = document.querySelector('.dropped-sticker[style*="display: none"]');
+      if (dragging) dragging.remove();
+    });
+  }
 }
 
 function makeStickerMoveable(sticker, container) {
@@ -131,35 +147,66 @@ function makeStickerMoveable(sticker, container) {
     offsetY = e.offsetY;
     sticker.style.zIndex = 100;
     document.body.style.userSelect = 'none';
+
+    const rect = sticker.getBoundingClientRect();
+    sticker.style.position = 'fixed';
+    sticker.style.left = rect.left + 'px';
+    sticker.style.top = rect.top + 'px';
+    sticker.style.width = rect.width + 'px';
+    sticker.style.height = rect.height + 'px';
+    document.body.appendChild(sticker);
   });
 
-  document.addEventListener('mousemove', function(e) {
+  function onMouseMove(e) {
     if (!isDragging) return;
-    const rect = container.getBoundingClientRect();
-    let x = e.clientX - rect.left - offsetX;
-    let y = e.clientY - rect.top - offsetY;
-    // Optional: constrain within container
+    sticker.style.left = (e.clientX - offsetX) + 'px';
+    sticker.style.top = (e.clientY - offsetY) + 'px';
+  }
+
+  function onMouseUp(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    sticker.style.zIndex = 20;
+    document.body.style.userSelect = '';
+
+    const trashcan = document.getElementById('sticker-trashcan');
+    const trashRect = trashcan.getBoundingClientRect();
+    const stickerRect = sticker.getBoundingClientRect();
+    const overlap = !(
+      stickerRect.right < trashRect.left ||
+      stickerRect.left > trashRect.right ||
+      stickerRect.bottom < trashRect.top ||
+      stickerRect.top > trashRect.bottom
+    );
+    if (overlap) {
+      sticker.remove();
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    let x = e.clientX - containerRect.left - offsetX;
+    let y = e.clientY - containerRect.top - offsetY;
     x = Math.max(0, Math.min(x, container.offsetWidth - sticker.offsetWidth));
     y = Math.max(0, Math.min(y, container.offsetHeight - sticker.offsetHeight));
+    sticker.style.position = 'absolute';
     sticker.style.left = x + 'px';
     sticker.style.top = y + 'px';
-  });
+    container.appendChild(sticker);
 
-  document.addEventListener('mouseup', function() {
-    if (isDragging) {
-      isDragging = false;
-      sticker.style.zIndex = 20;
-      document.body.style.userSelect = '';
-    }
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  }
+
+  sticker.addEventListener('mousedown', function() {
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   });
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
   initDecorationStudio();
   enableStickerDragDrop();
 });
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initDecorationStudio);
 

@@ -225,6 +225,23 @@ body {
   backdrop-filter: blur(10px);
 }
 
+#sticker-trashcan {
+  position: absolute;
+  right: 25px;
+  bottom: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ff4081;
+  border-radius: 10px;
+  background: white;
+  transition: background 0.2s;
+  z-index: 50;
+}
+#sticker-trashcan:hover {
+  background: #ffeaea;
+}
+
 @media (max-width: 1000px) {
     .decoration-layout {
       display: flex;
