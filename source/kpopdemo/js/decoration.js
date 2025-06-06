@@ -210,3 +210,45 @@ document.addEventListener('DOMContentLoaded', function () {
   enableStickerDragDrop();
 });
 
+/* Screenshot Mode */
+function initScreenshotMode() {
+    const screenshotBtn = document.getElementById('screenshot-btn');
+    const toast = document.getElementById('screenshot-toast');
+    let isScreenshotMode = false;
+
+    function showToast() {
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    function toggleScreenshotMode() {
+        isScreenshotMode = !isScreenshotMode;
+        document.body.classList.toggle('screenshot-mode', isScreenshotMode);
+        
+        // Update button text and icon
+        const btnIcon = screenshotBtn.querySelector('i');
+        const btnText = screenshotBtn.querySelector('span');
+        
+        if (isScreenshotMode) {
+            btnIcon.className = 'fas fa-eye';
+            btnText.textContent = 'Exit Screenshot Mode';
+            showToast();
+            // Add data attribute for automation
+            document.body.setAttribute('data-screenshot-mode', 'active');
+        } else {
+            btnIcon.className = 'fas fa-camera';
+            btnText.textContent = 'Screenshot Mode';
+            document.body.removeAttribute('data-screenshot-mode');
+        }
+    }
+
+    screenshotBtn.addEventListener('click', toggleScreenshotMode);
+}
+
+// Initialize Screenshot Mode when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    initScreenshotMode();
+});
+

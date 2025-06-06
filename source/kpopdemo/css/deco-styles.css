@@ -348,3 +348,107 @@ body {
     }
 
 }
+
+/* Screenshot Mode Styles */
+.screenshot-mode .panel:not(.center-panel),
+.screenshot-mode .dragbar,
+.screenshot-mode .app-header,
+.screenshot-mode #sticker-trashcan {
+    display: none !important;
+}
+
+.screenshot-mode .center-panel {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.screenshot-mode .center-panel h3 {
+    display: none;
+}
+
+.screenshot-mode #decoration-preview-card {
+    margin: 0;
+    width: auto;
+    max-width: 600px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screenshot-mode #decoration-preview-card img {
+    max-height: 90vh;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Screenshot Button */
+.screenshot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #ff7e5f, #ff4081);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.screenshot-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.screenshot-btn i {
+    font-size: 1.1em;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive adjustments for Screenshot Mode */
+@media (max-width: 768px) {
+    .screenshot-mode #decoration-preview-card {
+        max-width: 90%;
+    }
+    
+    .screenshot-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
