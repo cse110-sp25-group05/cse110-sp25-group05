@@ -147,108 +147,212 @@
         </section>
 
         <section id="minigame" class="hidden">
-            <h2>Rock Paper Scissors Battle</h2>
-            <div class="game-container">
-                <div class="game-header">
-                    <div class="game-score">
-                        <div class="score-header">
-                            <i class="fas fa-trophy"></i>
-                            <h3>Battle Score</h3>
-                        </div>
-                        <div class="score-display">
-                            <div class="score-item player">
-                                <div class="player-avatar">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <span class="score-label">You</span>
-                                <span class="score-value" id="player-score">0</span>
-                            </div>
-                            <div class="score-divider">
-                                <div class="vs-circle">VS</div>
-                            </div>
-                            <div class="score-item bot">
-                                <div class="bot-avatar">
-                                    <i class="fas fa-robot"></i>
-                                </div>
-                                <span class="score-label">Bot</span>
-                                <span class="score-value" id="bot-score">0</span>
-                            </div>
-                        </div>
-                        <div class="score-footer">
-                            <div class="round-counter">
-                                <i class="fas fa-clock"></i>
-                                <span>Round <span id="round-number">1</span></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="streak-info">
-                        <div class="streak-current">
-                            <div class="streak-header">
-                                <i class="fas fa-fire"></i>
-                                <span class="streak-label">Current Streak</span>
-                            </div>
-                            <div class="streak-value-container">
-                                <span class="streak-value" id="current-streak">0</span>
-                                <span class="streak-suffix">wins</span>
-                            </div>
-                        </div>
-                        <div class="streak-best">
-                            <div class="streak-header">
-                                <i class="fas fa-crown"></i>
-                                <span class="streak-label">Best Streak</span>
-                            </div>
-                            <div class="streak-value-container">
-                                <span class="streak-value" id="best-streak">0</span>
-                                <span class="streak-suffix">wins</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="battle-arena">
-                    <div class="choice-display">
-                        <div class="player-section">
-                            <h4>Your Choice</h4>
-                            <div id="player-choice">
-                                <div class="choice-placeholder">Make your choice!</div>
-                            </div>
-                        </div>
-                        <div class="vs-section">
-                            <div class="vs-badge">VS</div>
-                        </div>
-                        <div class="bot-section">
-                            <h4>Bot's Choice</h4>
-                            <div id="bot-choice">
-                                <div class="choice-placeholder">Waiting...</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="game-choices">
-                    <button class="game-btn" data-choice="rock">
+            <div class="minigame-selector">
+                <h2>Minigames <i class="fas fa-gamepad"></i></h2>
+                <div class="game-tabs">
+                    <button class="game-tab active" data-game="rps">
                         <i class="fas fa-hand-rock"></i>
-                        <span>Rock</span>
+                        Rock Paper Scissors
                     </button>
-                    <button class="game-btn" data-choice="paper">
-                        <i class="fas fa-hand-paper"></i>
-                        <span>Paper</span>
-                    </button>
-                    <button class="game-btn" data-choice="scissors">
-                        <i class="fas fa-hand-scissors"></i>
-                        <span>Scissors</span>
+                    <button class="game-tab" data-game="tictactoe">
+                        <i class="fas fa-th-large"></i>
+                        Tic Tac Toe
                     </button>
                 </div>
+            </div>
 
-                <div id="game-result">
-                    <div class="game-instruction">Choose Rock, Paper, or Scissors to start!</div>
+            <!-- Rock Paper Scissors Game -->
+            <div id="rps-game" class="game-section active">
+                <h3>Rock Paper Scissors Battle</h3>
+                <div class="game-container">
+                    <div class="game-header">
+                        <div class="game-score">
+                            <div class="score-header">
+                                <i class="fas fa-trophy"></i>
+                                <h4>Battle Score</h4>
+                            </div>
+                            <div class="score-display">
+                                <div class="score-item player">
+                                    <div class="player-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <span class="score-label">You</span>
+                                    <span class="score-value" id="player-score">0</span>
+                                </div>
+                                <div class="score-divider">
+                                    <div class="vs-circle">VS</div>
+                                </div>
+                                <div class="score-item bot">
+                                    <div class="bot-avatar">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <span class="score-label">Bot</span>
+                                    <span class="score-value" id="bot-score">0</span>
+                                </div>
+                            </div>
+                            <div class="score-footer">
+                                <div class="round-counter">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Round <span id="round-number">1</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="streak-info">
+                            <div class="streak-current">
+                                <div class="streak-header">
+                                    <i class="fas fa-fire"></i>
+                                    <span class="streak-label">Current Streak</span>
+                                </div>
+                                <div class="streak-value-container">
+                                    <span class="streak-value" id="current-streak">0</span>
+                                    <span class="streak-suffix">wins</span>
+                                </div>
+                            </div>
+                            <div class="streak-best">
+                                <div class="streak-header">
+                                    <i class="fas fa-crown"></i>
+                                    <span class="streak-label">Best Streak</span>
+                                </div>
+                                <div class="streak-value-container">
+                                    <span class="streak-value" id="best-streak">0</span>
+                                    <span class="streak-suffix">wins</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="battle-arena">
+                        <div class="choice-display">
+                            <div class="player-section">
+                                <h4>Your Choice</h4>
+                                <div id="player-choice">
+                                    <div class="choice-placeholder">Make your choice!</div>
+                                </div>
+                            </div>
+                            <div class="vs-section">
+                                <div class="vs-badge">VS</div>
+                            </div>
+                            <div class="bot-section">
+                                <h4>Bot's Choice</h4>
+                                <div id="bot-choice">
+                                    <div class="choice-placeholder">Waiting...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-choices">
+                        <button class="game-btn" data-choice="rock">
+                            <i class="fas fa-hand-rock"></i>
+                            <span>Rock</span>
+                        </button>
+                        <button class="game-btn" data-choice="paper">
+                            <i class="fas fa-hand-paper"></i>
+                            <span>Paper</span>
+                        </button>
+                        <button class="game-btn" data-choice="scissors">
+                            <i class="fas fa-hand-scissors"></i>
+                            <span>Scissors</span>
+                        </button>
+                    </div>
+
+                    <div id="game-result">
+                        <div class="game-instruction">Choose Rock, Paper, or Scissors to start!</div>
+                    </div>
+
+                    <div class="game-controls">
+                        <button id="reset-game" class="reset-btn">
+                            <i class="fas fa-redo"></i>
+                            Reset Game
+                        </button>
+                    </div>
                 </div>
+            </div>
 
-                <div class="game-controls">
-                    <button id="reset-game" class="reset-btn">
-                        <i class="fas fa-redo"></i>
-                        Reset Game
-                    </button>
+            <!-- Tic Tac Toe Game -->
+            <div id="tictactoe-game" class="game-section">
+                <h3>Tic Tac Toe Challenge</h3>
+                <div class="game-container">
+                    <div class="game-header">
+                        <div class="game-score">
+                            <div class="score-header">
+                                <i class="fas fa-trophy"></i>
+                                <h4>Battle Score</h4>
+                            </div>
+                            <div class="score-display">
+                                <div class="score-item player">
+                                    <div class="player-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <span class="score-label">You</span>
+                                    <span class="score-value" id="tic-player-score">0</span>
+                                </div>
+                                <div class="score-divider">
+                                    <div class="vs-circle">VS</div>
+                                </div>
+                                <div class="score-item bot">
+                                    <div class="bot-avatar">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <span class="score-label">Bot</span>
+                                    <span class="score-value" id="tic-bot-score">0</span>
+                                </div>
+                            </div>
+                            <div class="score-footer">
+                                <div class="round-counter">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Round <span id="tic-round-number">1</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="streak-info">
+                            <div class="streak-current">
+                                <div class="streak-header">
+                                    <i class="fas fa-fire"></i>
+                                    <span class="streak-label">Current Streak</span>
+                                </div>
+                                <div class="streak-value-container">
+                                    <span class="streak-value" id="tic-current-streak">0</span>
+                                    <span class="streak-suffix">wins</span>
+                                </div>
+                            </div>
+                            <div class="streak-best">
+                                <div class="streak-header">
+                                    <i class="fas fa-crown"></i>
+                                    <span class="streak-label">Best Streak</span>
+                                </div>
+                                <div class="streak-value-container">
+                                    <span class="streak-value" id="tic-best-streak">0</span>
+                                    <span class="streak-suffix">wins</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tic-tac-toe-arena">
+                        <div id="tic-board" class="tic-board">
+                            <div class="tic-cell" data-index="0"></div>
+                            <div class="tic-cell" data-index="1"></div>
+                            <div class="tic-cell" data-index="2"></div>
+                            <div class="tic-cell" data-index="3"></div>
+                            <div class="tic-cell" data-index="4"></div>
+                            <div class="tic-cell" data-index="5"></div>
+                            <div class="tic-cell" data-index="6"></div>
+                            <div class="tic-cell" data-index="7"></div>
+                            <div class="tic-cell" data-index="8"></div>
+                        </div>
+                    </div>
+
+                    <div id="tic-result">
+                        <div class="game-instruction">Click a cell to start playing!</div>
+                    </div>
+
+                    <div class="game-controls">
+                        <button id="tic-reset-game" class="reset-btn">
+                            <i class="fas fa-redo"></i>
+                            Reset Game
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -262,5 +366,7 @@
     <script src="js/card.js"></script>
     <script src="js/pack.js"></script>
     <script src="js/rps-game.js"></script>
+    <script src="js/tictactoe-game.js"></script>
+    <script src="js/minigame-tabs.js"></script>
 </body>
 </html> 
