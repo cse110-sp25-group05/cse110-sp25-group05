@@ -2516,3 +2516,32 @@ body.legendary-pull #pack-opening {
         font-size: 1.5rem;
     }
 } 
+#youtube-player-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+#youtube-player {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.volume-controls {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 25px;
+  padding: 10px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .volume-controls {
+  background: rgba(40, 40, 40, 0.9);
+}
+
+#volume-slider {
+  width: 120px;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+}
