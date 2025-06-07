@@ -434,5 +434,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initDecorationStudio();
   enableStickerDragDrop();
   decoratePreviewOnCardChange();
+  initScreenshotMode();
 });
 
