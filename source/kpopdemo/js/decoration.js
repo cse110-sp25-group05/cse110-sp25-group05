@@ -401,14 +401,32 @@ function makeStickerMoveable(sticker, container) {
 
 function decoratePreviewOnCardChange() {
   const select = document.getElementById('card-select');
+  const collection = loadOwnedCards();
   select.addEventListener('change', function () {
     const cardId = select.value;
+    const card = collection.find(c => c.id === cardId);
+    const preview = document.getElementById('decoration-preview-card');
+    if (card && preview) {
+      const imgPath = `assets/cards/${card.group.toLowerCase()}/${card.name}/${card.id}.png`;
+      preview.innerHTML = `<img src="${imgPath}" alt="${card.name}" width="220">`;
+    } else if (preview) {
+      preview.innerHTML = `<img src="assets/cardselect.png" alt="Preview" width="220">`;
+    }
     if (cardId) {
       loadDecorationForCard(cardId);
     }
   });
   if (select.value) {
-    loadDecorationForCard(select.value);
+    const cardId = select.value;
+    const card = collection.find(c => c.id === cardId);
+    const preview = document.getElementById('decoration-preview-card');
+    if (card && preview) {
+      const imgPath = `assets/cards/${card.group.toLowerCase()}/${card.name}/${card.id}.png`;
+      preview.innerHTML = `<img src="${imgPath}" alt="${card.name}" width="220">`;
+    } else if (preview) {
+      preview.innerHTML = `<img src="assets/cardselect.png" alt="Preview" width="220">`;
+    }
+    loadDecorationForCard(cardId);
   }
 }
 
