@@ -335,3 +335,55 @@ function loadCollection() {
     CardManager.loadCollection();
     updateCollectionDisplay();
 }
+
+
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+const songs = [
+  "H5v3kku4y6Q", // BTS - Dynamite
+  "ioNng23DkIM", // BLACKPINK - How You Like That
+  "3ymwOvzhwHs", // TWICE - Feel Special
+  "XE5w2e9B0hI", // STRAY KIDS - God's Menu
+  "mAKsZ26SabQ"  // ITZY - WANNABE
+];
+
+let player;
+let currentSongIndex = Math.floor(Math.random() * songs.length); // 随机选一首
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('youtube-player', {
+    height: '0',
+    width: '0',
+    videoId: songs[currentSongIndex],
+    playerVars: {
+      autoplay: 1,
+      controls: 0, 
+      disablekb: 1, 
+      fs: 0, 
+      loop: 1, 
+      playlist: songs.join(",") 
+    },
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+function onPlayerReady(event) {
+  event.target.setVolume(50); 
+  
+  const volumeSlider = document.getElementById('volume-slider');
+  volumeSlider.addEventListener('input', (e) => {
+    player.setVolume(e.target.value);
+  });
+}
+
+function onPlayerStateChange(event) {
+  if (event.data === YT.PlayerState.ENDED) {
+    console.log("olay next");
+  }
+}
