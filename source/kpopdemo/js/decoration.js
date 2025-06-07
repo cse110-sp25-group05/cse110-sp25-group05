@@ -32,6 +32,12 @@ function initDecorationStudio() {
 		select.appendChild(option);
 	});
 
+	const lastSelected = localStorage.getItem('lastSelectedCard');
+	if (lastSelected && collection.some(c => c.id === lastSelected)) {
+	    select.value = lastSelected;
+	    select.dispatchEvent(new Event('change'));
+	}
+
 	select.addEventListener('change', function () {
 		const card = collection.find(c => c.id === this.value);
 		const preview = document.getElementById('decoration-preview-card');
@@ -41,6 +47,7 @@ function initDecorationStudio() {
 		} else if (preview) {
 			preview.innerHTML = `<img src="assets/cardselect.png" alt="Preview" width="220">`;
 		}
+    	localStorage.setItem('lastSelectedCard', this.value);
 	});
 
 	const badgeToggle = document.getElementById('toggle-badge');
