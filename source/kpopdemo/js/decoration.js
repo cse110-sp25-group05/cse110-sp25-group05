@@ -94,41 +94,13 @@ function enableStickerDragDrop() {
   const stickers = document.querySelectorAll('.sticker-scroll img[draggable="true"]');
   const preview = document.getElementById('decoration-preview-card');
 
-  stickers.forEach(sticker => {
-    sticker.addEventListener('dragstart', function (e) {
-      e.dataTransfer.setData('sticker-src', this.src);
-    });
-  });
+	stickers.forEach(sticker => {
+	  sticker.addEventListener('dragstart', function (e) {
+	    e.dataTransfer.setData('sticker-src', this.src);
+	    e.dataTransfer.setData('from-palette', 'true');
+	  });
+	});
 
-  preview.addEventListener('dragover', function (e) {
-    e.preventDefault();
-  });
-
-  preview.addEventListener('drop', function (e) {
-    e.preventDefault();
-    const src = e.dataTransfer.getData('sticker-src');
-    if (src) {
-      const rect = preview.getBoundingClientRect();
-      // Calculate position relative to preview
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const stickerImg = document.createElement('img');
-      stickerImg.src = src;
-      stickerImg.className = 'dropped-sticker';
-      stickerImg.style.position = 'absolute';
-      stickerImg.style.left = `${x - 36}px`; // Center sticker (assuming 72px)
-      stickerImg.style.top = `${y - 36}px`;
-      stickerImg.style.width = '72px';
-      stickerImg.style.height = '72px';
-      stickerImg.style.pointerEvents = 'auto';
-      stickerImg.draggable = false;
-
-	  makeStickerMoveable(stickerImg, preview);
-
-      preview.appendChild(stickerImg);
-      preview.style.position = 'relative';
-    }
-  });
 
   if (trashcan) {
     trashcan.addEventListener('dragover', function(e) {
@@ -213,11 +185,6 @@ function makeStickerMoveable(sticker, container) {
     document.addEventListener('mouseup', onMouseUp);
   });
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-  initDecorationStudio();
-  enableStickerDragDrop();
-});
 
 /* Screenshot Mode */
 function initScreenshotMode() {
@@ -310,36 +277,38 @@ function enableStickerDragDrop() {
   stickers.forEach(sticker => {
     sticker.addEventListener('dragstart', function (e) {
       e.dataTransfer.setData('sticker-src', this.src);
+	  e.dataTransfer.setData('from-palette', 'true');
+
     });
   });
 
   preview.addEventListener('dragover', function (e) {
     e.preventDefault();
   });
-
+  
   preview.addEventListener('drop', function (e) {
-    e.preventDefault();
-    const src = e.dataTransfer.getData('sticker-src');
-    if (src) {
-      const rect = preview.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const stickerImg = document.createElement('img');
-      stickerImg.src = src;
-      stickerImg.className = 'dropped-sticker';
-      stickerImg.style.position = 'absolute';
-      stickerImg.style.left = `${x - 36}px`;
-      stickerImg.style.top = `${y - 36}px`;
-      stickerImg.style.width = '72px';
-      stickerImg.style.height = '72px';
-      stickerImg.style.pointerEvents = 'auto';
-      stickerImg.draggable = false;
-      makeStickerMoveable(stickerImg, preview);
-      preview.appendChild(stickerImg);
-      preview.style.position = 'relative';
-      saveCurrentDecoration();
-    }
-  });
+	e.preventDefault();
+	const src = e.dataTransfer.getData('sticker-src');
+	if (!src) return;
+	if (e.dataTransfer.getData('from-palette') !== 'true') return;
+	const rect = preview.getBoundingClientRect();
+	const x = e.clientX - rect.left;
+	const y = e.clientY - rect.top;
+	const stickerImg = document.createElement('img');
+	stickerImg.src = src;
+	stickerImg.className = 'dropped-sticker';
+	stickerImg.style.position = 'absolute';
+	stickerImg.style.left = `${x - 36}px`;
+	stickerImg.style.top = `${y - 36}px`;
+	stickerImg.style.width = '72px';
+	stickerImg.style.height = '72px';
+	stickerImg.style.pointerEvents = 'auto';
+	stickerImg.draggable = false;
+	makeStickerMoveable(stickerImg, preview);
+	preview.appendChild(stickerImg);
+	preview.style.position = 'relative';
+	saveCurrentDecoration();
+});
 
   if (trashcan) {
     trashcan.addEventListener('dragover', function(e) {
