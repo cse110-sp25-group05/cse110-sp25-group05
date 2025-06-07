@@ -34,8 +34,8 @@ function initDecorationStudio() {
 
 	const lastSelected = localStorage.getItem('lastSelectedCard');
 	if (lastSelected && collection.some(c => c.id === lastSelected)) {
-	    select.value = lastSelected;
-	    select.dispatchEvent(new Event('change'));
+    	select.value = lastSelected;
+   		select.dispatchEvent(new Event('change'));
 	}
 
 	select.addEventListener('change', function () {
