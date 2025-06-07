@@ -1,6 +1,8 @@
+// Card.js is how the project manages the user's card collection.
 const CardManager = (() => {
   let collection = [];
 
+  // Loads the user's card collection from local storage.
   function loadCollection() {
     const savedCollection = localStorage.getItem("kpopCardCollection");
     if (savedCollection) {
@@ -8,10 +10,12 @@ const CardManager = (() => {
     }
   }
 
+  // Saves the collection to the local storage.
   function saveCollection() {
     localStorage.setItem("kpopCardCollection", JSON.stringify(collection));
   }
 
+  // Adds the cards to the collection. If one is already obtained, increase count.
   function addCardsToCollection(cards) {
     cards.forEach((card) => {
       const existingIndex = collection.findIndex((c) => c.id === card.id);
@@ -44,7 +48,9 @@ const CardManager = (() => {
   };
 })();
 
+// Contains the data for each card. 
 const CardData = (() => {
+  // Generates a placeholder. SHOULD DELETE WHEN NOT NEEDED.
   function getPlaceholderUrl(name, group) {
       const initials = name.split(' ').map(n => n[0]).join('');
       const colorMap = {
@@ -59,11 +65,13 @@ const CardData = (() => {
       return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${bgColor}&color=fff&size=300&bold=true&font-size=0.33&length=2`;
   }
 
+  // Grabs the picture of the card. Follow the filepath when creating a new card.
   function getCardImage(id, name, group) {
     const realImagePath = `assets/cards/${group.toLowerCase()}/${name}/${id}.png`;
     return realImagePath;
   }
 
+  // Card data for all the cards in the project. 
   const cards = [
     {
       id: "bts-rm",
