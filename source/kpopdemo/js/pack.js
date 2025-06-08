@@ -1,3 +1,4 @@
+// Handles logic for card packs and card rarities.
 const PackManager = (() => {
     const packTypes = {
         basic: {
@@ -32,6 +33,7 @@ const PackManager = (() => {
         }
     };
 
+    // Pack Opening Function.
     function openPack(packType = 'basic', groupFilter = 'random') {
         const pack = packTypes[packType] || packTypes.basic;
         let cardCount = pack.cardCount;
@@ -47,6 +49,7 @@ const PackManager = (() => {
             console.error('No cards available for the specified group');
             return [];
         }
+        // Handles guarantees.
         const guaranteedSlots = [];
         if (packType === 'premium') {
             guaranteedSlots.push('rare');
@@ -58,12 +61,14 @@ const PackManager = (() => {
             }
         }
         const selectedIndices = new Set();
+        // Guaranteed rarity cards.
         guaranteedSlots.forEach(guaranteedRarity => {
             const card = getRandomCardWithRarity(availableCards, guaranteedRarity, selectedIndices);
             if (card) {
                 cards.push(card);
             }
         });
+        // Rest of the pack opening slots.
         while (cards.length < cardCount && selectedIndices.size < availableCards.length) {
             const rarity = determineRarity(pack.rarity);
             const card = getRandomCardWithRarity(availableCards, rarity, selectedIndices);
@@ -74,6 +79,7 @@ const PackManager = (() => {
         return cards;
     }
 
+    // Randomly choose a card within a specific rarity.
     function getRandomCardWithRarity(availableCards, rarity, selectedIndices) {
         const availableIndices = [];
         for (let i = 0; i < availableCards.length; i++) {
