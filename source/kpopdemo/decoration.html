@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decoration Studio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/deco-styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>Decoration Studio</h1>
+        <nav class="app-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="collection.html"><i class="fas fa-layer-group"></i> My Collection</a></li>
+                <li><a href="index.html#packs"><i class="fas fa-gift"></i> Summon Cards</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="decoration-layout">
+        <div class="panel left-panel">
+            <details open>
+                <summary><strong>Your Cards</strong></summary>
+            
+                <select id="card-select" class="card-select">
+                    <option>Select a card to decorate...</option>
+                </select>
+              
+                <fieldset class="decoration-options">
+                    <legend><h3>Show Rarity Badge</h3></legend>
+                    <label><input type="checkbox" id="toggle-badge" checked> Display rarity badge on card</label>
+                </fieldset>
+              
+                <div class="decoration-actions">
+                    <button id="save-decor"><i class="fas fa-save"></i> Save</button>
+                    <button id="reset-decor"><i class="fas fa-undo"></i> Reset</button>
+                </div>
+            </details>
+        </div>
+
+      <div class="dragbar"></div>
+
+        <div class="panel center-panel">
+            <h3>Live Preview</h3>
+            <div id="decoration-preview-card" class="card" data-rarity="common" data-show-badge="true">
+                <img src="assets/cardselect.png" alt="Preview" width="220">
+            </div>
+            <div id="sticker-trashcan" style="margin: 1rem auto 0; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                <img src="assets/trashcan.png" alt="Trash" width="70" height="70">
+            </div>
+        </div>
+
+        <div class="panel right-panel">
+            <details open>
+                <summary><strong>Select Sticker</strong></summary>
+                <fieldset class="decoration-options">
+                  <div class="sticker-scroll">
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/sparkles.png" alt="Sparkles" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/gold-sparkles.png" alt="Gold Sparkles" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/heart.png" alt="Heart" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/pink-hearts.png" alt="Pink Hearts" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/pink-flower.png" alt="Pink Flower" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/ribbon.png" alt="Ribbon" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/tear.png" alt="Tear" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/crown.png" alt="Crown" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/cherry-blossom.png" alt="Cherry Blossoms" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/petals.png" alt="Petals" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/chamomile.png" alt="Chamomile" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/daisy.png" alt="Daisy" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/sun.png" alt="Sun" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/sun2.png" alt="Sun2" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/moon.png" alt="Moon" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/shooting-star.png" alt="Shooting Star" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/shooting-star2.png" alt="Shooting Star2" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/butterfly.png" alt="Butterfly" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/clover.png" alt="Clover" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/musical-note.png" alt="Musical Note" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/musical-note2.png" alt="Musical Note 2" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/musical-note3.png" alt="Musical Note 3" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/snow.png" alt="Snow" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/fire.png" alt="Fire" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/fireworks.png" alt="Fireworks" draggable="true"></label>
+                    <label><input type="radio" name="sticker"><img src="assets/stickers/lightning.png" alt="Lightning" draggable="true"></label>
+                  </div>
+                </fieldset>
+            </details>
+        </div>
+    </section>
+
+    <script src="js/decoration.js"></script>
+
+    <button class="screenshot-btn" id="screenshot-btn">
+        <i class="fas fa-camera"></i>
+        <span>Screenshot Mode</span>
+    </button>
+
+    <div class="toast" id="screenshot-toast">Screenshot mode active</div>
+</body>
+</html>

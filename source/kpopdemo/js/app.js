@@ -197,6 +197,9 @@ function createCardElement(card) {
                 <p class="card-bio">${card.bio || 'No bio available'}</p>
             </div>
         </div>
+        <a href="decoration.html?cardID=${card.id}" class="deco-button" onclick="event.stopPropagation()">
+            <i class="fas fa-palette"></i>Decorate
+        </a>
     `;
     return cardDiv;
 }

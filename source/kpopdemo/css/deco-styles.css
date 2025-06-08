@@ -1,0 +1,526 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fefafb;
+  color: #000;
+}
+
+.app-header {
+  background: linear-gradient(90deg, #ff7e5f, #ff4081);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.app-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.app-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.decoration-layout {
+  display: grid;
+  grid-template-columns: 20% 4px 56% 20%;
+  height: calc(100vh - 100px);
+  width: 100vw;
+  overflow: hidden;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  overflow-y: auto;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.left-panel {
+  min-width: 160px;
+}
+.right-panel {
+  min-width: 160px;
+}
+
+.left-panel * {
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.2rem !important;
+  line-height: 1.1 !important;
+}
+
+.center-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  height: 100%;
+}
+
+#decoration-preview-card {
+    width: 75%;
+    max-width: 500px; 
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#decoration-preview-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 80vh; 
+    object-fit: contain;
+}
+
+.card-select-wrapper {
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+
+.card-select {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #000;
+  font-size: 1rem;
+  border: 2px solid #eee;
+}
+
+.decoration-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.decoration-actions button {
+  padding: 0.7rem 1.6rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+#save-decor {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: #000;
+}
+#save-decor:hover {
+  transform: translateY(-2px);
+}
+
+#reset-decor {
+  background: linear-gradient(135deg, #f44336, #da190b);
+  color: #000;
+}
+#reset-decor:hover {
+  transform: translateY(-2px);
+}
+
+.sticker-scroll {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  grid-auto-rows: 72px;
+  gap: 0.75rem;
+  overflow-y: auto;
+  max-height: 90vh;
+  padding-right: 0.5rem;
+}
+
+.sticker-scroll label {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.sticker-scroll label img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sticker-scroll input {
+  position: absolute;
+  opacity: 0;
+}
+
+.sticker-scroll input:checked + img {
+  box-shadow: 0 0 0 3px var(--primary-color, #ff4081);
+  transform: translateY(-2px);
+}
+
+.dropped-sticker {
+  z-index: 20;
+  cursor: move;
+  user-select: none;
+  transition: box-shadow 0.2s;
+}
+.dropped-sticker:active {
+  box-shadow: 0 0 8px #ff4081;
+}
+
+.card[data-show-badge="true"]::before {
+  content: attr(data-rarity);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  color: #000;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  z-index: 10;
+}
+.card[data-rarity="rare"][data-show-badge="true"]::before {
+  background: linear-gradient(45deg, #9b59b6, #8e44ad);
+}
+.card[data-rarity="epic"][data-show-badge="true"]::before {
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+}
+.card[data-rarity="legendary"][data-show-badge="true"]::before {
+  background: linear-gradient(45deg, #f39c12, #e67e22);
+}
+
+.decoration-section h3,
+.decoration-options legend {
+  color: var(--primary-color, #ff4081);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.decoration-options {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+#sticker-trashcan {
+  position: static;
+  margin-top: 2.5rem; 
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  transition: background 0.2s;
+  z-index: 50;
+  width: 48px;
+  height: 48px;
+}
+#sticker-trashcan:hover {
+  background: #ffeaea;
+}
+
+@media (max-width: 1000px) {
+  #sticker-trashcan img {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  #sticker-trashcan {
+    width: 28px !important;
+    height: 28px !important;
+  }
+    .decoration-layout {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      width: 100%;
+    }
+
+    .sticker-scroll label {
+      flex: 0 0 auto;
+      width: 72px;
+      height: 72px;
+    }
+    .app-header {
+      padding: 0.5rem 1rem;
+    }
+    .app-header h1 {
+      font-size: 0.75rem;
+    }
+
+    .app-nav a {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.4rem;
+    }
+
+    .dragbar {
+      display: none;
+    }
+    .left-panel,
+    .right-panel {
+      width: 100%;
+      margin-bottom: 2rem;
+      min-width: 0;
+      padding: 0.75rem !important;
+      font-size: 0.8rem;
+    }
+
+    .left-panel .panel,
+    .right-panel .panel {
+      padding: 0.75rem !important;
+      font-size: 0.8rem;
+    }
+
+    .left-panel button,
+    .right-panel button {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 2px;
+    }
+
+    .left-panel input,
+    .right-panel input,
+    .left-panel select,
+    .right-panel select {
+      font-size: 0.8rem;
+      padding: 0.3rem 0.5rem;
+    }
+    
+    .left-panel {
+      order: 1;
+      max-width: 95%;
+      line-height: 1.1;
+    }
+    .left-panel * {
+      margin-top: 0.2rem !important;
+      margin-bottom: 0.2rem !important;
+      line-height: 1;
+    }
+    .right-panel {
+      order: 2;
+    }
+    .center-panel {
+      order: 3;
+      align-items: center;
+    }
+
+    #decoration-preview-card {
+      width: 90%;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .sticker-scroll {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;    
+      overflow-x: auto;       
+      overflow-y: hidden;
+      gap: 0.75rem;
+      padding-bottom: 1rem;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .sticker-scroll label {
+      flex: 0 0 auto;
+      width: 48px;
+      height: 48px;
+    }
+
+    .sticker-scroll label img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+}
+
+/* Screenshot Mode Styles */
+.screenshot-mode .panel:not(.center-panel),
+.screenshot-mode .dragbar,
+.screenshot-mode .app-header,
+.screenshot-mode #sticker-trashcan {
+    display: none !important;
+}
+
+.screenshot-mode .center-panel {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.screenshot-mode .center-panel h3 {
+    display: none;
+}
+
+.screenshot-mode #decoration-preview-card {
+    margin: 0;
+    width: auto;
+    max-width: 600px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screenshot-mode #decoration-preview-card img {
+    max-height: 90vh;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Screenshot Button */
+.screenshot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #ff7e5f, #ff4081);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.screenshot-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.screenshot-btn i {
+    font-size: 1.1em;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive adjustments for Screenshot Mode */
+@media (max-width: 768px) {
+    .screenshot-mode #decoration-preview-card {
+        max-width: 90%;
+    }
+    
+    .screenshot-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Styling related to decoration button under each card in user's collection */
+
+/* hide decoration button by default, so it doesn't show up in summons */
+a.deco-button {
+  display: none;
+}
+
+.collection-container a.deco-button {
+  display: inline-block;
+  margin: 0.5rem auto 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--secondary-color);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+/* center button to card */
+.card .deco-button {
+  width: calc(100%);
+}
+
+.collection-container a.deco-button:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--hover-shadow);
+}
+
+.collection-container a.deco-button i {
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+/* Additional changes to avoid cards clipping into each other in the collection menu */
+
+.collection-container .card {
+    /* remove fixed 280px height and allow vertical stacking */
+    height: auto !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.collection-container .card .card-inner {
+    width: 100%;
+    flex: 0 0 280px; 
+}
+
+@media (max-width: 1200px) {
+    .collection-container .card {
+        /* overwrites previous width to fit smaller resolutions */
+        width: 160px;
+    }
+}
