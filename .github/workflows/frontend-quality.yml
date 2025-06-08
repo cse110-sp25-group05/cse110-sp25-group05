@@ -3,7 +3,7 @@ name: Front-end Quality Checks
 
 on:
   push:
-    branches: [ "main", "Somto-Implement-Mini-Game-RPS" ]
+    branches: [ "main", "tictactoe" ]
   pull_request:
     branches: [ "main" ]
   schedule:
