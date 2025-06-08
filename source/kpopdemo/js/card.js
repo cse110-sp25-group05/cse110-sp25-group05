@@ -1,6 +1,8 @@
+// Card.js is how the project manages the user's card collection.
 const CardManager = (() => {
   let collection = [];
 
+  // Loads the user's card collection from local storage.
   function loadCollection() {
     const savedCollection = localStorage.getItem("kpopCardCollection");
     if (savedCollection) {
@@ -8,10 +10,12 @@ const CardManager = (() => {
     }
   }
 
+  // Saves the collection to the local storage.
   function saveCollection() {
     localStorage.setItem("kpopCardCollection", JSON.stringify(collection));
   }
 
+  // Adds the cards to the collection. If one is already obtained, increase count.
   function addCardsToCollection(cards) {
     cards.forEach((card) => {
       const existingIndex = collection.findIndex((c) => c.id === card.id);
@@ -44,7 +48,9 @@ const CardManager = (() => {
   };
 })();
 
+// Contains the data for each card. 
 const CardData = (() => {
+  // Generates a placeholder. SHOULD DELETE WHEN NOT NEEDED.
   function getPlaceholderUrl(name, group) {
       const initials = name.split(' ').map(n => n[0]).join('');
       const colorMap = {
@@ -59,11 +65,13 @@ const CardData = (() => {
       return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${bgColor}&color=fff&size=300&bold=true&font-size=0.33&length=2`;
   }
 
+  // Grabs the picture of the card. Follow the filepath when creating a new card.
   function getCardImage(id, name, group) {
     const realImagePath = `assets/cards/${group.toLowerCase()}/${name}/${id}.png`;
     return realImagePath;
   }
 
+  // Card data for all the cards in the project. 
   const cards = [
     {
       id: "bts-rm",
@@ -138,6 +146,15 @@ const CardData = (() => {
       image: getCardImage("bp-jisoo", "Jisoo", "BLACKPINK"),
     },
     {
+      id: "bp-jisoo2",
+      name: "Jisoo",
+      group: "BLACKPINK",
+      role: "Lead Vocalist, Visual",
+      birthday: "January 3, 1995",
+      bio: "Kim Ji-soo is the oldest member of BLACKPINK and serves as a vocalist and visual.",
+      image: getCardImage("bp-jisoo2", "Jisoo", "BLACKPINK"),
+    },
+    {
       id: "bp-jennie",
       name: "Jennie",
       group: "BLACKPINK",
@@ -147,13 +164,31 @@ const CardData = (() => {
       image: getCardImage("bp-jennie", "Jennie", "BLACKPINK"),
     },
     {
+      id: "bp-jennie2",
+      name: "Jennie",
+      group: "BLACKPINK",
+      role: "Main Rapper, Lead Vocalist",
+      birthday: "January 16, 1996",
+      bio: "Jennie Kim is a rapper and vocalist in BLACKPINK, known for her versatility.",
+      image: getCardImage("bp-jennie2", "Jennie", "BLACKPINK"),
+    },
+    {
       id: "bp-rose",
       name: "Rosé",
       group: "BLACKPINK",
       role: "Main Vocalist, Lead Dancer",
       birthday: "February 11, 1997",
       bio: "Roseanne Park, known as Rosé, is the main vocalist of BLACKPINK with a unique vocal tone.",
-      image: getCardImage("bp-rose", "Rosé", "BLACKPINK"),
+      image: getCardImage("bp-rose", "Rose", "BLACKPINK"),
+    },
+    {
+      id: "bp-rose2",
+      name: "Rosé",
+      group: "BLACKPINK",
+      role: "Main Vocalist, Lead Dancer",
+      birthday: "February 11, 1997",
+      bio: "Roseanne Park, known as Rosé, is the main vocalist of BLACKPINK with a unique vocal tone.",
+      image: getCardImage("bp-rose2", "Rose", "BLACKPINK"),
     },
     {
       id: "bp-lisa",
@@ -163,6 +198,15 @@ const CardData = (() => {
       birthday: "March 27, 1997",
       bio: "Lalisa Manoban, known as Lisa, is a Thai rapper and dancer in BLACKPINK.",
       image: getCardImage("bp-lisa", "Lisa", "BLACKPINK"),
+    },
+    {
+      id: "bp-lisa2",
+      name: "Lisa",
+      group: "BLACKPINK",
+      role: "Main Dancer, Lead Rapper, Maknae",
+      birthday: "March 27, 1997",
+      bio: "Lalisa Manoban, known as Lisa, is a Thai rapper and dancer in BLACKPINK.",
+      image: getCardImage("bp-lisa2", "Lisa", "BLACKPINK"),
     },
     {
       id: "twice-chaeyoung",
@@ -255,6 +299,15 @@ const CardData = (() => {
       image: getCardImage("skz-bang-chan", "Bang Chan", "STRAY KIDS"),
     },
     {
+      id: "skz-bang-chan2",
+      name: "Bang Chan",
+      group: "STRAY KIDS",
+      role: "Leader, Producer, Vocalist",
+      birthday: "October 3, 1997",
+      bio: "Christopher Bang is the leader and producer of Stray Kids, skilled in composing and producing.",
+      image: getCardImage("skz-bang-chan2", "Bang Chan", "STRAY KIDS"),
+    },
+    {
       id: "skz-lee-know",
       name: "Lee Know",
       group: "STRAY KIDS",
@@ -264,6 +317,15 @@ const CardData = (() => {
       image: getCardImage("skz-lee-know", "Lee Know", "STRAY KIDS"),
     },
     {
+      id: "skz-lee-know2",
+      name: "Lee Know",
+      group: "STRAY KIDS",
+      role: "Main Dancer, Sub Vocalist",
+      birthday: "October 25, 1998",
+      bio: "Lee Min-ho, known as Lee Know, is the main dancer of Stray Kids and a former backup dancer.",
+      image: getCardImage("skz-lee-know2", "Lee Know", "STRAY KIDS"),
+    },
+    {
       id: "skz-felix",
       name: "Felix",
       group: "STRAY KIDS",
@@ -271,6 +333,105 @@ const CardData = (() => {
       birthday: "September 15, 2000",
       bio: "Lee Felix is an Australian member of Stray Kids known for his deep voice and dancing skills.",
       image: getCardImage("skz-felix", "Felix", "STRAY KIDS"),
+    },
+    {
+      id: "skz-felix2",
+      name: "Felix",
+      group: "STRAY KIDS",
+      role: "Lead Dancer, Rapper",
+      birthday: "September 15, 2000",
+      bio: "Lee Felix is an Australian member of Stray Kids known for his deep voice and dancing skills.",
+      image: getCardImage("skz-felix2", "Felix", "STRAY KIDS"),
+    },
+    {
+      id: "skz-han",
+      name: "Han",
+      group: "STRAY KIDS",
+      role: "Rapper, Vocalist",
+      birthday: "September 14th, 2000",
+      bio: "Han Jisung is a South Korean member of Stray Kids, known for his songwriting and rap skills.",
+      image: getCardImage("skz-han", "Han", "STRAY KIDS"),
+    },
+    {
+      id: "skz-han2",
+      name: "Han",
+      group: "STRAY KIDS",
+      role: "Rapper, Vocalist",
+      birthday: "September 14th, 2000",
+      bio: "Han Jisung is a South Korean member of Stray Kids, known for his songwriting and rap skills.",
+      image: getCardImage("skz-han2", "Han", "STRAY KIDS"),
+    },
+    {
+      id: "skz-changbin",
+      name: "Changbin",
+      group: "STRAY KIDS",
+      role: "Rapper, Producer",
+      birthday: "August 11th, 1999",
+      bio: "Seo Chang-bin, known as Changbin in the group STRAY KIDS, is known for his producing and rapping.",
+      image: getCardImage("skz-changbin", "Changbin", "STRAY KIDS"),
+    },
+    {
+      id: "skz-changbin2",
+      name: "Changbin",
+      group: "STRAY KIDS",
+      role: "Rapper, Producer",
+      birthday: "August 11th, 1999",
+      bio: "Seo Chang-bin, known as Changbin in the group STRAY KIDS, is known for his producing and rapping.",
+      image: getCardImage("skz-changbin2", "Changbin", "STRAY KIDS"),
+    },
+    {
+      id: "skz-hyunjin",
+      name: "Hyunjin",
+      group: "STRAY KIDS",
+      role: "Rapper, Dancer",
+      birthday: "March 20th, 2000",
+      bio: "South Korean STRAY KIDS member Hyunjin is known for his impressive rap and dancing skills",
+      image: getCardImage("skz-hyunjin", "Hyunjin", "STRAY KIDS"),
+    },
+    {
+      id: "skz-hyunjin2",
+      name: "Hyunjin",
+      group: "STRAY KIDS",
+      role: "Rapper, Dancer",
+      birthday: "March 20th, 2000",
+      bio: "South Korean STRAY KIDS member Hyunjin is known for his impressive rap and dancing skills",
+      image: getCardImage("skz-hyunjin2", "Hyunjin", "STRAY KIDS"),
+    },
+    {
+      id: "skz-in",
+      name: "I.N",
+      group: "STRAY KIDS",
+      role: "Vocalist",
+      birthday: "February 8th, 2001",
+      bio: "Yang Jeong-in, known as I.N, is a vocalist member of STRAY KIDS is known for his range.",
+      image: getCardImage("skz-in", "I.N", "STRAY KIDS"),
+    },
+    {
+      id: "skz-in2",
+      name: "I.N",
+      group: "STRAY KIDS",
+      role: "Vocalist",
+      birthday: "February 8th, 2001",
+      bio: "Yang Jeong-in, known as I.N, is a vocalist member of STRAY KIDS is known for his range.",
+      image: getCardImage("skz-in2", "I.N", "STRAY KIDS"),
+    },
+    {
+      id: "skz-seungmin",
+      name: "Seungmin",
+      group: "STRAY KIDS",
+      role: "Main Vocalist",
+      birthday: "September 22nd, 2000",
+      bio: "Seungmin is a member of STRAY KIDS known for taking on some of the most challenging parts of their songs.",
+      image: getCardImage("skz-seungmin", "Seungmin", "STRAY KIDS"),
+    },
+    {
+      id: "skz-seungmin2",
+      name: "Seungmin",
+      group: "STRAY KIDS",
+      role: "Main Vocalist",
+      birthday: "September 22nd, 2000",
+      bio: "Seungmin is a member of STRAY KIDS known for taking on some of the most challenging parts of their songs.",
+      image: getCardImage("skz-seungmin2", "Seungmin", "STRAY KIDS"),
     },
     {
       id: "itzy-yeji",
@@ -298,6 +459,24 @@ const CardData = (() => {
       birthday: "December 9, 2003",
       bio: "Shin Yu-na is the youngest member of ITZY and is known for her height and visuals.",
       image: getCardImage("itzy-yuna", "Yuna", "ITZY"),
+    },
+    {
+      id: 'itzy-lia',
+      name: 'Lia',
+      group: 'ITZY',
+      role: 'Main Vocalist, Sub Rapper',
+      birthday: 'July 21, 2000',
+      bio: 'Choi Ji-su, known as Lia, is the main vocalist of ITZY and is recognized for her elegant visuals and powerful voice.',
+      image: getCardImage('itzy-lia', 'Lia', 'ITZY')
+    },
+    {
+      id: 'itzy-chaeryeong',
+      name: 'Chaeryeong',
+      group: 'ITZY',
+      role: 'Main Dancer, Sub Vocalist, Sub Rapper',
+      birthday: 'June 5, 2001',
+      bio: 'Lee Chaeryeong is praised for her expressive dancing and has trained the longest among ITZY members, previously appearing on survival shows.',
+      image: getCardImage('itzy-chaeryeong', 'Chaeryeong', 'ITZY')
     },
     {
       id: "aespa-karina",

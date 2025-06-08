@@ -12,6 +12,7 @@ function initApp() {
     });
 }
 
+// Pack opening buttons.
 function setupEventListeners() {
     const openPackBtns = document.querySelectorAll('.open-pack-btn');
     openPackBtns.forEach(btn => {
@@ -40,6 +41,7 @@ function setupEventListeners() {
         });
     }
     
+    // Filter collection.
     const groupFilter = document.getElementById('group-filter');
     if (groupFilter) {
         groupFilter.addEventListener('change', () => {
@@ -47,6 +49,7 @@ function setupEventListeners() {
         });
     }
     
+    // Card flip on click.
     document.addEventListener('click', event => {
         const card = event.target.closest('.card');
         if (card && !card.classList.contains('new-card-animation') && !card.classList.contains('card-reveal')) {
@@ -75,6 +78,7 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
+// Pack Opening Events.
 let currentlyOpenedCards = [];
 
 function getCurrentlyOpenedCards() {
@@ -197,6 +201,7 @@ function createCardElement(card) {
     return cardDiv;
 }
 
+// Collection Display Sorting.
 function updateCollectionDisplay() {
     const collectionContainer = document.querySelector('.collection-container');
     collectionContainer.innerHTML = '';
