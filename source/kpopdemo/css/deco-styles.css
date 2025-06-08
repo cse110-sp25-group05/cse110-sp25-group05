@@ -462,3 +462,65 @@ body {
         font-size: 0.9rem;
     }
 }
+
+/* Styling related to decoration button under each card in user's collection */
+
+/* hide decoration button by default, so it doesn't show up in summons */
+a.deco-button {
+  display: none;
+}
+
+.collection-container a.deco-button {
+  display: inline-block;
+  margin: 0.5rem auto 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--secondary-color);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+/* center button to card */
+.card .deco-button {
+  width: calc(100%);
+}
+
+.collection-container a.deco-button:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--hover-shadow);
+}
+
+.collection-container a.deco-button i {
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+/* Additional changes to avoid cards clipping into each other in the collection menu */
+
+.collection-container .card {
+    /* remove fixed 280px height and allow vertical stacking */
+    height: auto !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.collection-container .card .card-inner {
+    width: 100%;
+    flex: 0 0 280px; 
+}
+
+@media (max-width: 1200px) {
+    .collection-container .card {
+        /* overwrites previous width to fit smaller resolutions */
+        width: 160px;
+    }
+}
