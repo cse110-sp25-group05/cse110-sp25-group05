@@ -2516,6 +2516,39 @@ body.legendary-pull #pack-opening {
     .result-main {
         font-size: 1.5rem;
     }
+} 
+#sc-player {
+  display: none;
+}
+
+/* music control panel*/
+#volume-control {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0,0,0,0.7);
+  padding: 12px 18px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+}
+
+#volume-control i {
+  color: white;
+  font-size: 18px;
+}
+
+#volume {
+  width: 100px;
+  accent-color: #ff5500;
+}
+
+@media (max-width: 768px) {
+  #unmute-prompt {
+    display: block;
+  }
 }
 
 /* Minigame Tab System - Enhanced Design */
@@ -3281,3 +3314,4 @@ body.legendary-pull #pack-opening {
         border-radius: 10px;
     }
 }
+
