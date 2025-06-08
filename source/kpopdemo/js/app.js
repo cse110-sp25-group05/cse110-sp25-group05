@@ -12,6 +12,7 @@ function initApp() {
     });
 }
 
+// Pack opening buttons.
 function setupEventListeners() {
     const openPackBtns = document.querySelectorAll('.open-pack-btn');
     openPackBtns.forEach(btn => {
@@ -40,6 +41,7 @@ function setupEventListeners() {
         });
     }
     
+    // Filter collection.
     const groupFilter = document.getElementById('group-filter');
     if (groupFilter) {
         groupFilter.addEventListener('change', () => {
@@ -47,6 +49,7 @@ function setupEventListeners() {
         });
     }
     
+    // Card flip on click.
     document.addEventListener('click', event => {
         const card = event.target.closest('.card');
         if (card && !card.classList.contains('new-card-animation') && !card.classList.contains('card-reveal')) {
@@ -75,6 +78,7 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
+// Pack Opening Events.
 let currentlyOpenedCards = [];
 
 function getCurrentlyOpenedCards() {
@@ -200,6 +204,7 @@ function createCardElement(card) {
     return cardDiv;
 }
 
+// Collection Display Sorting.
 function updateCollectionDisplay() {
     const collectionContainer = document.querySelector('.collection-container');
     collectionContainer.innerHTML = '';
@@ -338,3 +343,137 @@ function loadCollection() {
     CardManager.loadCollection();
     updateCollectionDisplay();
 }
+
+// init SoundCloud
+const TRACK_IDS = [
+  '2096744259', //BTS-Dynamitc 
+  '2096744094', //BTS-DNA
+  '669902048',  //BlackPink- KIll this love
+  '1059662128', //BlackPink- DDU-DU
+  '575498373', //ITZY- DALLA DALLA
+  '1108916788', //ITZY- WANNABE
+  '1209259669', //Stray Kids-God's Menue
+  '1209176545', //Stray Kids-Thunderous
+  '427096254', //TWICE - WHat is love
+  '910923943', // TWICE- I CAN'T STOP ME
+  '1655391237', // AESPA - DRAMA
+  '1301753080', //AESPA - BLACK MAMBA
+
+];
+
+const initSoundCloudPlayer = () => {
+  const iframe = document.getElementById('sc-player');
+  
+  // Start with a random track
+  const randomIndex = Math.floor(Math.random() * TRACK_IDS.length);
+  const firstTrackUrl = `https://api.soundcloud.com/tracks/${TRACK_IDS[randomIndex]}`;
+  
+  // Create playlist with the remaining tracks in order (starting after the random one)
+  const playlistUrls = [];
+  for (let i = 1; i < TRACK_IDS.length; i++) {
+    const idx = (randomIndex + i) % TRACK_IDS.length;
+    playlistUrls.push(`https://api.soundcloud.com/tracks/${TRACK_IDS[idx]}`);
+  }
+  
+  iframe.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(firstTrackUrl)}
+    &auto_play=true
+    &loop=true
+    &hide_related=true
+    &show_comments=false
+    &show_user=false
+    &show_reposts=false
+    &show_teaser=false
+    ${playlistUrls.length > 0 ? `&playnext=true&tracks=${playlistUrls.join(',')}` : ''}`.replace(/\s+/g, '');
+
+  const widget = SC.Widget(iframe);
+
+  document.getElementById('volume').addEventListener('input', (e) => {
+    const sliderValue = parseInt(e.target.value);
+    const volume = sliderValue;
+    
+    if(sliderValue <= 20) {
+      widget.setVolume(0);
+      document.getElementById('volume-icon').className = 'fas fa-volume-mute';
+      document.getElementById('volume-icon').style.color = '#ff0000';
+      return;
+    }
+    
+    widget.setVolume(volume);
+    updateVolumeIcon(volume);
+  });
+
+  widget.bind(SC.Widget.Events.READY, () => {
+    widget.setVolume(50);
+    document.getElementById('volume').value = 50;
+    startProtectionLoop(widget);
+    
+    widget.getVolume(vol => {
+      if(vol < 0.8) widget.setVolume(0.8);
+    });
+  });
+
+  setupActivationHandler(widget);
+};
+
+// Update the icon
+const updateVolumeIcon = (volume) => {
+  const icon = document.getElementById('volume-icon');
+  icon.className = volume === 0 ? 'fas fa-volume-mute' :
+                   volume < 0.4 ? 'fas fa-volume-off' :
+                   volume < 0.7 ? 'fas fa-volume-down' : 
+                   'fas fa-volume-up';
+  
+  // change color when at certain volume value
+  icon.style.color = volume === 0 ? '#ff0000' : 
+                    volume < 75 ? '#ff9900' : 
+                    '#00ff00';
+};
+
+const startProtectionLoop = (widget) => {
+  setInterval(() => {
+    widget.getVolume(vol => {
+      const currentSliderVal = parseInt(document.getElementById('volume').value);
+      if(currentSliderVal > 20 && vol < 50) {
+        widget.setVolume(50);
+      }
+    });
+    
+    //Prevent stop
+    widget.getPause(isPaused => {
+      if(isPaused) {
+        widget.play();
+        console.warn("Auto-resumed playback");
+      }
+    });
+  }, 3000);
+};
+
+//User active 
+const setupActivationHandler = (widget) => {
+  const activateAudio = () => {
+    widget.play();
+    document.body.style.cursor = 'pointer';
+    document.getElementById('unmute-prompt')?.remove();
+    
+    document.body.addEventListener('click', () => {
+      widget.setVolume(50);
+      document.getElementById('volume').value = 100;
+      document.body.style.cursor = '';
+    }, { once: true });
+  };
+
+  document.body.addEventListener('click', activateAudio, { once: true });
+};
+
+// Start Player
+if(window.SC) {
+  try {
+    initSoundCloudPlayer();
+  } catch(e) {
+    console.error("SoundCloud init failed:", e);
+    document.getElementById('volume-control').style.display = 'none';
+  }
+} else {
+  console.warn("SoundCloud API not loaded");
+}
+

@@ -1,3 +1,4 @@
+// rps-game.js manages the rock-paper-scissors part of the project.
 document.addEventListener('DOMContentLoaded', () => {
     const gameButtons = document.querySelectorAll('.game-btn');
     const resultDiv = document.getElementById('game-result');
@@ -8,13 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const streakSpan = document.getElementById('current-streak');
     const bestStreakSpan = document.getElementById('best-streak');
     
+    // Game state variables.
     let playerScore = 0;
     let botScore = 0;
     let currentStreak = 0;
     let bestStreak = parseInt(localStorage.getItem('rps-best-streak') || '0');
     let isPlaying = false;
-    let recentBotChoices = [];
-    let recentPlayerChoices = [];
+    let recentBotChoices = []; // Tracks recent choices made by the bot.
+    let recentPlayerChoices = []; // Tracks recent choices made by player. Info for bot's plan of strategy.
     let gameCount = 0;
     let roundNumber = 1;
 
@@ -34,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', showActiveSection);
     showActiveSection();
 
+    // Computer's logic on RPS.
     function getComputerChoice() {
         const choices = ['rock', 'paper', 'scissors'];
         gameCount++;
@@ -54,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         let finalChoice = choices[baseRandomIndex];
-        
+        // Added logic for possible use of strategy.
         if (gameCount > 1) {
             const shouldUseStrategy = Math.random() < 0.4;
             
@@ -70,12 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (recentPlayerChoices.length >= 2) {
                     const playerPattern = recentPlayerChoices.slice(-2);
                     const lastPlayerChoice = playerPattern[1];
-                    
+                    // Counter favorite choice of player.
                     const playerFavorite = getMostFrequentChoice(recentPlayerChoices);
                     if (playerFavorite && Math.random() < 0.3) {
                         finalChoice = getWinningChoice(playerFavorite);
                     }
-                    
+                    // Counter alternating strategy of player.
                     if (recentPlayerChoices.length >= 3) {
                         const isAlternating = checkIfAlternating(recentPlayerChoices.slice(-3));
                         if (isAlternating && Math.random() < 0.5) {
@@ -290,6 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     }
     
+    // pop up when bot uses strategy check.
     function showStrategyHint() {
         const hint = document.createElement('div');
         hint.className = 'strategy-hint';
@@ -306,6 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 
+    // Different random multiple messages depending on result of match.
     function displayResult(playerChoice, computerChoice, result) {
         const resultTexts = {
             win: ['You Win! 🎉', 'Victory! 💪', 'Awesome! 🌟', 'Perfect! ✨'],
