@@ -461,6 +461,24 @@ const CardData = (() => {
       image: getCardImage("itzy-yuna", "Yuna", "ITZY"),
     },
     {
+      id: 'itzy-lia',
+      name: 'Lia',
+      group: 'ITZY',
+      role: 'Main Vocalist, Sub Rapper',
+      birthday: 'July 21, 2000',
+      bio: 'Choi Ji-su, known as Lia, is the main vocalist of ITZY and is recognized for her elegant visuals and powerful voice.',
+      image: getCardImage('itzy-lia', 'Lia', 'ITZY')
+    },
+    {
+      id: 'itzy-chaeryeong',
+      name: 'Chaeryeong',
+      group: 'ITZY',
+      role: 'Main Dancer, Sub Vocalist, Sub Rapper',
+      birthday: 'June 5, 2001',
+      bio: 'Lee Chaeryeong is praised for her expressive dancing and has trained the longest among ITZY members, previously appearing on survival shows.',
+      image: getCardImage('itzy-chaeryeong', 'Chaeryeong', 'ITZY')
+    },
+    {
       id: "aespa-karina",
       name: "Karina",
       group: "AESPA",
