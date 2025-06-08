@@ -435,5 +435,20 @@ document.addEventListener('DOMContentLoaded', function () {
   enableStickerDragDrop();
   decoratePreviewOnCardChange();
   initScreenshotMode();
-});
 
+  // DECORATE BUTTON
+
+  //grab cardID of selected card from URL
+  const url_params = new URLSearchParams(window.location.search);
+  const cardID = url_params.get('cardID');
+  const collection = loadOwnedCards();
+  const card_exists = collection.some(card => card.id === cardID);
+
+  //if cardID is specified in URL, grab <select> element, and manually 
+  //set its value to the card whose decorate button was pressed
+  if(cardID && card_exists) {
+    const select = document.getElementById('card-select');
+    select.value = cardID;
+    select.dispatchEvent(new Event('change'));
+  }
+});
