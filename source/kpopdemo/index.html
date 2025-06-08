@@ -139,12 +139,16 @@
             </div>
         </section>
 
-
         <section id="minigame" class="hidden">
+            <!-- Enhanced Minigames with Tab System -->
             <div class="minigame-selector">
-                <h2>Minigames <i class="fas fa-gamepad"></i></h2>
+                <h2><i class="fas fa-gamepad"></i> Minigames</h2>
                 <div class="game-tabs">
-                    <button class="game-tab active" data-game="rps">
+                    <button class="game-tab active" data-game="lucky-dice">
+                        <i class="fas fa-dice"></i>
+                        Lucky Dice
+                    </button>
+                    <button class="game-tab" data-game="rock-paper-scissors">
                         <i class="fas fa-hand-rock"></i>
                         Rock Paper Scissors
                     </button>
@@ -155,15 +159,137 @@
                 </div>
             </div>
 
-            <!-- Rock Paper Scissors Game -->
-            <div id="rps-game" class="game-section active">
-                <h3>Rock Paper Scissors Battle</h3>
+            <!-- Lucky Dice Game Section -->
+            <div class="game-section active" id="lucky-dice-section">
+                <h3>🎲 Lucky Dice Casino</h3>
+                <div class="game-container">
+                    <div class="game-header">
+                        <div class="game-score">
+                            <div class="score-header">
+                                <i class="fas fa-coins"></i>
+                                <h4>Game Stats</h4>
+                            </div>
+                            <div class="score-display">
+                                <div class="score-item player">
+                                    <div class="player-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <span class="score-label">Wins</span>
+                                    <span class="score-value" id="dice-wins">0</span>
+                                </div>
+                                <div class="score-divider">
+                                    <div class="vs-circle">DICE</div>
+                                </div>
+                                <div class="score-item bot">
+                                    <div class="bot-avatar">
+                                        <i class="fas fa-dice"></i>
+                                    </div>
+                                    <span class="score-label">Losses</span>
+                                    <span class="score-value" id="dice-losses">0</span>
+                                </div>
+                            </div>
+                            <div class="score-footer">
+                                <div class="round-counter">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Roll <span id="dice-round">1</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="streak-info">
+                            <div class="streak-current">
+                                <div class="streak-header">
+                                    <i class="fas fa-fire"></i>
+                                    <span class="streak-label">Current Streak</span>
+                                </div>
+                                <div class="streak-value-container">
+                                    <span class="streak-value" id="dice-current-streak">0</span>
+                                    <span class="streak-suffix">wins</span>
+                                </div>
+                            </div>
+                            <div class="streak-best">
+                                <div class="streak-header">
+                                    <i class="fas fa-crown"></i>
+                                    <span class="streak-label">Best Streak</span>
+                                </div>
+                                <div class="streak-value-container">
+                                    <span class="streak-value" id="dice-best-streak">0</span>
+                                    <span class="streak-suffix">wins</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dice-arena">
+                        <div class="dice-display-section">
+                            <h4>Dice Roll Result</h4>
+                            <div id="dice-display">
+                                <div class="dice-container">
+                                    <div class="dice-placeholder">
+                                        <i class="fas fa-dice"></i>
+                                        <span>Ready to Roll!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="betting-section">
+                            <div class="bet-controls">
+                                <h4>Choose Your Bet</h4>
+                                <div class="bet-options">
+                                    <button class="bet-btn active" data-bet="low">
+                                        <i class="fas fa-arrow-down"></i>
+                                        <span>Low (2-6)</span>
+                                        <small>2x Payout</small>
+                                    </button>
+                                    <button class="bet-btn" data-bet="high">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>High (8-12)</span>
+                                        <small>2x Payout</small>
+                                    </button>
+                                    <button class="bet-btn" data-bet="lucky7">
+                                        <i class="fas fa-star"></i>
+                                        <span>Lucky 7</span>
+                                        <small>5x Payout</small>
+                                    </button>
+                                    <button class="bet-btn" data-bet="doubles">
+                                        <i class="fas fa-gem"></i>
+                                        <span>Doubles</span>
+                                        <small>4x Payout</small>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dice-controls">
+                        <button id="roll-dice-btn" class="game-btn primary">
+                            <i class="fas fa-dice"></i>
+                            <span>Roll Dice</span>
+                        </button>
+                    </div>
+
+                    <div id="dice-result">
+                        <div class="game-instruction">Choose your bet and roll the dice to start!</div>
+                    </div>
+
+                    <div class="game-controls">
+                        <button id="reset-dice-game" class="reset-btn">
+                            <i class="fas fa-redo"></i>
+                            Reset Game
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rock Paper Scissors Game Section -->
+            <div class="game-section" id="rps-section">
+                <h3>⚔️ Rock Paper Scissors Battle</h3>
                 <div class="game-container">
                     <div class="game-header">
                         <div class="game-score">
                             <div class="score-header">
                                 <i class="fas fa-trophy"></i>
-                                <h4>Battle Score</h4>
+                                <h3>Battle Score</h3>
                             </div>
                             <div class="score-display">
                                 <div class="score-item player">
@@ -360,6 +486,7 @@
     <script src="js/card.js"></script>
     <script src="js/pack.js"></script>
     <script src="js/rps-game.js"></script>
+    <script src="js/luckydice.js"></script>
     <script src="js/tictactoe-game.js"></script>
     <script src="js/minigame-tabs.js"></script>
 </body>
