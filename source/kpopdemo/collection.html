@@ -35,6 +35,310 @@
             gap: 2rem !important;
             margin-top: 2rem !important;
         }
+        
+                 /* Collection Action Buttons */
+        .collection-actions {
+            display: flex;
+            gap: 1rem;
+            margin-left: 2rem;
+            align-items: center;
+        }
+        
+        /* Group Headers with Images */
+        .group-header {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0 1rem 0;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.8));
+            border-radius: 15px;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .group-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 3px solid;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .group-header.bts {
+            border-color: #7a3fb0;
+        }
+        
+        .group-header.bts .group-logo {
+            border-color: #7a3fb0;
+        }
+        
+        .group-header.blackpink {
+            border-color: #ff007f;
+        }
+        
+        .group-header.blackpink .group-logo {
+            border-color: #ff007f;
+        }
+        
+        .group-header.twice {
+            border-color: #ff8b3e;
+        }
+        
+        .group-header.twice .group-logo {
+            border-color: #ff8b3e;
+        }
+        
+        .group-header.stray-kids {
+            border-color: #384cff;
+        }
+        
+        .group-header.stray-kids .group-logo {
+            border-color: #384cff;
+        }
+        
+        .group-header.itzy {
+            border-color: #ff363c;
+        }
+        
+        .group-header.itzy .group-logo {
+            border-color: #ff363c;
+        }
+        
+        .group-header.aespa {
+            border-color: #00a77d;
+        }
+        
+        .group-header.aespa .group-logo {
+            border-color: #00a77d;
+        }
+        
+        .group-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .group-info-text {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+        
+        .action-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .danger-btn {
+            background: linear-gradient(135deg, #ff4444, #cc3333);
+            color: white;
+        }
+        
+        .danger-btn:hover {
+            background: linear-gradient(135deg, #ff3333, #bb2222);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+        }
+        
+        .info-btn {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            color: white;
+        }
+        
+        .info-btn:hover {
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+        
+                 /* Card Count Badge */
+        .card-count-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #ff5722, #e64a19);
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(255, 87, 34, 0.4);
+            z-index: 8;
+            border: 2px solid white;
+        }
+        
+        /* Rarity Badges */
+        .rarity-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 2px solid;
+            backdrop-filter: blur(10px);
+            z-index: 8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .rarity-badge.rarity-common {
+            background: linear-gradient(135deg, rgba(158, 158, 158, 0.9), rgba(117, 117, 117, 0.9));
+            color: white;
+            border-color: #9e9e9e;
+        }
+        
+        .rarity-badge.rarity-rare {
+            background: linear-gradient(135deg, rgba(63, 81, 181, 0.9), rgba(48, 63, 159, 0.9));
+            color: white;
+            border-color: #3f51b5;
+            box-shadow: 0 2px 8px rgba(63, 81, 181, 0.4);
+        }
+        
+        .rarity-badge.rarity-epic {
+            background: linear-gradient(135deg, rgba(156, 39, 176, 0.9), rgba(123, 31, 162, 0.9));
+            color: white;
+            border-color: #9c27b0;
+            box-shadow: 0 2px 8px rgba(156, 39, 176, 0.4);
+        }
+        
+        .rarity-badge.rarity-legendary {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.9), rgba(255, 111, 0, 0.9));
+            color: white;
+            border-color: #ff9800;
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.4);
+            animation: legendaryGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes legendaryGlow {
+            from {
+                box-shadow: 0 2px 8px rgba(255, 152, 0, 0.4);
+            }
+            to {
+                box-shadow: 0 4px 16px rgba(255, 152, 0, 0.6);
+            }
+        }
+
+        /* Card Delete Buttons */
+        .card-delete-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        
+        .collection-card:hover .card-delete-btn {
+            opacity: 1;
+        }
+        
+        .card-delete-btn:hover {
+            background: rgba(255, 34, 34, 1);
+            transform: scale(1.1);
+        }
+        
+                 @media (max-width: 768px) {
+             .collection-actions {
+                 flex-direction: column;
+                 margin-left: 0;
+                 margin-top: 1rem;
+                 gap: 0.5rem;
+             }
+             
+             .action-btn {
+                 width: 100%;
+                 justify-content: center;
+             }
+             
+             .card-delete-btn {
+                 opacity: 1; /* Always visible on mobile */
+             }
+             
+             .group-header {
+                 padding: 0.8rem;
+                 margin: 1.5rem 0 0.8rem 0;
+             }
+             
+             .group-logo {
+                 width: 45px;
+                 height: 45px;
+             }
+             
+             .group-title {
+                 font-size: 1.4rem;
+             }
+             
+             .group-info-text {
+                 font-size: 0.8rem;
+             }
+             
+             .card-count-badge {
+                 width: 24px;
+                 height: 24px;
+                 font-size: 0.7rem;
+             }
+             
+             .rarity-badge {
+                 padding: 0.2rem 0.6rem;
+                 font-size: 0.6rem;
+             }
+         }
+         
+         /* Notification Animations */
+         @keyframes slideInRight {
+             from {
+                 transform: translateX(100%);
+                 opacity: 0;
+             }
+             to {
+                 transform: translateX(0);
+                 opacity: 1;
+             }
+         }
+         
+         @keyframes slideOutRight {
+             from {
+                 transform: translateX(0);
+                 opacity: 1;
+             }
+             to {
+                 transform: translateX(100%);
+                 opacity: 0;
+             }
+         }
     </style>
 </head>
 <body>
@@ -50,7 +354,7 @@
         <div class="header-content">
             <nav>
                 <ul>
-                    <li><a href="collection.html"><i class="fas fa-layer-group"></i> My Collection</a></li>
+                    <li><a href="collection.html#collection"><i class="fas fa-layer-group"></i> My Collection</a></li>
                     <li><a href="index.html?section=packs"><i class="fas fa-gift"></i> Summon Cards</a></li>
                     <li><a href="index.html?section=minigame"><i class="fas fa-gamepad"></i> Minigames</a></li>
                     <li><a href="decoration.html"><i class="fas fa-palette"></i> Decorations</a></li>
@@ -77,6 +381,14 @@
                     <option value="ITZY">ITZY</option>
                     <option value="AESPA">AESPA</option>
                 </select>
+                
+                <!-- Collection Management Buttons -->
+                <div class="collection-actions">
+                    <button id="reset-collection" class="action-btn danger-btn">
+                        <i class="fas fa-trash-alt"></i>
+                        Reset Collection
+                    </button>
+                </div>
             </div>
             <div class="collection-container">
                 <!-- Collection cards will be displayed here -->
@@ -89,121 +401,188 @@
     </footer>
 
 
-    <script src="js/app.js"></script>
     <script src="js/card.js"></script>
+    <script src="js/pack.js"></script>
+    <script src="js/app.js"></script>
 
     <script>
         // Initialize collection page
         document.addEventListener('DOMContentLoaded', () => {
             console.log('Collection page loading...');
             
-            // Wait a bit for all scripts to load properly
+            // Prevent unwanted scrolling
+            document.body.style.scrollBehavior = 'auto';
+            
+            // Ensure we're on the collection section regardless of hash
+            if (!window.location.hash || window.location.hash !== '#collection') {
+                console.log('Setting hash to #collection');
+                // Use replaceState to avoid scrolling
+                history.replaceState(null, null, '#collection');
+            }
+            
+            // Wait for all scripts to load properly
             setTimeout(() => {
                 initializeCollection();
-            }, 250);
+            }, 500);
         });
         
         function initializeCollection() {
             console.log('Initializing collection...');
             
-            // Load saved data using the same system as summon cards
+
+            
+            // Load saved data using the same system as main page
             if (typeof CardManager !== 'undefined') {
                 CardManager.loadCollection();
-                console.log('CardManager loaded collection');
+                console.log('Collection loaded successfully');
+            } else {
+                console.error('CardManager not available!');
+                return;
             }
+            
             if (typeof CurrencyManager !== 'undefined') {
                 CurrencyManager.loadCurrency();
-                console.log('CurrencyManager loaded currency');
-            }
-            
-            // Update currency display
-            const currencyDisplay = document.querySelector('.currency-display');
-            if (currencyDisplay && typeof CurrencyManager !== 'undefined') {
-                currencyDisplay.textContent = CurrencyManager.getBalance().toLocaleString();
-                console.log('Currency display updated:', CurrencyManager.getBalance());
-            }
-            
-            // Get collection data
-            let collection = [];
-            if (typeof CardManager !== 'undefined') {
-                collection = CardManager.getCollection();
-                console.log('Collection loaded via CardManager:', collection);
-                console.log('Collection length:', collection.length);
-            } else {
-                // Fallback to direct localStorage read with correct key
-                try {
-                    const stored = localStorage.getItem('kpopCardCollection');
-                    collection = stored ? JSON.parse(stored) : [];
-                    console.log('Collection loaded via fallback localStorage:', collection);
-                } catch (e) {
-                    console.error('Failed to load collection:', e);
-                    collection = [];
+                
+                // Update currency display
+                const currencyDisplay = document.querySelector('.currency-display');
+                if (currencyDisplay) {
+                    currencyDisplay.textContent = CurrencyManager.getBalance().toLocaleString();
                 }
             }
             
-            // Force display update
-            displayCollection(collection);
+            // Try multiple approaches to display the collection
+            let displayWorked = false;
+            
+            // Approach 1: Use the main updateCollectionDisplay function
+            if (typeof updateCollectionDisplay === 'function') {
+                console.log('Trying main updateCollectionDisplay function');
+                try {
+                    updateCollectionDisplay();
+                    console.log('updateCollectionDisplay worked');
+                    displayWorked = true;
+                } catch (e) {
+                    console.error('Error with updateCollectionDisplay:', e);
+                }
+            }
+            
+            // Approach 2: Use CardManager directly
+            if (!displayWorked && typeof CardManager !== 'undefined') {
+                console.log('Trying CardManager approach');
+                try {
+                    const collection = CardManager.getCollection();
+                    if (collection && collection.length > 0) {
+                        displayCollection(collection);
+                        displayWorked = true;
+                        console.log('CardManager approach worked');
+                    } else {
+                        console.log('CardManager returned empty collection');
+                    }
+                } catch (e) {
+                    console.error('Error with CardManager approach:', e);
+                }
+            }
+            
+            // Approach 3: Direct localStorage read
+            if (!displayWorked) {
+                console.log('Trying direct localStorage approach');
+                try {
+                    const storedData = localStorage.getItem('kpopCardCollection');
+                    console.log('Raw localStorage data:', storedData);
+                    if (storedData) {
+                        const collection = JSON.parse(storedData);
+                        console.log('Parsed localStorage collection:', collection);
+                        if (collection && collection.length > 0) {
+                            displayCollection(collection);
+                            displayWorked = true;
+                            console.log('Direct localStorage approach worked');
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error with direct localStorage approach:', e);
+                }
+            }
+            
+            // If nothing worked, show empty state with helpful instructions
+            if (!displayWorked) {
+                console.log('All approaches failed, showing empty state');
+                const container = document.querySelector('.collection-container');
+                if (container) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 3rem;">
+                            <h3 style="color: var(--primary-color); margin-bottom: 1rem;">No Cards in Collection</h3>
+                            <p class="empty-collection">
+                                You haven't collected any cards yet!<br>
+                                <a href="index.html#packs" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">
+                                    🎁 Go Summon Some Cards
+                                </a>
+                            </p>
+                        </div>
+                    `;
+                }
+            }
             
             // Set up filter functionality
             const groupFilter = document.getElementById('group-filter');
             if (groupFilter) {
                 groupFilter.addEventListener('change', () => {
                     console.log('Filter changed to:', groupFilter.value);
-                    displayCollection(collection);
+                    // Always get fresh collection data when filtering
+                    if (typeof updateCollectionDisplay === 'function') {
+                        try {
+                            updateCollectionDisplay();
+                        } catch (e) {
+                            console.error('Error with updateCollectionDisplay during filter:', e);
+                            displayCollection(); // Use no parameter to get fresh data
+                        }
+                    } else {
+                        displayCollection(); // Use no parameter to get fresh data
+                    }
                 });
             }
             
-            // Try using the main updateCollectionDisplay function if available
-            if (typeof updateCollectionDisplay === 'function') {
-                console.log('Using main updateCollectionDisplay function');
-                try {
-                    updateCollectionDisplay();
-                } catch (e) {
-                    console.error('Error with updateCollectionDisplay:', e);
-                    // Fall back to our custom display
-                    displayCollection(collection);
-                }
-            } else {
-                console.log('updateCollectionDisplay not available, using custom display');
-                displayCollection(collection);
-            }
+            // Set up collection management buttons
+            setupCollectionManagement();
             
-            // Initialize sound system
+
+            
+            // Initialize sound system (optional)
             setTimeout(() => {
-                if(window.SC) {
+                if(window.SC && typeof initSoundCloudPlayer === 'function') {
                     try {
-                        if (typeof initSoundCloudPlayer === 'function') {
-                            initSoundCloudPlayer();
-                            console.log('🎵 SoundCloud initialization started on collection page');
-                        } else {
-                            console.warn('initSoundCloudPlayer function not found');
-                        }
+                        initSoundCloudPlayer();
+                        console.log('🎵 SoundCloud initialized on collection page');
                     } catch(e) {
                         console.error("SoundCloud init failed:", e);
                     }
-                } else {
-                    console.warn("SoundCloud API not loaded, trying again...");
-                    setTimeout(() => {
-                        if(window.SC) {
-                            try {
-                                if (typeof initSoundCloudPlayer === 'function') {
-                                    initSoundCloudPlayer();
-                                    console.log('🎵 SoundCloud initialization started (delayed) on collection page');
-                                } else {
-                                    console.warn('initSoundCloudPlayer function not found (delayed)');
-                                }
-                            } catch(e) {
-                                console.error("SoundCloud delayed init failed:", e);
-                            }
-                        } else {
-                            console.error('SoundCloud API failed to load');
-                        }
-                    }, 2000);
                 }
-            }, 500);
+            }, 1000);
         }
         
-        function displayCollection(collection) {
+        function displayCollectionFallback() {
+            console.log('Using fallback collection display');
+            if (typeof CardManager !== 'undefined') {
+                const collection = CardManager.getCollection();
+                console.log('Collection from CardManager:', collection.length, 'cards');
+                displayCollection(collection);
+            } else {
+                console.error('CardManager not available for fallback display');
+                const container = document.querySelector('.collection-container');
+                if (container) {
+                    container.innerHTML = '<p class="empty-collection">Error: Could not load collection data. Please try refreshing the page.</p>';
+                }
+            }
+        }
+        
+        function displayCollection(inputCollection = null) {
+            // Get the latest collection data if not provided
+            let collection = inputCollection;
+            if (!collection && typeof CardManager !== 'undefined') {
+                collection = CardManager.getCollection();
+            }
+            if (!collection) {
+                collection = [];
+            }
+            
             console.log('Displaying collection:', collection.length, 'cards');
             const container = document.querySelector('.collection-container');
             const groupFilter = document.getElementById('group-filter');
@@ -235,11 +614,14 @@
                 groupedCards[card.group].push(card);
             });
             
-            // Display each group
+            // Display each group with header and logo
             Object.keys(groupedCards).sort().forEach(group => {
                 const groupSection = document.createElement('div');
                 groupSection.className = 'group-section';
-                groupSection.innerHTML = `<h3 style="color: var(--primary-color); margin: 2rem 0 1rem 0; text-align: center;">${group}</h3>`;
+                
+                // Create group header with logo
+                const groupHeader = createGroupHeader(group, groupedCards[group]);
+                groupSection.appendChild(groupHeader);
                 
                 const groupGrid = document.createElement('div');
                 groupGrid.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;';
@@ -268,21 +650,27 @@
                     
                     let countBadge = '';
                     if (card.count && card.count > 1) {
-                        countBadge = `<div style="position: absolute; top: 10px; right: 10px; background: #ff5722; color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold;">×${card.count}</div>`;
+                        countBadge = `<div class="card-count-badge" title="You have ${card.count} copies of this card">×${card.count}</div>`;
                     }
+                    
+                    // Create rarity badge
+                    let rarityBadge = '';
+                    const rarity = card.rarity || 'common';
+                    rarityBadge = `<div class="rarity-badge rarity-${rarity}" title="${rarity.toUpperCase()} rarity">${rarity.toUpperCase()}</div>`;
                     
                     cardDiv.innerHTML = `
                         <div style="position: relative;">
                             ${countBadge}
+                            ${rarityBadge}
+                            <button class="card-delete-btn" data-card-id="${card.id}" title="Delete this card">
+                                <i class="fas fa-times"></i>
+                            </button>
                             <img src="${card.image}" alt="${card.name}" 
                                  style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;"
                                  onerror="this.src='https://via.placeholder.com/200x200/ccc/666?text=${encodeURIComponent(card.name)}'"
                             >
                             <h3 style="color: var(--primary-color); margin: 0.5rem 0; font-size: 1.1rem;">${card.name}</h3>
                             <p style="color: #666; margin: 0; font-weight: 500;">${card.group}</p>
-                            <p style="color: ${rarityColor}; font-size: 0.8rem; margin: 0.5rem 0; text-transform: uppercase; font-weight: bold;">
-                                ${card.rarity || 'common'}
-                            </p>
                         </div>
                     `;
                     
@@ -313,7 +701,252 @@
             container.innerHTML = '';
             container.appendChild(collectionGrid);
             
+            // Add event listeners for delete buttons
+            setupCardDeleteButtons();
+            
             console.log('Collection display completed successfully');
+        }
+        
+        function createGroupHeader(groupName, cards) {
+            const header = document.createElement('div');
+            header.className = `group-header ${groupName.toLowerCase().replace(' ', '-')}`;
+            
+            const logoUrl = getGroupLogoUrl(groupName);
+            const cardCount = cards.length;
+            const uniqueCards = new Set(cards.map(card => card.id)).size;
+            
+            header.innerHTML = `
+                <img src="${logoUrl}" alt="${groupName} Logo" class="group-logo" 
+                     onerror="this.src='https://via.placeholder.com/60x60/${getGroupColorCode(groupName)}/ffffff?text=${encodeURIComponent(groupName.substring(0, 2))}'">
+                <div>
+                    <h3 class="group-title">${groupName}</h3>
+                    <p class="group-info-text">${uniqueCards} unique cards (${cardCount} total)</p>
+                </div>
+            `;
+            
+            return header;
+        }
+        
+        function getGroupLogoUrl(groupName) {
+            // Using placeholder logos with group colors for now
+            // You can replace these with actual group logo URLs
+            const groupLogos = {
+                'BTS': 'https://via.placeholder.com/60x60/7a3fb0/ffffff?text=BTS',
+                'BLACKPINK': 'https://via.placeholder.com/60x60/ff007f/ffffff?text=BP',
+                'TWICE': 'https://via.placeholder.com/60x60/ff8b3e/ffffff?text=TW',
+                'STRAY KIDS': 'https://via.placeholder.com/60x60/384cff/ffffff?text=SKZ',
+                'ITZY': 'https://via.placeholder.com/60x60/ff363c/ffffff?text=ITZ',
+                'AESPA': 'https://via.placeholder.com/60x60/00a77d/ffffff?text=AES'
+            };
+            
+            return groupLogos[groupName] || `https://via.placeholder.com/60x60/ccc/666?text=${encodeURIComponent(groupName.substring(0, 2))}`;
+        }
+        
+        function getGroupColorCode(groupName) {
+            const colors = {
+                'BTS': '7a3fb0',
+                'BLACKPINK': 'ff007f',
+                'TWICE': 'ff8b3e',
+                'STRAY KIDS': '384cff',
+                'ITZY': 'ff363c',
+                'AESPA': '00a77d'
+            };
+            return colors[groupName] || 'ccc';
+        }
+        
+        function setupCollectionManagement() {
+            // Reset Collection Button
+            const resetBtn = document.getElementById('reset-collection');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    showConfirmDialog(
+                        'Reset Collection',
+                        'Are you sure you want to delete ALL cards? This action cannot be undone!',
+                        () => {
+                            resetCollection();
+                        }
+                    );
+                });
+            }
+            
+
+        }
+        
+        function setupCardDeleteButtons() {
+            const deleteButtons = document.querySelectorAll('.card-delete-btn');
+            deleteButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent card click
+                    const cardId = btn.getAttribute('data-card-id');
+                    const cardElement = btn.closest('.collection-card');
+                    const cardName = cardElement.querySelector('h3').textContent;
+                    
+                    showConfirmDialog(
+                        'Delete Card',
+                        `Are you sure you want to delete "${cardName}"?`,
+                        () => {
+                            deleteCard(cardId);
+                        }
+                    );
+                });
+            });
+        }
+        
+        function deleteCard(cardId) {
+            if (typeof CardManager !== 'undefined') {
+                // Remove card from collection
+                const collection = CardManager.getCollection();
+                const updatedCollection = collection.filter(card => card.id !== cardId);
+                
+                // Update localStorage directly
+                localStorage.setItem('kpopCardCollection', JSON.stringify(updatedCollection));
+                
+                // Reload collection in CardManager
+                CardManager.loadCollection();
+                
+                // Refresh display
+                initializeCollection();
+                
+                showNotification('Card deleted successfully!', 'success');
+                console.log(`Card ${cardId} deleted from collection`);
+            } else {
+                showNotification('Error: Could not delete card', 'error');
+            }
+        }
+        
+        function resetCollection() {
+            if (typeof CardManager !== 'undefined') {
+                // Clear collection
+                localStorage.removeItem('kpopCardCollection');
+                
+                // Reload collection in CardManager
+                CardManager.loadCollection();
+                
+                // Refresh display
+                initializeCollection();
+                
+                showNotification('Collection reset successfully!', 'success');
+                console.log('Collection reset');
+            } else {
+                showNotification('Error: Could not reset collection', 'error');
+            }
+        }
+        
+
+        
+        function showConfirmDialog(title, message, onConfirm) {
+            const dialog = document.createElement('div');
+            dialog.className = 'confirm-dialog-overlay';
+            dialog.innerHTML = `
+                <div class="confirm-dialog">
+                    <h3>${title}</h3>
+                    <p>${message}</p>
+                    <div class="confirm-dialog-buttons">
+                        <button class="confirm-btn-cancel">Cancel</button>
+                        <button class="confirm-btn-ok">Confirm</button>
+                    </div>
+                </div>
+            `;
+            
+            dialog.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                backdrop-filter: blur(5px);
+            `;
+            
+            const dialogBox = dialog.querySelector('.confirm-dialog');
+            dialogBox.style.cssText = `
+                background: white;
+                padding: 2rem;
+                border-radius: 15px;
+                max-width: 400px;
+                width: 90%;
+                text-align: center;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            `;
+            
+            const buttons = dialog.querySelector('.confirm-dialog-buttons');
+            buttons.style.cssText = `
+                display: flex;
+                gap: 1rem;
+                margin-top: 1.5rem;
+                justify-content: center;
+            `;
+            
+            const cancelBtn = dialog.querySelector('.confirm-btn-cancel');
+            const okBtn = dialog.querySelector('.confirm-btn-ok');
+            
+            cancelBtn.style.cssText = `
+                padding: 0.8rem 1.5rem;
+                border: 2px solid #ddd;
+                background: white;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+            `;
+            
+            okBtn.style.cssText = `
+                padding: 0.8rem 1.5rem;
+                border: none;
+                background: linear-gradient(135deg, #ff4444, #cc3333);
+                color: white;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+            `;
+            
+            cancelBtn.addEventListener('click', () => {
+                document.body.removeChild(dialog);
+            });
+            
+            okBtn.addEventListener('click', () => {
+                document.body.removeChild(dialog);
+                onConfirm();
+            });
+            
+            document.body.appendChild(dialog);
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            const bgColors = {
+                success: 'linear-gradient(135deg, #4caf50, #66BB6A)',
+                error: 'linear-gradient(135deg, #f44336, #ef5350)',
+                warning: 'linear-gradient(135deg, #ff9800, #ffb74d)',
+                info: 'linear-gradient(135deg, #2196f3, #64b5f6)'
+            };
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${bgColors[type] || bgColors.info};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                font-weight: 600;
+                z-index: 10001;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+                animation: slideInRight 0.5s ease-out;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease-in';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
         }
     </script>
 

@@ -41,13 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add click event listeners to tabs
     gameTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
+        tab.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent any unwanted scrolling behavior
+            
             const gameType = tab.dataset.game;
             switchGame(gameType);
             
             // Add pressed animation
             tab.classList.add('tab-pressed');
             setTimeout(() => tab.classList.remove('tab-pressed'), 150);
+            
+            console.log(`Switched to ${gameType} game without scrolling`);
         });
     });
 
