@@ -3930,9 +3930,6 @@ footer {
     border-radius: 18px;
     padding: 3px;
     background: transparent;
-    mask: linear-gradient(#fff, #fff) content-box, linear-gradient(#fff, #fff);
-    mask-composite: exclude;
-    -webkit-mask-composite: xor;
     z-index: -1;
     pointer-events: none;
 }
@@ -4029,8 +4026,6 @@ footer {
     border-radius: 15px;
     padding: 1px;
     background: transparent;
-    mask: linear-gradient(#fff, #fff) content-box, linear-gradient(#fff, #fff);
-    mask-composite: exclude;
     z-index: 1;
     pointer-events: none;
 }
