@@ -612,8 +612,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const total = die1 + die2;
             
             animateDiceRoll(die1, die2, () => {
-                const won = checkWin(total, die1, die2);
-                const multiplier = betConfigs[currentBet].multiplier;
+                const config = betConfigs[currentBet];
+                const won = config.condition(total, die1, die2);
+                const multiplier = won ? config.multiplier : 0;
                 
                 showResult(won, total, die1, die2, multiplier);
             });
