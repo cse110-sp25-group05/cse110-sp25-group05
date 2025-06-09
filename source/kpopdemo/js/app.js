@@ -342,45 +342,40 @@ function loadCollection() {
 }
 
 // init SoundCloud
-const TRACK_IDS = [
-  '2096744259', //BTS-Dynamitc 
-  '2096744094', //BTS-DNA
-  '669902048',  //BlackPink- KIll this love
-  '1059662128', //BlackPink- DDU-DU
-  '575498373', //ITZY- DALLA DALLA
-  '1108916788', //ITZY- WANNABE
-  '1209259669', //Stray Kids-God's Menue
-  '1209176545', //Stray Kids-Thunderous
-  '427096254', //TWICE - WHat is love
-  '910923943', // TWICE- I CAN'T STOP ME
-  '1655391237', // AESPA - DRAMA
-  '1301753080', //AESPA - BLACK MAMBA
-
-];
+const SOUNDCLOUD_CONFIG = {
+    PLAYLIST_ID :'2034180753',
+    RANDOM_START: true,
+    AUTO_PLAY: true,
+    LOOP: true,
+    HIDE_RELATED: true,
+    SHOW_COMMENTS: false,
+    SHOW_USER: false,
+    SHOW_REPOSTS: false,
+    SHOW_TEASER: false
+};
 
 const initSoundCloudPlayer = () => {
   const iframe = document.getElementById('sc-player');
+  let playerUrl = `https://w.soundcloud.com/player/?url=${encodeURIComponent(
+    `https://api.soundcloud.com/playlists/${SOUNDCLOUD_CONFIG.PLAYLIST_ID}`
+  )}`;
   
-  // Start with a random track
-  const randomIndex = Math.floor(Math.random() * TRACK_IDS.length);
-  const firstTrackUrl = `https://api.soundcloud.com/tracks/${TRACK_IDS[randomIndex]}`;
+  const params = {
+    auto_play: SOUNDCLOUD_CONFIG.AUTO_PLAY,
+    loop: SOUNDCLOUD_CONFIG.LOOP,
+    hide_related: SOUNDCLOUD_CONFIG.HIDE_RELATED,
+    show_comments: SOUNDCLOUD_CONFIG.SHOW_COMMENTS,
+    show_user: SOUNDCLOUD_CONFIG.SHOW_USER,
+    show_reposts: SOUNDCLOUD_CONFIG.SHOW_REPOSTS,
+    show_teaser: SOUNDCLOUD_CONFIG.SHOW_TEASER,
+    randomize: SOUNDCLOUD_CONFIG.RANDOM_START
+  };
   
-  // Create playlist with the remaining tracks in order (starting after the random one)
-  const playlistUrls = [];
-  for (let i = 1; i < TRACK_IDS.length; i++) {
-    const idx = (randomIndex + i) % TRACK_IDS.length;
-    playlistUrls.push(`https://api.soundcloud.com/tracks/${TRACK_IDS[idx]}`);
-  }
+  playerUrl += '&' + Object.entries(params)
+    .map(([key, value]) => `${key}=${value}`)
+    .join('&');
   
-  iframe.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(firstTrackUrl)}
-    &auto_play=true
-    &loop=true
-    &hide_related=true
-    &show_comments=false
-    &show_user=false
-    &show_reposts=false
-    &show_teaser=false
-    ${playlistUrls.length > 0 ? `&playnext=true&tracks=${playlistUrls.join(',')}` : ''}`.replace(/\s+/g, '');
+  iframe.src = playerUrl;
 
   const widget = SC.Widget(iframe);
 
