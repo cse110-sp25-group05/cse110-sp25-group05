@@ -3,92 +3,188 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Decoration Studio</title>
+    <title>K-pop Card Gacha - Decoration Studio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/deco-styles.css">
+    
+    <!-- SoundCloud Widget API -->
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    
+    <style>
+        /* Override conflicts and fix decoration layout */
+        main {
+            margin: 0 !important;
+            padding: 0 !important;
+            max-width: none !important;
+        }
+        
+        .decoration-layout {
+            display: grid !important;
+            grid-template-columns: 20% 4px 56% 20% !important;
+            height: calc(100vh - 150px) !important; /* Adjusted for new header */
+            width: 100vw !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+            padding: 1rem !important;
+            box-sizing: border-box !important;
+        }
+        
+        .panel {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px) !important;
+            border-radius: 1rem !important;
+            padding: 1.5rem !important;
+            overflow-y: auto !important;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
+            height: 100% !important;
+        }
+        
+        .center-panel {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            height: 100% !important;
+        }
+        
+        .dragbar {
+            background: rgba(0, 0, 0, 0.1) !important;
+            cursor: col-resize !important;
+            border-radius: 2px !important;
+        }
+        
+        /* Ensure footer doesn't interfere */
+        footer {
+            margin-top: 0 !important;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 1000px) {
+            .decoration-layout {
+                display: flex !important;
+                flex-direction: column !important;
+                height: auto !important;
+                width: 100% !important;
+                padding: 0.5rem !important;
+            }
+            
+            .dragbar {
+                display: none !important;
+            }
+            
+            .panel {
+                width: 100% !important;
+                margin-bottom: 1rem !important;
+                min-width: 0 !important;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="app-header">
-        <h1>Decoration Studio</h1>
-        <nav class="app-nav">
-            <ul>
-                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="collection.html"><i class="fas fa-layer-group"></i> My Collection</a></li>
-                <li><a href="index.html#packs"><i class="fas fa-gift"></i> Summon Cards</a></li>
-            </ul>
-        </nav>
+    <iframe id="sc-player" allow="autoplay" style="width: 1px; height: 1px; opacity: 0; position: absolute; left: -9999px; pointer-events: none; border: 0;"></iframe>
+    <!-- volume control UI -->
+    <div id="volume-control">
+        <i class="fas fa-volume-off" id="volume-icon"></i>
+        <input type="range" id="volume" min="0" max="100" value="70">
+    </div>
+    
+    <header>
+        <h1><i class="fas fa-gem"></i> K-pop Card Gacha</h1>
+        <div class="header-content">
+            <nav>
+                <ul>
+                    <li><a href="collection.html#collection"><i class="fas fa-layer-group"></i> My Collection</a></li>
+                    <li><a href="index.html?section=packs"><i class="fas fa-gift"></i> Summon Cards</a></li>
+                    <li><a href="index.html?section=minigame"><i class="fas fa-gamepad"></i> Minigames</a></li>
+                    <li><a href="decoration.html" class="active"><i class="fas fa-palette"></i> Decorations</a></li>
+                </ul>
+            </nav>
+            <div class="currency-container">
+                <i class="fas fa-coins"></i>
+                <span class="currency-display">0</span>
+            </div>
+        </div>
     </header>
 
-    <section class="decoration-layout">
-        <div class="panel left-panel">
-            <details open>
-                <summary><strong>Your Cards</strong></summary>
-            
-                <select id="card-select" class="card-select">
-                    <option>Select a card to decorate...</option>
-                </select>
-              
-                <fieldset class="decoration-options">
-                    <legend><h3>Show Rarity Badge</h3></legend>
-                    <label><input type="checkbox" id="toggle-badge" checked> Display rarity badge on card</label>
-                </fieldset>
-              
-                <div class="decoration-actions">
-                    <button id="save-decor"><i class="fas fa-save"></i> Save</button>
-                    <button id="reset-decor"><i class="fas fa-undo"></i> Reset</button>
+    <main>
+        <section class="decoration-layout">
+            <div class="panel left-panel">
+                <details open>
+                    <summary><strong>Your Cards</strong></summary>
+                
+                    <select id="card-select" class="card-select">
+                        <option>Select a card to decorate...</option>
+                    </select>
+                  
+                    <fieldset class="decoration-options">
+                        <legend><h3>Show Rarity Badge</h3></legend>
+                        <label><input type="checkbox" id="toggle-badge" checked> Display rarity badge on card</label>
+                    </fieldset>
+                  
+                    <div class="decoration-actions">
+                        <button id="save-decor"><i class="fas fa-save"></i> Save</button>
+                        <button id="reset-decor"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                </details>
+            </div>
+
+            <div class="dragbar"></div>
+
+            <div class="panel center-panel">
+                <h3>Live Preview</h3>
+                <div id="decoration-preview-card" class="card" data-rarity="common" data-show-badge="true">
+                    <img src="assets/cardselect.png" alt="Preview" width="220">
                 </div>
-            </details>
-        </div>
-
-      <div class="dragbar"></div>
-
-        <div class="panel center-panel">
-            <h3>Live Preview</h3>
-            <div id="decoration-preview-card" class="card" data-rarity="common" data-show-badge="true">
-                <img src="assets/cardselect.png" alt="Preview" width="220">
+                <div id="sticker-trashcan" style="margin: 1rem auto 0; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                    <img src="assets/trashcan.png" alt="Trash" width="70" height="70">
+                </div>
             </div>
-            <div id="sticker-trashcan" style="margin: 1rem auto 0; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                <img src="assets/trashcan.png" alt="Trash" width="70" height="70">
+
+            <div class="panel right-panel">
+                <details open>
+                    <summary><strong>Select Sticker</strong></summary>
+                    <fieldset class="decoration-options">
+                      <div class="sticker-scroll">
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/sparkles.png" alt="Sparkles" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/gold-sparkles.png" alt="Gold Sparkles" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/heart.png" alt="Heart" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/pink-hearts.png" alt="Pink Hearts" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/pink-flower.png" alt="Pink Flower" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/ribbon.png" alt="Ribbon" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/tear.png" alt="Tear" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/crown.png" alt="Crown" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/cherry-blossom.png" alt="Cherry Blossoms" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/petals.png" alt="Petals" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/chamomile.png" alt="Chamomile" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/daisy.png" alt="Daisy" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/sun.png" alt="Sun" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/sun2.png" alt="Sun2" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/moon.png" alt="Moon" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/shooting-star.png" alt="Shooting Star" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/shooting-star2.png" alt="Shooting Star2" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/butterfly.png" alt="Butterfly" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/clover.png" alt="Clover" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/musical-note.png" alt="Musical Note" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/musical-note2.png" alt="Musical Note 2" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/musical-note3.png" alt="Musical Note 3" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/snow.png" alt="Snow" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/fire.png" alt="Fire" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/fireworks.png" alt="Fireworks" draggable="true"></label>
+                        <label><input type="radio" name="sticker"><img src="assets/stickers/lightning.png" alt="Lightning" draggable="true"></label>
+                      </div>
+                    </fieldset>
+                </details>
             </div>
-        </div>
+        </section>
+    </main>
 
-        <div class="panel right-panel">
-            <details open>
-                <summary><strong>Select Sticker</strong></summary>
-                <fieldset class="decoration-options">
-                  <div class="sticker-scroll">
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/sparkles.png" alt="Sparkles" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/gold-sparkles.png" alt="Gold Sparkles" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/heart.png" alt="Heart" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/pink-hearts.png" alt="Pink Hearts" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/pink-flower.png" alt="Pink Flower" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/ribbon.png" alt="Ribbon" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/tear.png" alt="Tear" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/crown.png" alt="Crown" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/cherry-blossom.png" alt="Cherry Blossoms" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/petals.png" alt="Petals" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/chamomile.png" alt="Chamomile" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/daisy.png" alt="Daisy" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/sun.png" alt="Sun" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/sun2.png" alt="Sun2" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/moon.png" alt="Moon" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/shooting-star.png" alt="Shooting Star" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/shooting-star2.png" alt="Shooting Star2" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/butterfly.png" alt="Butterfly" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/clover.png" alt="Clover" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/musical-note.png" alt="Musical Note" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/musical-note2.png" alt="Musical Note 2" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/musical-note3.png" alt="Musical Note 3" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/snow.png" alt="Snow" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/fire.png" alt="Fire" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/fireworks.png" alt="Fireworks" draggable="true"></label>
-                    <label><input type="radio" name="sticker"><img src="assets/stickers/lightning.png" alt="Lightning" draggable="true"></label>
-                  </div>
-                </fieldset>
-            </details>
-        </div>
-    </section>
+    <footer>
+        <p>CSE 110 Project - K-pop Card Gacha</p>
+    </footer>
 
+    <script src="js/app.js"></script>
+    <script src="js/card.js"></script>
     <script src="js/decoration.js"></script>
 
     <button class="screenshot-btn" id="screenshot-btn">
@@ -97,5 +193,149 @@
     </button>
 
     <div class="toast" id="screenshot-toast">Screenshot mode active</div>
+
+    <script>
+        // Sound System Initialization for Decoration Page
+        const initSoundCloudPlayer = () => {
+            const iframe = document.getElementById('sc-player');
+            
+            // Try multiple K-pop tracks in case one doesn't work
+            const kpopTracks = [
+                'https://api.soundcloud.com/tracks/427096254', // TWICE - What is Love
+                'https://api.soundcloud.com/tracks/575498373', // ITZY - DALLA DALLA  
+                'https://api.soundcloud.com/tracks/669902048'  // BLACKPINK - Kill This Love
+            ];
+            
+            const trackUrl = kpopTracks[0]; // Start with TWICE
+            
+            iframe.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}
+                &auto_play=true
+                &loop=true
+                &hide_related=true
+                &show_comments=false
+                &show_user=false
+                &show_reposts=false
+                &show_teaser=false
+                &visual=false`.replace(/\s+/g, '');
+
+            console.log('🎵 SoundCloud iframe initialized with TWICE - What is Love');
+            console.log('📢 If you can\'t hear it clearly, refresh and try clicking the page');
+
+            const widget = SC.Widget(iframe);
+
+            // Add error handling
+            widget.bind(SC.Widget.Events.ERROR, (error) => {
+                console.warn('SoundCloud widget error (normal for hidden player):', error);
+            });
+
+            // Volume control
+            document.getElementById('volume').addEventListener('input', (e) => {
+                const sliderValue = parseInt(e.target.value);
+                const volume = (sliderValue / 100) * 2.0;
+                try {
+                    widget.setVolume(volume);
+                    updateVolumeIcon(sliderValue);
+                    console.log(`🔊 Volume set to ${sliderValue}% (actual: ${volume.toFixed(2)})`);
+                } catch (e) {
+                    console.warn('Volume control error:', e);
+                }
+            });
+
+            widget.bind(SC.Widget.Events.READY, () => {
+                console.log('✅ SoundCloud widget ready');
+                try {
+                    widget.setVolume(1.4);
+                    document.getElementById('volume').value = 70;
+                    updateVolumeIcon(70);
+                    console.log('🔊 Initial volume set to 70% (actual: 1.4) - should be loud!');
+                } catch (e) {
+                    console.warn('Initial volume setting error:', e);
+                }
+            });
+
+            widget.bind(SC.Widget.Events.PLAY, () => {
+                console.log('🎵 MUSIC IS PLAYING: TWICE - What is Love');
+                console.log('👂 You should hear K-pop music now!');
+            });
+
+            widget.bind(SC.Widget.Events.PAUSE, () => {
+                console.log('⏸️ Music paused');
+            });
+
+            // Simple activation handler
+            document.addEventListener('click', function enableAudio() {
+                try {
+                    widget.play();
+                    console.log('🎶 ACTIVATED: Click detected - starting TWICE - What is Love');
+                    console.log('🎵 Listen for: Korean lyrics with upbeat pop melody');
+                } catch (e) {
+                    console.warn('Play activation error:', e);
+                }
+            }, { once: true });
+        };
+
+        // Update volume icon
+        const updateVolumeIcon = (volume) => {
+            const icon = document.getElementById('volume-icon');
+            icon.className = volume === 0 ? 'fas fa-volume-mute' :
+                           volume < 30 ? 'fas fa-volume-off' :
+                           volume < 70 ? 'fas fa-volume-down' : 
+                           'fas fa-volume-up';
+            
+            icon.style.color = volume === 0 ? '#ff0000' : 
+                              volume < 50 ? '#ff9900' : 
+                              '#00ff00';
+        };
+
+        // Initialize decoration page
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Decoration page loading...');
+            
+            // Prevent unwanted scrolling on page load
+            document.body.style.scrollBehavior = 'auto';
+            
+            // Add navigation scroll prevention
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    console.log(`Navigating from decoration page to: ${link.href}`);
+                    // Let navigation work normally but prevent scroll jumping
+                });
+            });
+            
+            // Load currency and update display
+            if (typeof CurrencyManager !== 'undefined') {
+                CurrencyManager.loadCurrency();
+                const currencyDisplay = document.querySelector('.currency-display');
+                if (currencyDisplay) {
+                    currencyDisplay.textContent = CurrencyManager.getBalance().toLocaleString();
+                    console.log('Currency loaded:', CurrencyManager.getBalance());
+                }
+            }
+            
+            // Initialize sound system
+            if(window.SC) {
+                try {
+                    initSoundCloudPlayer();
+                    console.log('🎵 SoundCloud initialization started on decoration page');
+                } catch(e) {
+                    console.error("SoundCloud init failed:", e);
+                }
+            } else {
+                console.warn("SoundCloud API not loaded, trying again...");
+                setTimeout(() => {
+                    if(window.SC) {
+                        try {
+                            initSoundCloudPlayer();
+                            console.log('🎵 SoundCloud initialization started (delayed) on decoration page');
+                        } catch(e) {
+                            console.error("SoundCloud delayed init failed:", e);
+                        }
+                    } else {
+                        console.error('SoundCloud API failed to load');
+                    }
+                }, 2000);
+            }
+        });
+    </script>
 </body>
 </html>

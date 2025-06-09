@@ -5,7 +5,7 @@ function loadOwnedCards() {
 		CardManager.loadCollection?.(); // load once
 		return CardManager.getCollection(); // shallow copy
 	}
-	// Fallback – read the raw array directly
+	// Fallback – read the raw array directly using the correct key
 	const raw = localStorage.getItem('kpopCardCollection');
 	return raw ? JSON.parse(raw) : [];
 }
@@ -25,12 +25,41 @@ function initDecorationStudio() {
 	const select = document.getElementById('card-select');
 	select.innerHTML = '<option>Select a card to decorate...</option>';
 
-	collection.forEach(card => {
+	// Debug: log all cards and their image paths
+	console.log('=== DECORATION DEBUG ===');
+	console.log('Total cards in collection:', collection.length);
+	
+	// Check localStorage directly
+	const directLS = localStorage.getItem('kpopCardCollection');
+	console.log('Direct localStorage check:', directLS ? JSON.parse(directLS).length : 0, 'cards');
+	
+	// Check if CardManager is working
+	if (typeof CardManager !== 'undefined') {
+		console.log('CardManager available - using CardManager.getCollection()');
+		console.log('CardManager collection length:', CardManager.getCollection().length);
+	} else {
+		console.log('CardManager not available - using localStorage fallback');
+	}
+	
+	if (collection.length === 0) {
+		console.log('❌ NO CARDS IN COLLECTION - You need to summon cards first!');
+		select.innerHTML = '<option>No cards owned! Go summon some cards first.</option>';
+		console.log('=== END DEBUG ===');
+		return;
+	}
+	
+	console.log('✅ Found', collection.length, 'owned cards:');
+	
+	collection.forEach((card, index) => {
+		console.log(`  ${index + 1}. ${card.name} (${card.group}) - Image: ${card.image}`);
+		
 		const option = document.createElement('option');
 		option.value = card.id;
 		option.textContent = `${card.name} (${card.group})`;
 		select.appendChild(option);
 	});
+
+	console.log('=== END DEBUG ===');
 
 	const lastSelected = localStorage.getItem('lastSelectedCard');
 	if (lastSelected && collection.some(c => c.id === lastSelected)) {
@@ -41,12 +70,22 @@ function initDecorationStudio() {
 	select.addEventListener('change', function () {
 		const card = collection.find(c => c.id === this.value);
 		const preview = document.getElementById('decoration-preview-card');
+		
+		console.log('=== CARD SELECTION DEBUG ===');
+		console.log('Selected card ID:', this.value);
+		console.log('Found card:', card);
+		
 		if (card && preview) {
-			const imgPath = `assets/cards/${card.group.toLowerCase()}/${card.name}/${card.id}.png`;
-			preview.innerHTML = `<img src="${imgPath}" alt="${card.name}" width="220">`;
+			console.log('Card image path:', card.image);
+			// Use the card's actual image path instead of constructing it
+			preview.innerHTML = `<img src="${card.image}" alt="${card.name}" width="220" onload="console.log('✅ Image loaded successfully for ${card.name}')" onerror="console.error('❌ Image failed to load for ${card.name}: ${card.image}')">`;
+			console.log('Image element created for:', card.name);
 		} else if (preview) {
+			console.log('No card found or no preview element');
 			preview.innerHTML = `<img src="assets/cardselect.png" alt="Preview" width="220">`;
 		}
+		console.log('=== END SELECTION DEBUG ===');
+		
     	localStorage.setItem('lastSelectedCard', this.value);
 	});
 
@@ -90,101 +129,7 @@ function initDecorationStudio() {
 }
 
 
-function enableStickerDragDrop() {
-  const stickers = document.querySelectorAll('.sticker-scroll img[draggable="true"]');
-  const preview = document.getElementById('decoration-preview-card');
 
-	stickers.forEach(sticker => {
-	  sticker.addEventListener('dragstart', function (e) {
-	    e.dataTransfer.setData('sticker-src', this.src);
-	    e.dataTransfer.setData('from-palette', 'true');
-	  });
-	});
-
-
-  if (trashcan) {
-    trashcan.addEventListener('dragover', function(e) {
-      e.preventDefault();
-      trashcan.style.background = '#ffeaea';
-    });
-    trashcan.addEventListener('dragleave', function() {
-      trashcan.style.background = '';
-    });
-    trashcan.addEventListener('drop', function(e) {
-      e.preventDefault();
-      trashcan.style.background = '';
-      const dragging = document.querySelector('.dropped-sticker[style*="display: none"]');
-      if (dragging) dragging.remove();
-    });
-  }
-}
-
-function makeStickerMoveable(sticker, container) {
-  let offsetX, offsetY, isDragging = false;
-
-  sticker.addEventListener('mousedown', function(e) {
-    isDragging = true;
-    offsetX = e.offsetX;
-    offsetY = e.offsetY;
-    sticker.style.zIndex = 100;
-    document.body.style.userSelect = 'none';
-
-    const rect = sticker.getBoundingClientRect();
-    sticker.style.position = 'fixed';
-    sticker.style.left = rect.left + 'px';
-    sticker.style.top = rect.top + 'px';
-    sticker.style.width = rect.width + 'px';
-    sticker.style.height = rect.height + 'px';
-    document.body.appendChild(sticker);
-  });
-
-  function onMouseMove(e) {
-    if (!isDragging) return;
-    sticker.style.left = (e.clientX - offsetX) + 'px';
-    sticker.style.top = (e.clientY - offsetY) + 'px';
-  }
-
-  function onMouseUp(e) {
-    if (!isDragging) return;
-    isDragging = false;
-    sticker.style.zIndex = 20;
-    document.body.style.userSelect = '';
-
-    const trashcan = document.getElementById('sticker-trashcan');
-    const trashRect = trashcan.getBoundingClientRect();
-    const stickerRect = sticker.getBoundingClientRect();
-    const overlap = !(
-      stickerRect.right < trashRect.left ||
-      stickerRect.left > trashRect.right ||
-      stickerRect.bottom < trashRect.top ||
-      stickerRect.top > trashRect.bottom
-    );
-    if (overlap) {
-      sticker.remove();
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-      return;
-    }
-
-    const containerRect = container.getBoundingClientRect();
-    let x = e.clientX - containerRect.left - offsetX;
-    let y = e.clientY - containerRect.top - offsetY;
-    x = Math.max(0, Math.min(x, container.offsetWidth - sticker.offsetWidth));
-    y = Math.max(0, Math.min(y, container.offsetHeight - sticker.offsetHeight));
-    sticker.style.position = 'absolute';
-    sticker.style.left = x + 'px';
-    sticker.style.top = y + 'px';
-    container.appendChild(sticker);
-
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-  }
-
-  sticker.addEventListener('mousedown', function() {
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
-}
 
 /* Screenshot Mode */
 function initScreenshotMode() {
@@ -407,8 +352,7 @@ function decoratePreviewOnCardChange() {
     const card = collection.find(c => c.id === cardId);
     const preview = document.getElementById('decoration-preview-card');
     if (card && preview) {
-      const imgPath = `assets/cards/${card.group.toLowerCase()}/${card.name}/${card.id}.png`;
-      preview.innerHTML = `<img src="${imgPath}" alt="${card.name}" width="220">`;
+      preview.innerHTML = `<img src="${card.image}" alt="${card.name}" width="220">`;
     } else if (preview) {
       preview.innerHTML = `<img src="assets/cardselect.png" alt="Preview" width="220">`;
     }
@@ -421,8 +365,7 @@ function decoratePreviewOnCardChange() {
     const card = collection.find(c => c.id === cardId);
     const preview = document.getElementById('decoration-preview-card');
     if (card && preview) {
-      const imgPath = `assets/cards/${card.group.toLowerCase()}/${card.name}/${card.id}.png`;
-      preview.innerHTML = `<img src="${imgPath}" alt="${card.name}" width="220">`;
+      preview.innerHTML = `<img src="${card.image}" alt="${card.name}" width="220">`;
     } else if (preview) {
       preview.innerHTML = `<img src="assets/cardselect.png" alt="Preview" width="220">`;
     }

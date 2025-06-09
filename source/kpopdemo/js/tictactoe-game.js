@@ -292,6 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
             playerScore++;
             currentStreak++;
             
+            // Award currency for win - with a small delay for better UX
+            setTimeout(() => {
+                const baseReward = CurrencyManager.getReward('tic-tac-toe', 'win');
+                const streakBonus = currentStreak >= 3 ? CurrencyManager.getReward('tic-tac-toe', 'streak') * Math.floor(currentStreak / 3) : 0;
+                const totalReward = baseReward + streakBonus;
+                
+                CurrencyManager.earnCurrency(totalReward, `Tic Tac Toe Win${streakBonus > 0 ? ` (+${streakBonus} streak bonus)` : ''}`);
+            }, 400);
+            
             playerScoreSpan.classList.add('score-increase');
             setTimeout(() => playerScoreSpan.classList.remove('score-increase'), 600);
             
@@ -306,7 +315,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 bestStreakSpan.classList.add('streak-increase');
                 setTimeout(() => bestStreakSpan.classList.remove('streak-increase'), 800);
                 
-                showAchievement('New Best Streak!');
+                setTimeout(() => {
+                    showAchievement('New Best Streak!');
+                }, 500);
             }
         } else if (result === 'lose') {
             botScore++;
