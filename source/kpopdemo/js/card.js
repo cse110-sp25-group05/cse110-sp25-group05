@@ -73,8 +73,8 @@ const CurrencyManager = (() => {
   // Minigame rewards configuration
   const rewards = {
     'lucky-dice': { win: 25, streak: 5 },
-    'rock-paper-scissors': { win: 20, streak: 3 },
-    'tic-tac-toe': { win: 30, streak: 7 }
+    'rock-paper-scissors': { win: 100, streak: 0 },
+    'tic-tac-toe': { win: 100, streak: 0 }
   };
 
   // Game costs configuration (for games that cost money to play)
@@ -87,7 +87,7 @@ const CurrencyManager = (() => {
     if (saved) {
       currentBalance = parseInt(saved);
     } else {
-      currentBalance = 10000; // Starting currency - increased for testing
+      currentBalance = 2000; // Starting currency
       saveCurrency();
     }
     updateCurrencyDisplay();
@@ -152,10 +152,8 @@ const CurrencyManager = (() => {
     });
   }
 
-  // Temporarily set currency to 10,000 for testing
-  setTimeout(() => {
-    setCurrency(10000);
-  }, 100);
+  // Initialize currency system
+  loadCurrency();
 
   function showCurrencyNotification(text, reason, type) {
     const notification = document.createElement('div');

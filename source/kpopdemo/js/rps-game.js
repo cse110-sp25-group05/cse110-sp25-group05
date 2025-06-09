@@ -161,12 +161,14 @@ document.addEventListener('DOMContentLoaded', () => {
             playerScore++;
             currentStreak++;
             
-            // Award currency for win
-            const baseReward = CurrencyManager.getReward('rock-paper-scissors', 'win');
-            const streakBonus = currentStreak >= 3 ? CurrencyManager.getReward('rock-paper-scissors', 'streak') * Math.floor(currentStreak / 3) : 0;
-            const totalReward = baseReward + streakBonus;
-            
-            CurrencyManager.earnCurrency(totalReward, `RPS Win${streakBonus > 0 ? ` (+${streakBonus} streak bonus)` : ''}`);
+            // Award currency for win - with a small delay to not interrupt the reveal
+            setTimeout(() => {
+                const baseReward = CurrencyManager.getReward('rock-paper-scissors', 'win');
+                const streakBonus = currentStreak >= 3 ? CurrencyManager.getReward('rock-paper-scissors', 'streak') * Math.floor(currentStreak / 3) : 0;
+                const totalReward = baseReward + streakBonus;
+                
+                CurrencyManager.earnCurrency(totalReward, `RPS Win${streakBonus > 0 ? ` (+${streakBonus} streak bonus)` : ''}`);
+            }, 500);
             
             playerScoreSpan.classList.add('score-increase');
             setTimeout(() => playerScoreSpan.classList.remove('score-increase'), 600);
@@ -182,7 +184,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 bestStreakSpan.classList.add('streak-increase');
                 setTimeout(() => bestStreakSpan.classList.remove('streak-increase'), 800);
                 
-                showAchievement('New Best Streak!');
+                setTimeout(() => {
+                    showAchievement('New Best Streak!');
+                }, 600);
             }
         } else if (result === 'lose') {
             botScore++;
@@ -331,12 +335,18 @@ document.addEventListener('DOMContentLoaded', () => {
         animateChoiceReveal(playerChoice, computerChoice);
 
         setTimeout(() => {
+            // Update score and currency AFTER animations complete
+            updateScore(result);
+            
+            // Calculate streak for display after update
+            const streakToShow = result === 'win' ? currentStreak : 0;
+            
             resultDiv.innerHTML = `
                 <div class="result-card ${result}">
                     <div class="result-main">${randomMessage}</div>
                     <div class="result-details">
                         <span class="vs-text">You vs Bot</span>
-                        ${currentStreak > 0 ? `<div class="streak-badge">🔥 ${currentStreak} Win Streak!</div>` : ''}
+                        ${streakToShow > 0 ? `<div class="streak-badge">🔥 ${streakToShow} Win Streak!</div>` : ''}
                     </div>
                 </div>
             `;
@@ -438,7 +448,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => button.classList.remove('btn-pressed'), 200);
             
             playSound('click');
-            updateScore(result);
             displayResult(playerChoice, computerChoice, result);
         });
     });

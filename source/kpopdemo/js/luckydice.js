@@ -220,6 +220,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="dice-emoji">${diceFaces[value - 1]}</span>
                     <span class="dice-number">${value}</span>
                 </div>
+                ${isHot ? '<div class="hot-indicator">🔥 HOT!</div>' : ''}
+            </div>
+        `;
+    }
+
+    function createOperatorElement(symbol) {
+        return `<div class="dice-operator">${symbol}</div>`;
+    }
+
+    function createTotalElement(total, isBonus = false, isHot = false) {
+        return `
+            <div class="dice-total ${isBonus ? 'bonus-total' : ''}">
+                <span>${total}</span>
+                <div class="total-label">Total</div>
+                ${isHot ? '<div class="hot-indicator">🔥 HOT!</div>' : ''}
             </div>
         `;
     }
@@ -227,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateDiceRoll(die1, die2, callback) {
         if (!diceDisplay) return;
         
-        // Enhanced rolling animation with effects
+        // Enhanced rolling animation with effects - DICE + DICE = TOTAL format
         diceDisplay.innerHTML = `
             <div class="dice-container rolling ${bonusRoundActive ? 'bonus-glow' : ''}">
                 <div class="dice-card rolling">
@@ -236,11 +251,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="dice-number">?</span>
                     </div>
                 </div>
+                ${createOperatorElement('+')}
                 <div class="dice-card rolling">
                     <div class="dice-face">
                         <span class="dice-emoji">🎲</span>
                         <span class="dice-number">?</span>
                     </div>
+                </div>
+                ${createOperatorElement('=')}
+                <div class="dice-total">
+                    <span>?</span>
+                    <div class="total-label">Total</div>
                 </div>
             </div>
         `;
@@ -252,18 +273,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show final result with enhanced effects
         setTimeout(() => {
             const isHotRoll = hotStreak >= 3;
+            const total = die1 + die2;
+            
             diceDisplay.innerHTML = `
                 <div class="dice-container ${bonusRoundActive ? 'bonus-glow' : ''}">
                     ${createDiceElement(die1, false, isHotRoll)}
+                    ${createOperatorElement('+')}
                     ${createDiceElement(die2, false, isHotRoll)}
-                </div>
-                <div class="dice-total ${bonusRoundActive ? 'bonus-total' : ''}">
-                    <span>Total: ${die1 + die2}</span>
-                    ${isHotRoll ? '<span class="hot-indicator">🔥 HOT!</span>' : ''}
+                    ${createOperatorElement('=')}
+                    ${createTotalElement(total, bonusRoundActive, isHotRoll)}
                 </div>
             `;
             
-            const diceCards = diceDisplay.querySelectorAll('.dice-card');
+            const diceCards = diceDisplay.querySelectorAll('.dice-card, .dice-total');
             diceCards.forEach((card, index) => {
                 setTimeout(() => {
                     card.classList.add('reveal');
@@ -528,9 +550,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (diceDisplay) {
             diceDisplay.innerHTML = `
                 <div class="dice-container">
-                    <div class="dice-placeholder">
-                        <i class="fas fa-dice"></i>
-                        <span>Ready to Roll!</span>
+                    <div class="dice-card">
+                        <div class="dice-face">
+                            <span class="dice-emoji">🎲</span>
+                            <span class="dice-number">-</span>
+                        </div>
+                    </div>
+                    ${createOperatorElement('+')}
+                    <div class="dice-card">
+                        <div class="dice-face">
+                            <span class="dice-emoji">🎲</span>
+                            <span class="dice-number">-</span>
+                        </div>
+                    </div>
+                    ${createOperatorElement('=')}
+                    <div class="dice-total">
+                        <span>-</span>
+                        <div class="total-label">Total</div>
                     </div>
                 </div>
             `;
