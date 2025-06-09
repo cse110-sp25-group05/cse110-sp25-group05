@@ -488,6 +488,15 @@ const CardData = (() => {
       image: getCardImage("aespa-karina", "Karina", "AESPA"),
     },
     {
+      id: "aespa-giselle",
+      name: "Giselle",
+      group: "AESPA",
+      role: "Main Rapper, Sub Vocalist",
+      birthday: "October 30, 2000",
+      bio: "Uchinaga Aeri, known as Giselle, is the main rapper and a sub vocalist in aespa.",
+      image: getCardImage("aespa-giselle", "Giselle", "AESPA"),
+    },
+    {
       id: "aespa-winter",
       name: "Winter",
       group: "AESPA",
