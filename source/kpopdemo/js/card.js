@@ -87,7 +87,7 @@ const CurrencyManager = (() => {
     if (saved) {
       currentBalance = parseInt(saved);
     } else {
-      currentBalance = 2000; // Starting currency
+      currentBalance = 5000; // Starting currency
       saveCurrency();
     }
     updateCurrencyDisplay();
