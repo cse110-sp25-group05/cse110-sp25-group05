@@ -9,135 +9,214 @@
 
     <!-- any styling related to decoration stuff -->
     <link rel="stylesheet" href="css/deco-styles.css">
+    
+    <!-- SoundCloud Widget API -->
+    <script src="https://w.soundcloud.com/player/api.js"></script>
 </head>
 <body>
     <iframe id="sc-player" allow="autoplay"></iframe>
     <!-- volume control UI -->
     <div id="volume-control">
         <i class="fas fa-volume-off" id="volume-icon"></i>
-        <input type="range" id="volume" min="20" max="150" value="150">
-        <i class="fas fa-volume-up"></i>
+        <input type="range" id="volume" min="0" max="100" value="70">
     </div>
     <header>
         <h1><i class="fas fa-gem"></i> K-pop Card Gacha</h1>
-        <nav>
-            <ul>
-                <li><a href="collection.html#collection"><i class="fas fa-layer-group"></i> My Collection</a></li>
-                <li><a href="#packs"><i class="fas fa-gift"></i> Summon Cards</a></li>
-                <li><a href="#minigame"><i class="fas fa-gamepad"></i> Minigames</a></li>
-                <li><a href="decoration.html"><i class="fas fa-palette"></i> Decorations</a></li>
-                <li><a href="index.html#minigame"><i class="fas fa-gamepad"></i> Minigames</a></li>
-            </ul>
-        </nav>
+        <div class="header-content">
+            <nav>
+                <ul>
+                    <li><a href="collection.html"><i class="fas fa-layer-group"></i> My Collection</a></li>
+                    <li><a href="#" data-section="packs"><i class="fas fa-gift"></i> Summon Cards</a></li>
+                    <li><a href="#" data-section="minigame"><i class="fas fa-gamepad"></i> Minigames</a></li>
+                    <li><a href="decoration.html"><i class="fas fa-palette"></i> Decorations</a></li>
+                </ul>
+            </nav>
+            <div class="currency-container">
+                <i class="fas fa-coins"></i>
+                <span class="currency-display">0</span>
+            </div>
+        </div>
     </header>
 
     <main>
         <section id="packs">
             <h2>Card Summons <i class="fas fa-sparkles"></i></h2>
-            <div class="pack-container">
+            
+            <!-- Pack Selection View -->
+            <div id="pack-selection" class="pack-container">
                 <!-- Pack elements -->
-                <div class="pack" data-type="basic" data-group="random" data-rarity="common">
+                <div class="pack" data-type="basic">
                     <div class="pack-image">
-                        <div class="pack-placeholder" style="background: linear-gradient(135deg, #f8a5c2, #ff69b4); color: white; display: flex; align-items: center; justify-content: center; height: 100%; font-weight: bold; text-align: center;">K-pop<br>Basic Summon</div>
-                    </div>
-                    <div class="pack-info">
-                        <div class="pack-info-content">
-                            <h3>Basic Summon</h3>
-                            <p>5 random K-pop idol cards with standard drop rates</p>
+                        <div class="pack-gradient basic-gradient">
+                            <h3>K-pop<br>Basic Summon</h3>
+                            <div class="pack-icons">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-music"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="pack-button-container">
-                        <button class="open-pack-btn" data-type="basic" data-group="random">Summon Now</button>
+                    <div class="pack-info">
+                        <h3 class="pack-title">BASIC SUMMON</h3>
+                        <p class="pack-description">1 random K-pop idol card with standard drop rates</p>
+                        <button class="open-pack-btn" data-type="basic" data-group="random">
+                            <i class="fas fa-gift"></i>
+                            Summon Now
+                        </button>
                     </div>
                 </div>
 
-                <div class="pack" data-type="premium" data-group="random" data-rarity="rare">
+                <div class="pack" data-type="premium">
                     <div class="pack-image">
-                        <div class="pack-placeholder" style="background: linear-gradient(135deg, #d8a2eb, #ba68c8); color: white; display: flex; align-items: center; justify-content: center; height: 100%; font-weight: bold; text-align: center;">K-pop<br>Premium Summon</div>
-                    </div>
-                    <div class="pack-info">
-                        <div class="pack-info-content">
-                            <h3>Premium Summon</h3>
-                            <p>7 cards with increased rare drop rates</p>
+                        <div class="pack-gradient premium-gradient">
+                            <h3>K-pop<br>Premium Summon</h3>
+                            <div class="pack-icons">
+                                <i class="fas fa-gem"></i>
+                                <i class="fas fa-crown"></i>
+                                <i class="fas fa-gem"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="pack-button-container">
-                        <button class="open-pack-btn" data-type="premium" data-group="random">Summon Now</button>
+                    <div class="pack-info">
+                        <h3 class="pack-title">PREMIUM SUMMON</h3>
+                        <p class="pack-description">1 card with increased rare drop rates</p>
+                        <button class="open-pack-btn" data-type="premium" data-group="random">
+                            <i class="fas fa-gift"></i>
+                            Summon Now
+                        </button>
                     </div>
                 </div>
 
-                <div class="pack" data-type="basic" data-group="BTS" data-rarity="rare">
+                <div class="pack" data-type="ultimate">
                     <div class="pack-image">
-                        <div class="pack-placeholder" style="background: linear-gradient(135deg, #7a3fb0, #9c27b0); color: white; display: flex; align-items: center; justify-content: center; height: 100%; font-weight: bold; text-align: center;">BTS<br>Summon</div>
-                    </div>
-                    <div class="pack-info">
-                        <div class="pack-info-content">
-                            <h3>BTS Summon</h3>
-                            <p>5 cards from BTS members only</p>
+                        <div class="pack-gradient ultimate-gradient">
+                            <h3>Ultimate<br>Legendary Summon</h3>
+                            <div class="pack-icons">
+                                <i class="fas fa-trophy"></i>
+                                <i class="fas fa-fire"></i>
+                                <i class="fas fa-trophy"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="pack-button-container">
-                        <button class="open-pack-btn" data-type="basic" data-group="BTS">Summon Now</button>
+                    <div class="pack-info">
+                        <h3 class="pack-title">LEGENDARY SUMMON</h3>
+                        <p class="pack-description">1 card with highest chance for rare and legendary drops</p>
+                        <button class="open-pack-btn" data-type="ultimate" data-group="random">
+                            <i class="fas fa-gift"></i>
+                            Summon Now
+                        </button>
                     </div>
                 </div>
 
-                <div class="pack" data-type="basic" data-group="BLACKPINK" data-rarity="rare">
+                <div class="pack" data-type="basic">
                     <div class="pack-image">
-                        <div class="pack-placeholder" style="background: linear-gradient(135deg, #ff007f, #e91e63); color: white; display: flex; align-items: center; justify-content: center; height: 100%; font-weight: bold; text-align: center;">BLACKPINK<br>Summon</div>
-                    </div>
-                    <div class="pack-info">
-                        <div class="pack-info-content">
-                            <h3>BLACKPINK Summon</h3>
-                            <p>4 cards from BLACKPINK members only</p>
+                        <div class="pack-gradient bts-gradient">
+                            <h3>BTS<br>Summon</h3>
+                            <div class="pack-icons">
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-microphone"></i>
+                                <i class="fas fa-heart"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="pack-button-container">
-                        <button class="open-pack-btn" data-type="basic" data-group="BLACKPINK">Summon Now</button>
+                    <div class="pack-info">
+                        <h3 class="pack-title">BTS SUMMON</h3>
+                        <p class="pack-description">1 card from BTS members only</p>
+                        <button class="open-pack-btn" data-type="basic" data-group="BTS">
+                            <i class="fas fa-gift"></i>
+                            Summon Now
+                        </button>
                     </div>
                 </div>
 
-                <div class="pack" data-type="basic" data-group="TWICE" data-rarity="rare">
+                <div class="pack" data-type="basic">
                     <div class="pack-image">
-                        <div class="pack-placeholder" style="background: linear-gradient(135deg, #ff8b3e, #ff5722); color: white; display: flex; align-items: center; justify-content: center; height: 100%; font-weight: bold; text-align: center;">TWICE<br>Summon</div>
-                    </div>
-                    <div class="pack-info">
-                        <div class="pack-info-content">
-                            <h3>TWICE Summon</h3>
-                            <p>5 cards from TWICE members only</p>
+                        <div class="pack-gradient blackpink-gradient">
+                            <h3>BLACKPINK<br>Summon</h3>
+                            <div class="pack-icons">
+                                <i class="fas fa-crown"></i>
+                                <i class="fas fa-bolt"></i>
+                                <i class="fas fa-crown"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="pack-button-container">
-                        <button class="open-pack-btn" data-type="basic" data-group="TWICE">Summon Now</button>
+                    <div class="pack-info">
+                        <h3 class="pack-title">BLACKPINK SUMMON</h3>
+                        <p class="pack-description">1 card from BLACKPINK members only</p>
+                        <button class="open-pack-btn" data-type="basic" data-group="BLACKPINK">
+                            <i class="fas fa-gift"></i>
+                            Summon Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pack" data-type="basic">
+                    <div class="pack-image">
+                        <div class="pack-gradient twice-gradient">
+                            <h3>TWICE<br>Summon</h3>
+                            <div class="pack-icons">
+                                <i class="fas fa-candy-cane"></i>
+                                <i class="fas fa-rainbow"></i>
+                                <i class="fas fa-candy-cane"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pack-info">
+                        <h3 class="pack-title">TWICE SUMMON</h3>
+                        <p class="pack-description">1 card from TWICE members only</p>
+                        <button class="open-pack-btn" data-type="basic" data-group="TWICE">
+                            <i class="fas fa-gift"></i>
+                            Summon Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pack Opening Results View (initially hidden) -->
+            <div id="pack-opening-results" class="hidden">
+                <h3>Summoning Cards <i class="fas fa-magic"></i></h3>
+                <div class="cards-container">
+                    <!-- Cards from opened pack will appear here -->
+                </div>
+                <div class="pack-controls">
+                    <button id="back-to-pack-selection"><i class="fas fa-arrow-left"></i> Back to Packs</button>
+                    <button id="add-to-collection"><i class="fas fa-plus-circle"></i> Add to Collection</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card Summon Modal -->
+        <div id="summon-modal" class="summon-modal">
+            <div class="summon-modal-content">
+                <div class="summon-modal-header">
+                    <h2><i class="fas fa-sparkles"></i> Card Summoned!</h2>
+                    <p>You got a new card!</p>
+                </div>
+                
+                <div class="summon-card-display">
+                    <div class="summon-card-wrapper">
+                        <div id="summoned-card" class="summon-card">
+                            <!-- Card content will be populated here -->
+                        </div>
+                        <div class="rarity-effects"></div>
                     </div>
                 </div>
                 
-                <div class="pack" data-type="ultimate" data-group="random" data-rarity="legendary">
-                    <div class="pack-image">
-                        <div class="pack-placeholder" style="background: linear-gradient(135deg, #ff6f00, #ffeb3b); color: white; display: flex; align-items: center; justify-content: center; height: 100%; font-weight: bold; text-align: center;">Ultimate<br>Legendary Summon</div>
-                    </div>
-                    <div class="pack-info">
-                        <div class="pack-info-content">
-                            <h3>Legendary Summon</h3>
-                            <p>10 cards with highest chance for rare and legendary drops</p>
-                        </div>
-                    </div>
-                    <div class="pack-button-container">
-                        <button class="open-pack-btn" data-type="ultimate" data-group="random">Summon Now</button>
-                    </div>
+                <div class="summon-modal-actions">
+                    <button class="modal-action-btn add-to-collection-btn" id="modal-add-to-collection">
+                        <i class="fas fa-plus-circle"></i>
+                        Add to Collection
+                    </button>
+                    <button class="modal-action-btn summon-again-btn" id="modal-summon-again">
+                        <i class="fas fa-redo"></i>
+                        Summon Again
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="pack-opening" class="hidden">
-            <h2>Summoning Cards <i class="fas fa-magic"></i></h2>
-            <div class="cards-container">
-                <!-- Cards from opened pack will appear here -->
-            </div>
-            <div class="pack-controls">
-                <button id="back-to-packs"><i class="fas fa-arrow-left"></i> Back</button>
-                <button id="add-to-collection"><i class="fas fa-plus-circle"></i> Add to Collection</button>
-            </div>
-        </section>
+        <!-- Celebration Effects Container -->
+        <div id="celebration-effects" class="celebration-effects"></div>
 
         <section id="minigame" class="hidden">
             <!-- Enhanced Minigames with Tab System -->
@@ -288,8 +367,8 @@
                     <div class="game-header">
                         <div class="game-score">
                             <div class="score-header">
-                                <i class="fas fa-trophy"></i>
-                                <h3>Battle Score</h3>
+                                <i class="fas fa-coins"></i>
+                                <h4>Battle Score</h4>
                             </div>
                             <div class="score-display">
                                 <div class="score-item player">
@@ -396,7 +475,7 @@
                     <div class="game-header">
                         <div class="game-score">
                             <div class="score-header">
-                                <i class="fas fa-trophy"></i>
+                                <i class="fas fa-coins"></i>
                                 <h4>Battle Score</h4>
                             </div>
                             <div class="score-display">
@@ -485,9 +564,64 @@
     <script src="js/app.js"></script>
     <script src="js/card.js"></script>
     <script src="js/pack.js"></script>
+    <script src="js/no-duplicates.js"></script>
     <script src="js/rps-game.js"></script>
     <script src="js/luckydice.js"></script>
     <script src="js/tictactoe-game.js"></script>
     <script src="js/minigame-tabs.js"></script>
+    
+    <script>
+        // Smart navigation handler to prevent unwanted scrolling
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for URL parameters to determine target section
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetSection = urlParams.get('section');
+            
+            // Handle internal navigation clicks
+            document.querySelectorAll('nav a[data-section]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default link behavior and scrolling
+                    const section = link.getAttribute('data-section');
+                    
+                    // Update URL hash without causing scroll
+                    history.replaceState(null, null, `#${section}`);
+                    
+                    // Manually trigger section display update
+                    if (typeof showActiveSection === 'function') {
+                        showActiveSection();
+                    }
+                    
+                    console.log(`Navigated to ${section} section without scrolling`);
+                });
+            });
+            
+            // Handle external navigation (from URL parameters)
+            if (targetSection) {
+                console.log(`External navigation detected: targeting ${targetSection} section`);
+                
+                // Set the hash without scrolling
+                history.replaceState(null, null, `#${targetSection}`);
+                
+                // Clear the URL parameter for cleaner URL
+                const cleanUrl = window.location.origin + window.location.pathname;
+                history.replaceState(null, null, cleanUrl + `#${targetSection}`);
+                
+                // Show the target section
+                setTimeout(() => {
+                    if (typeof showActiveSection === 'function') {
+                        showActiveSection();
+                        console.log(`Successfully navigated to ${targetSection} section from external page`);
+                    }
+                }, 100);
+            } else {
+                // No external navigation - ensure initial section is shown on page load
+                setTimeout(() => {
+                    if (typeof showActiveSection === 'function') {
+                        showActiveSection();
+                    }
+                }, 100);
+            }
+        });
+    </script>
 </body>
 </html> 

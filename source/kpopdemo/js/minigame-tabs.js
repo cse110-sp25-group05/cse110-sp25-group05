@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameTabs = document.querySelectorAll('.game-tab');
     const gameSections = document.querySelectorAll('.game-section');
 
+    // Map tab data-game values to actual section IDs
+    const gameMapping = {
+        'lucky-dice': 'lucky-dice-section',
+        'rock-paper-scissors': 'rps-section',
+        'tictactoe': 'tictactoe-game'
+    };
+
     function switchGame(gameType) {
         // Update tab active states
         gameTabs.forEach(tab => {
@@ -11,10 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Update game section visibility
+        // Update game section visibility using the mapping
         gameSections.forEach(section => {
             section.classList.remove('active');
-            if (section.id === `${gameType}-game`) {
+            if (section.id === gameMapping[gameType]) {
                 section.classList.add('active');
             }
         });
@@ -44,6 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initialize with RPS game active
-    switchGame('rps');
+    // Initialize with Lucky Dice game active (first tab)
+    switchGame('lucky-dice');
 }); 

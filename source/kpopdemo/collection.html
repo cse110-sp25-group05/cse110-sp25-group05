@@ -6,15 +6,61 @@
     <title>K-pop Card Gacha</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SoundCloud Widget API -->
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    
+    <style>
+        /* Ensure collection content displays properly */
+        main {
+            min-height: 60vh;
+        }
+        
+        .collection-container {
+            min-height: 300px;
+            width: 100%;
+        }
+        
+        .empty-collection {
+            display: block !important;
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .collection-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+            gap: 2rem !important;
+            margin-top: 2rem !important;
+        }
+    </style>
 </head>
 <body>
+    <iframe id="sc-player" allow="autoplay" style="width: 1px; height: 1px; opacity: 0; position: absolute; left: -9999px; pointer-events: none; border: 0;"></iframe>
+    <!-- volume control UI -->
+    <div id="volume-control">
+        <i class="fas fa-volume-off" id="volume-icon"></i>
+        <input type="range" id="volume" min="0" max="100" value="70">
+    </div>
+    
     <header>
         <h1><i class="fas fa-gem"></i> K-pop Card Gacha</h1>
-         <nav>
-            <ul>
-                <li><a href="index.html"><i class="fas fa-home"></i>  Home</a></li>
-            </ul>
-        </nav>
+        <div class="header-content">
+            <nav>
+                <ul>
+                    <li><a href="collection.html"><i class="fas fa-layer-group"></i> My Collection</a></li>
+                    <li><a href="index.html?section=packs"><i class="fas fa-gift"></i> Summon Cards</a></li>
+                    <li><a href="index.html?section=minigame"><i class="fas fa-gamepad"></i> Minigames</a></li>
+                    <li><a href="decoration.html"><i class="fas fa-palette"></i> Decorations</a></li>
+                </ul>
+            </nav>
+            <div class="currency-container">
+                <i class="fas fa-coins"></i>
+                <span class="currency-display">0</span>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -45,8 +91,231 @@
 
     <script src="js/app.js"></script>
     <script src="js/card.js"></script>
-    <script src="js/pack.js"></script>
-    <script src="js/rps-game.js"></script>
+
+    <script>
+        // Initialize collection page
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Collection page loading...');
+            
+            // Wait a bit for all scripts to load properly
+            setTimeout(() => {
+                initializeCollection();
+            }, 250);
+        });
+        
+        function initializeCollection() {
+            console.log('Initializing collection...');
+            
+            // Load saved data using the same system as summon cards
+            if (typeof CardManager !== 'undefined') {
+                CardManager.loadCollection();
+                console.log('CardManager loaded collection');
+            }
+            if (typeof CurrencyManager !== 'undefined') {
+                CurrencyManager.loadCurrency();
+                console.log('CurrencyManager loaded currency');
+            }
+            
+            // Update currency display
+            const currencyDisplay = document.querySelector('.currency-display');
+            if (currencyDisplay && typeof CurrencyManager !== 'undefined') {
+                currencyDisplay.textContent = CurrencyManager.getBalance().toLocaleString();
+                console.log('Currency display updated:', CurrencyManager.getBalance());
+            }
+            
+            // Get collection data
+            let collection = [];
+            if (typeof CardManager !== 'undefined') {
+                collection = CardManager.getCollection();
+                console.log('Collection loaded via CardManager:', collection);
+                console.log('Collection length:', collection.length);
+            } else {
+                // Fallback to direct localStorage read with correct key
+                try {
+                    const stored = localStorage.getItem('kpopCardCollection');
+                    collection = stored ? JSON.parse(stored) : [];
+                    console.log('Collection loaded via fallback localStorage:', collection);
+                } catch (e) {
+                    console.error('Failed to load collection:', e);
+                    collection = [];
+                }
+            }
+            
+            // Force display update
+            displayCollection(collection);
+            
+            // Set up filter functionality
+            const groupFilter = document.getElementById('group-filter');
+            if (groupFilter) {
+                groupFilter.addEventListener('change', () => {
+                    console.log('Filter changed to:', groupFilter.value);
+                    displayCollection(collection);
+                });
+            }
+            
+            // Try using the main updateCollectionDisplay function if available
+            if (typeof updateCollectionDisplay === 'function') {
+                console.log('Using main updateCollectionDisplay function');
+                try {
+                    updateCollectionDisplay();
+                } catch (e) {
+                    console.error('Error with updateCollectionDisplay:', e);
+                    // Fall back to our custom display
+                    displayCollection(collection);
+                }
+            } else {
+                console.log('updateCollectionDisplay not available, using custom display');
+                displayCollection(collection);
+            }
+            
+            // Initialize sound system
+            setTimeout(() => {
+                if(window.SC) {
+                    try {
+                        if (typeof initSoundCloudPlayer === 'function') {
+                            initSoundCloudPlayer();
+                            console.log('🎵 SoundCloud initialization started on collection page');
+                        } else {
+                            console.warn('initSoundCloudPlayer function not found');
+                        }
+                    } catch(e) {
+                        console.error("SoundCloud init failed:", e);
+                    }
+                } else {
+                    console.warn("SoundCloud API not loaded, trying again...");
+                    setTimeout(() => {
+                        if(window.SC) {
+                            try {
+                                if (typeof initSoundCloudPlayer === 'function') {
+                                    initSoundCloudPlayer();
+                                    console.log('🎵 SoundCloud initialization started (delayed) on collection page');
+                                } else {
+                                    console.warn('initSoundCloudPlayer function not found (delayed)');
+                                }
+                            } catch(e) {
+                                console.error("SoundCloud delayed init failed:", e);
+                            }
+                        } else {
+                            console.error('SoundCloud API failed to load');
+                        }
+                    }, 2000);
+                }
+            }, 500);
+        }
+        
+        function displayCollection(collection) {
+            console.log('Displaying collection:', collection.length, 'cards');
+            const container = document.querySelector('.collection-container');
+            const groupFilter = document.getElementById('group-filter');
+            const selectedGroup = groupFilter ? groupFilter.value : 'all';
+            
+            // Filter collection by selected group
+            const filteredCollection = selectedGroup === 'all' 
+                ? collection 
+                : collection.filter(card => card.group === selectedGroup);
+                
+            console.log('Filtered collection:', filteredCollection.length, 'cards for group:', selectedGroup);
+            
+            if (filteredCollection.length === 0) {
+                container.innerHTML = '<p class="empty-collection">No cards in this category yet. Go summon some cards!</p>';
+                return;
+            }
+            
+            // Create collection grid
+            const collectionGrid = document.createElement('div');
+            collectionGrid.className = 'collection-grid';
+            collectionGrid.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;';
+            
+            // Group cards by group for better organization
+            const groupedCards = {};
+            filteredCollection.forEach(card => {
+                if (!groupedCards[card.group]) {
+                    groupedCards[card.group] = [];
+                }
+                groupedCards[card.group].push(card);
+            });
+            
+            // Display each group
+            Object.keys(groupedCards).sort().forEach(group => {
+                const groupSection = document.createElement('div');
+                groupSection.className = 'group-section';
+                groupSection.innerHTML = `<h3 style="color: var(--primary-color); margin: 2rem 0 1rem 0; text-align: center;">${group}</h3>`;
+                
+                const groupGrid = document.createElement('div');
+                groupGrid.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;';
+                
+                groupedCards[group].forEach(card => {
+                    const cardDiv = document.createElement('div');
+                    cardDiv.className = 'collection-card';
+                    cardDiv.style.cssText = `
+                        background: white; 
+                        border-radius: 15px; 
+                        padding: 1rem; 
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+                        text-align: center; 
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        cursor: pointer;
+                        border: 3px solid transparent;
+                    `;
+                    
+                    // Add rarity styling
+                    let rarityColor = '#ddd';
+                    if (card.rarity === 'rare') rarityColor = '#3f51b5';
+                    else if (card.rarity === 'epic') rarityColor = '#9c27b0';
+                    else if (card.rarity === 'legendary') rarityColor = '#ff9800';
+                    
+                    cardDiv.style.borderColor = rarityColor;
+                    
+                    let countBadge = '';
+                    if (card.count && card.count > 1) {
+                        countBadge = `<div style="position: absolute; top: 10px; right: 10px; background: #ff5722; color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold;">×${card.count}</div>`;
+                    }
+                    
+                    cardDiv.innerHTML = `
+                        <div style="position: relative;">
+                            ${countBadge}
+                            <img src="${card.image}" alt="${card.name}" 
+                                 style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;"
+                                 onerror="this.src='https://via.placeholder.com/200x200/ccc/666?text=${encodeURIComponent(card.name)}'"
+                            >
+                            <h3 style="color: var(--primary-color); margin: 0.5rem 0; font-size: 1.1rem;">${card.name}</h3>
+                            <p style="color: #666; margin: 0; font-weight: 500;">${card.group}</p>
+                            <p style="color: ${rarityColor}; font-size: 0.8rem; margin: 0.5rem 0; text-transform: uppercase; font-weight: bold;">
+                                ${card.rarity || 'common'}
+                            </p>
+                        </div>
+                    `;
+                    
+                    // Add hover effects
+                    cardDiv.addEventListener('mouseenter', () => {
+                        cardDiv.style.transform = 'translateY(-5px)';
+                        cardDiv.style.boxShadow = '0 8px 25px rgba(0,0,0,0.2)';
+                    });
+                    
+                    cardDiv.addEventListener('mouseleave', () => {
+                        cardDiv.style.transform = 'translateY(0)';
+                        cardDiv.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+                    });
+                    
+                    // Add click functionality for decoration
+                    cardDiv.addEventListener('click', () => {
+                        window.location.href = `decoration.html?cardID=${card.id}`;
+                    });
+                    
+                    groupGrid.appendChild(cardDiv);
+                });
+                
+                groupSection.appendChild(groupGrid);
+                collectionGrid.appendChild(groupSection);
+            });
+            
+            // Clear container and add new content
+            container.innerHTML = '';
+            container.appendChild(collectionGrid);
+            
+            console.log('Collection display completed successfully');
+        }
+    </script>
 
 </body>
 </html> 

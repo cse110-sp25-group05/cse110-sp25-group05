@@ -116,14 +116,42 @@ document.addEventListener('DOMContentLoaded', () => {
         const config = betConfigs[currentBet];
         const streakBonus = getStreakBonus();
         const effectiveMultiplier = config.multiplier + streakBonus;
+        const rollCost = CurrencyManager.getGameCost('lucky-dice');
+        const canAfford = CurrencyManager.canAffordGame('lucky-dice');
         
         resultDiv.innerHTML = `
             <div class="game-instruction">
                 ${config.icon} Selected: <strong>${config.name}</strong> 
                 (${effectiveMultiplier}x payout${streakBonus > 0 ? ` +${streakBonus}x streak bonus!` : ''}) 
-                ${bonusRoundActive ? '🎊 <strong>BONUS ROUND!</strong>' : '- Roll to win!'}
+                ${bonusRoundActive ? '🎊 <strong>BONUS ROUND!</strong>' : `- Cost: ${rollCost} coins to roll!`}
+                ${!canAfford ? '<br><span style="color: #f44336;">⚠️ Not enough coins!</span>' : ''}
             </div>
         `;
+        
+        updateRollButtonState();
+    }
+    
+    function updateRollButtonState() {
+        if (!rollButton) return;
+        
+        const rollCost = CurrencyManager.getGameCost('lucky-dice');
+        const canAfford = CurrencyManager.canAffordGame('lucky-dice');
+        
+        if (canAfford && !isRolling) {
+            rollButton.disabled = false;
+            rollButton.classList.remove('btn-disabled');
+            rollButton.innerHTML = `
+                <i class="fas fa-dice"></i>
+                <span>Roll Dice (${rollCost} coins)</span>
+            `;
+        } else if (!canAfford) {
+            rollButton.disabled = true;
+            rollButton.classList.add('btn-disabled');
+            rollButton.innerHTML = `
+                <i class="fas fa-coins"></i>
+                <span>Need ${rollCost} coins</span>
+            `;
+        }
     }
     
     function getStreakBonus() {
@@ -261,6 +289,13 @@ document.addEventListener('DOMContentLoaded', () => {
             hotStreak++;
             coldStreak = 0;
             
+            // Award currency for win
+            const baseReward = CurrencyManager.getReward('lucky-dice', 'win');
+            const streakBonus = currentStreak >= 3 ? CurrencyManager.getReward('lucky-dice', 'streak') * Math.floor(currentStreak / 3) : 0;
+            const totalReward = baseReward + streakBonus;
+            
+            CurrencyManager.earnCurrency(totalReward, `Lucky Dice Win${streakBonus > 0 ? ` (+${streakBonus} streak bonus)` : ''}`);
+            
             // Check for bonus round activation
             if (consecutiveWins === 3 && !bonusRoundActive) {
                 bonusRoundActive = true;
@@ -301,21 +336,19 @@ document.addEventListener('DOMContentLoaded', () => {
             losses++;
             currentStreak = 0;
             consecutiveWins = 0;
-            coldStreak++;
             hotStreak = 0;
-            
-            // Cold streak encouragement
-            if (coldStreak === 5) {
-                showAchievement('💪 Don\'t give up! Luck will turn! 💪');
-            }
+            coldStreak++;
             
             if (lossesSpan) {
                 lossesSpan.classList.add('score-increase');
                 setTimeout(() => lossesSpan.classList.remove('score-increase'), 600);
             }
+            
+            if (currentStreakSpan && currentStreakSpan.textContent !== '0') {
+                currentStreakSpan.classList.add('streak-break');
+                setTimeout(() => currentStreakSpan.classList.remove('streak-break'), 800);
+            }
         }
-        
-        roundNumber++;
         
         if (winsSpan) winsSpan.textContent = wins;
         if (lossesSpan) lossesSpan.textContent = losses;
@@ -385,6 +418,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             updateScore(won, finalMultiplier);
             
+            // Update button state after currency changes
+            setTimeout(() => {
+                updateBetDisplay();
+                updateRollButtonState();
+            }, 100);
+            
         }, 800);
     }
     
@@ -440,6 +479,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1100;
+            font-weight: 500;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            background-color: ${type === 'error' ? '#f44336' : type === 'success' ? '#4caf50' : '#2196f3'};
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            notification.style.opacity = '0';
+            setTimeout(() => notification.remove(), 500);
+        }, 3000);
+    }
+    
     function resetGame() {
         wins = 0;
         losses = 0;
@@ -480,9 +545,27 @@ document.addEventListener('DOMContentLoaded', () => {
         rollButton.addEventListener('click', () => {
             if (isRolling) return;
             
+            // Check if player can afford to roll
+            const rollCost = CurrencyManager.getGameCost('lucky-dice');
+            if (!CurrencyManager.canAffordGame('lucky-dice')) {
+                showNotification(`Need ${rollCost} coins to roll!`, 'error');
+                return;
+            }
+            
+            // Spend currency for the roll
+            const success = CurrencyManager.spendCurrency(rollCost, 'Lucky Dice Roll');
+            if (!success) {
+                showNotification('Transaction failed!', 'error');
+                return;
+            }
+            
             isRolling = true;
             rollButton.disabled = true;
             rollButton.classList.add('btn-disabled');
+            rollButton.innerHTML = `
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Rolling...</span>
+            `;
             betButtons.forEach(btn => {
                 btn.disabled = true;
                 btn.classList.add('btn-disabled');
@@ -509,9 +592,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize game
     updateBetDisplay();
     
+    // Set up periodic updates to check currency status
+    setInterval(() => {
+        if (!isRolling) {
+            updateRollButtonState();
+        }
+    }, 1000);
+    
     // Legacy function for backwards compatibility
     window.playLuckyDice = function() {
-        if (rollButton && !isRolling) {
+        if (rollButton && !isRolling && CurrencyManager.canAffordGame('lucky-dice')) {
             rollButton.click();
         }
     };

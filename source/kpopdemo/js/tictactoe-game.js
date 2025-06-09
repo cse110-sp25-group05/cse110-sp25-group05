@@ -292,6 +292,13 @@ document.addEventListener('DOMContentLoaded', () => {
             playerScore++;
             currentStreak++;
             
+            // Award currency for win
+            const baseReward = CurrencyManager.getReward('tic-tac-toe', 'win');
+            const streakBonus = currentStreak >= 3 ? CurrencyManager.getReward('tic-tac-toe', 'streak') * Math.floor(currentStreak / 3) : 0;
+            const totalReward = baseReward + streakBonus;
+            
+            CurrencyManager.earnCurrency(totalReward, `Tic Tac Toe Win${streakBonus > 0 ? ` (+${streakBonus} streak bonus)` : ''}`);
+            
             playerScoreSpan.classList.add('score-increase');
             setTimeout(() => playerScoreSpan.classList.remove('score-increase'), 600);
             

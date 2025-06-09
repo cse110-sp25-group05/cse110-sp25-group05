@@ -161,6 +161,13 @@ document.addEventListener('DOMContentLoaded', () => {
             playerScore++;
             currentStreak++;
             
+            // Award currency for win
+            const baseReward = CurrencyManager.getReward('rock-paper-scissors', 'win');
+            const streakBonus = currentStreak >= 3 ? CurrencyManager.getReward('rock-paper-scissors', 'streak') * Math.floor(currentStreak / 3) : 0;
+            const totalReward = baseReward + streakBonus;
+            
+            CurrencyManager.earnCurrency(totalReward, `RPS Win${streakBonus > 0 ? ` (+${streakBonus} streak bonus)` : ''}`);
+            
             playerScoreSpan.classList.add('score-increase');
             setTimeout(() => playerScoreSpan.classList.remove('score-increase'), 600);
             
