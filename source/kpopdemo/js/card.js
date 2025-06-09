@@ -70,7 +70,8 @@ const CardData = (() => {
     const realImagePath = `assets/cards/${group.toLowerCase()}/${name}/${id}.png`;
     return realImagePath;
   }
-
+  // source\kpopdemo\assets\cards\bts\Jimin\bts-jimin\bts-jimin.png
+  // assets/cards/bts/Jimin/bts-jimin.png
   // Card data for all the cards in the project. 
   const cards = [
     {
