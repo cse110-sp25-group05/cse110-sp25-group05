@@ -231,7 +231,7 @@ const CardData = (() => {
     // BTS Members - Mixed rarities (using existing system)
     {
       id: "bts-rm",
-      name: "RM",
+      name: "Rap Monster",
       group: "BTS",
       role: "Leader, Main Rapper",
       birthday: "September 12, 1994",
